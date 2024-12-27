@@ -1,6 +1,6 @@
 # GitHub action to build
 
-name: Build
+name: Build-docker
 
 on:
   push:
@@ -19,6 +19,7 @@ jobs:
       JACKSON_API_KEY: secret
 
     steps:
+      - uses: actions/checkout@v4
       - name: ls
         run: |
           ls -all -h
