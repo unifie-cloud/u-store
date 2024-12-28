@@ -10,7 +10,6 @@ const Products: NextPageWithLayout = (props) => {
   return (
     <div className="p-3">
       <p className="text-sm">{t('product-placeholder')}</p>
-      <p className="text-sm">Test code</p>
       {JSON.stringify(props.clusterList)}
     </div>
   );

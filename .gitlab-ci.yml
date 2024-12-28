@@ -1,0 +1,32 @@
+image: public.ecr.aws/g4a0y2u8/node-awscli-docker:latest-v20
+
+stages:
+  - build
+  - test
+  - ci_scripts
+
+variables:
+  DOCKER_HOST: 'tcp://docker:2375' # Used for docker:dind inside kubernetes cicd runner
+  KUBECONFIG: '/.kube-config' # Used for docker:dind inside kubernetes cicd runner
+  DOCKER_TLS_CERTDIR: '' # Used for docker:dind inside kubernetes cicd runner
+  IMAGE_NAME_PROD: unifie.store
+  PROJECT_IMAGE_NAME: unifie-store
+
+.base-script:
+  before_script:
+    - echo "In $CI_COMMIT_BRANCH brunch"
+    - |
+      export TAG_BRANCH_TYPE="test"
+      if [[ $CI_COMMIT_BRANCH == "production" ]]; then 
+        export TAG_BRANCH_TYPE="production" 
+      fi
+      if [[ $CI_COMMIT_BRANCH == "main" ]]; then 
+        export TAG_BRANCH_TYPE="production" 
+      fi
+      if [[ $CI_COMMIT_BRANCH == "staging" ]]; then 
+        export TAG_BRANCH_TYPE="staging" 
+      fi
+    - export IMAGE_TAG_ID="$TAG_BRANCH_TYPE-$CI_PIPELINE_ID"
+
+include:
+  - local: .gitlab-ci-builds.yml
