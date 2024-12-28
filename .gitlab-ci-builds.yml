@@ -8,7 +8,7 @@ build-prod-image:
   image: public.ecr.aws/g4a0y2u8/node-awscli-docker:latest-v20
   script:
     - node -v
-    - ( npm ci && npm run build-ci )
+    - ( cd packages/store && npm ci && npm run build-ci )
 
     - while true; do sleep 1 && echo "try docker info" && docker info && break; done
 

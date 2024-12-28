@@ -2,8 +2,6 @@ image: public.ecr.aws/g4a0y2u8/node-awscli-docker:latest-v20
 
 stages:
   - build
-  - test
-  - ci_scripts
 
 variables:
   DOCKER_HOST: 'tcp://docker:2375' # Used for docker:dind inside kubernetes cicd runner
