@@ -1,4 +1,9 @@
-import { Cog6ToothIcon, CodeBracketIcon } from '@heroicons/react/24/outline';
+import {
+  Cog6ToothIcon,
+  CodeBracketIcon,
+  UserCircleIcon,
+  ShieldCheckIcon,
+} from '@heroicons/react/24/outline';
 import { useTranslation } from 'next-i18next';
 import NavigationItems from './NavigationItems';
 import { NavigationProps, MenuItem } from './NavigationItems';
@@ -24,6 +29,18 @@ const TeamNavigation = ({ slug, activePathname }: NavigationItemsProps) => {
       active:
         activePathname?.startsWith(`/teams/${slug}`) &&
         !activePathname.includes('products'),
+    },
+    {
+      name: t('account'),
+      href: '/settings/account',
+      icon: UserCircleIcon,
+      active: activePathname === '/settings/account',
+    },
+    {
+      name: t('security'),
+      href: '/settings/security',
+      icon: ShieldCheckIcon,
+      active: activePathname === '/settings/security',
     },
   ];
 

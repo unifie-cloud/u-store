@@ -11,12 +11,12 @@ const UserNavigation = ({ activePathname }: NavigationProps) => {
   const { t } = useTranslation('common');
 
   const menus: MenuItem[] = [
-    {
-      name: t('all-teams'),
-      href: '/teams',
-      icon: RectangleStackIcon,
-      active: activePathname === '/teams',
-    },
+    // {
+    //   name: t('all-teams'),
+    //   href: '/teams',
+    //   icon: RectangleStackIcon,
+    //   active: activePathname === '/teams',
+    // },
     {
       name: t('account'),
       href: '/settings/account',
