@@ -23,7 +23,7 @@ export const UnifieDeploymentOverview = (props: {
   const currentTeamApplication: iUnifieApplication =
     props.app as iUnifieApplication;
 
-  const updateApplication = async (values: any) => {
+  const updateApplication = async () => {
     const config = form.getFieldsValue();
 
     setLoading(true);

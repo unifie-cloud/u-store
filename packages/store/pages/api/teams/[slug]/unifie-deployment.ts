@@ -1,5 +1,4 @@
 import { ApiError } from '@/lib/errors';
-import { Role } from '@prisma/client';
 import { getCurrentUserWithTeam, throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -9,7 +8,6 @@ import UnifieApi, {
   iUnifieApplicationInput,
 } from '@/lib/unifie/unifieApi';
 import { z } from 'zod';
-import { domain } from '@/lib/zod/primitives';
 
 function getAppUuid(teamId: string) {
   return `store-team-${teamId}`;
@@ -26,9 +24,9 @@ export default async function handler(
       case 'GET':
         await handleGET(req, res);
         break;
-      case 'DELETE':
-        await handleDELETE(req, res);
-        break;
+      // case 'DELETE':
+      //   await handleDELETE(req, res);
+      //   break;
       case 'POST':
         await handlePOST(req, res);
         break;
@@ -75,9 +73,9 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 // Delete team deployment
-const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
-  throw new ApiError(501, 'Not implemented');
-};
+// const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
+//   throw new ApiError(501, 'Not implemented');
+// };
 
 export const appCreateSchema = z.object({
   clusterId: z.number().int(),

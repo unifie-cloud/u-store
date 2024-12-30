@@ -7,7 +7,6 @@ import UnifieApi, {
   iUnifieCluster,
 } from '@/lib/unifie/unifieApi';
 import useTeam from 'hooks/useTeam';
-import useCanAccess from 'hooks/useCanAccess';
 import useSWR from 'swr';
 import fetcher from '@/lib/fetcher';
 import { Button, Result, Skeleton } from 'antd';
@@ -19,8 +18,8 @@ import { useRouter } from 'next/router';
 const Products: NextPageWithLayout = (props) => {
   const router = useRouter();
   const { t } = useTranslation('common');
-  const { canAccess } = useCanAccess();
-  const { isLoading, isError, team } = useTeam();
+
+  const { isLoading, team } = useTeam();
   const app = useTeamApplication();
 
   const { data } = useSWR(
@@ -47,7 +46,7 @@ const Products: NextPageWithLayout = (props) => {
           <Button
             type="primary"
             key="console"
-            onClick={(e) => {
+            onClick={() => {
               router.push(`/teams/${team?.slug}/billing`);
             }}
           >

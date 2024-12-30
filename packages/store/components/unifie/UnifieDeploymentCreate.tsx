@@ -17,7 +17,7 @@ export const UnifieDeploymentCreate = (props: {
   const [cluster, setCluster] = useState(false);
   const clusterList: iUnifieCluster[] = props.clusterList as any;
 
-  const createApplication = async (values: any) => {
+  const createApplication = async () => {
     if (!cluster) {
       toast.error('Please select a cluster');
       return;
