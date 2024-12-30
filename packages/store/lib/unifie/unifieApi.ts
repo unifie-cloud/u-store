@@ -21,7 +21,8 @@ export interface iUnifieApplication {
   id: number;
   name: string;
   domain: string;
-  dpCreationType: string;
+  extUuid: string;
+  extData: any;
   projectId: number;
   specsErrors: string;
   specsWarns: string;
@@ -43,6 +44,21 @@ export interface iUnifieApplication {
   services: string;
   tags: string;
 }
+export interface iUnifieApplicationInput {
+  name: string;
+  domain: string;
+  extUuid: string;
+  extData: any;
+  projectId: number;
+  isReady: boolean;
+  isEnabled: boolean;
+  region: number;
+  version: number;
+  env: any;
+  services: any;
+  tags: number[];
+}
+
 export interface UnifieApiOptions {
   apiKey: string;
   apiHost: string;
@@ -103,6 +119,37 @@ class UnifieApi {
 
     return query?.data?.Clusters_getClustersList || [];
   }
+  public async Application_getApplicationByExtUuid(
+    extUuid: string
+  ): Promise<iUnifieApplication | null> {
+    const query = await this.client.rawRequest(
+      `query Application_getApplicationByExtUuid($extUuid: String!) {
+          Application_getApplicationByExtUuid(extUuid: $extUuid) { 
+            id
+            name
+            domain 
+            projectId 
+            isReady
+            isEnabled 
+            ClusterModel {
+              id
+              title
+            }
+            VersionModel {
+              id
+              name
+              title
+              description
+            } 
+            tags
+          }
+        }`,
+      { extUuid: extUuid }
+    );
+
+    return query?.data?.Application_getApplicationByExtUuid || null;
+  }
+
   public async Application_getApplicationsList(): Promise<
     iUnifieApplication[]
   > {
@@ -132,6 +179,51 @@ class UnifieApi {
     );
 
     return query?.data?.Application_getApplicationsList || [];
+  }
+
+  public async Application_createFromTemplate(data: {
+    templateId?: number;
+    name: string;
+    clusterId: number;
+    extUuid?: string;
+    extData?: any;
+  }): Promise<iUnifieApplication> {
+    const query = await this.client.rawRequest(
+      `mutation Application_createFromTemplate($templateId: Int!, $name: String!, $clusterId: Int!, $extUuid: String, $extData: JSON) {
+          Application_createFromTemplate(templateId: $templateId, name: $name, clusterId: $clusterId, extUuid: $extUuid, extData: $extData) {
+            id
+            extUuid
+          }
+        }`,
+      {
+        templateId: Number(data.templateId || this.defaultTemplateId),
+        name: String(data.name),
+        clusterId: Number(data.clusterId),
+        extUuid: String(data.extUuid),
+        extData: data.extData,
+      }
+    );
+
+    return query?.data?.Application_createFromTemplate;
+  }
+
+  public async Application_updateByExtUuid(
+    extUuid: string,
+    fields: Partial<iUnifieApplicationInput>
+  ): Promise<{ error: string }> {
+    const query = await this.client.rawRequest(
+      `mutation Application_updateByExtUuid($extUuid: String!, $fields: JSON!) {
+        Application_updateByExtUuid(extUuid: $extUuid, fields: $fields) {
+          error  
+        }
+      }`,
+      {
+        extUuid: extUuid,
+        fields: fields,
+      }
+    );
+
+    return query?.data?.Application_updateByExtUuid;
   }
 }
 

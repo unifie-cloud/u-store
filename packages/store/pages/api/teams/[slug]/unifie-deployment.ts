@@ -1,23 +1,19 @@
 import { ApiError } from '@/lib/errors';
-import { sendAudit } from '@/lib/retraced';
-import { sendEvent } from '@/lib/svix';
 import { Role } from '@prisma/client';
-import {
-  getCurrentUserWithTeam,
-  removeTeamMember,
-  throwIfNoTeamAccess,
-} from 'models/team';
+import { getCurrentUserWithTeam, throwIfNoTeamAccess } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { recordMetric } from '@/lib/metrics';
-import { countTeamMembers, updateTeamMember } from 'models/teamMember';
-import { validateMembershipOperation } from '@/lib/rbac';
-import {
-  deleteMemberSchema,
-  updateMemberSchema,
-  validateWithSchema,
-} from '@/lib/zod';
-import UnifieApi, { iUnifieApplication } from '@/lib/unifie/unifieApi';
+import { validateWithSchema } from '@/lib/zod';
+import UnifieApi, {
+  iUnifieApplication,
+  iUnifieApplicationInput,
+} from '@/lib/unifie/unifieApi';
+import { z } from 'zod';
+import { domain } from '@/lib/zod/primitives';
+
+function getAppUuid(teamId: string) {
+  return `store-team-${teamId}`;
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -36,8 +32,11 @@ export default async function handler(
       case 'POST':
         await handlePOST(req, res);
         break;
+      case 'PATCH':
+        await handlePATCH(req, res);
+        break;
       default:
-        res.setHeader('Allow', 'GET, DELETE, POST');
+        res.setHeader('Allow', 'GET, DELETE, POST, PATCH');
         res.status(405).json({
           error: { message: `Method ${method} Not Allowed` },
         });
@@ -57,7 +56,7 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
   throwIfNotAllowed(user, 'team', 'read');
 
   if (!process.env.UNIFIE_API_KEY || !process.env.UNIFIE_API_URL) {
-    return { data: null };
+    throw new ApiError(403, `UNIFIE_API_KEY or UNIFIE_API_URL is not set`);
   }
 
   //  Send deployment for this team
@@ -67,42 +66,22 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     apiHost: process.env.UNIFIE_API_URL,
   });
 
-  const applications: iUnifieApplication[] =
-    await unifieApi.Application_getApplicationsList();
-
   const currentTeamApplication: iUnifieApplication | null =
-    applications.find((app) => app.name === `store-${teamMember.id}`) || null;
+    await unifieApi.Application_getApplicationByExtUuid(
+      getAppUuid(teamMember.team.id)
+    );
 
   res.status(200).json({ data: currentTeamApplication });
 };
 
 // Delete team deployment
 const handleDELETE = async (req: NextApiRequest, res: NextApiResponse) => {
-  const teamMember = await throwIfNoTeamAccess(req, res);
-  throwIfNotAllowed(teamMember, 'team_member', 'delete');
-
-  const { memberId } = validateWithSchema(
-    deleteMemberSchema,
-    req.query as { memberId: string }
-  );
-
-  await validateMembershipOperation(memberId, teamMember);
-
-  const teamMemberRemoved = await removeTeamMember(teamMember.teamId, memberId);
-
-  await sendEvent(teamMember.teamId, 'member.removed', teamMemberRemoved);
-
-  sendAudit({
-    action: 'member.remove',
-    crud: 'd',
-    user: teamMember.user,
-    team: teamMember.team,
-  });
-
-  recordMetric('member.removed');
-
-  res.status(200).json({ data: {} });
+  throw new ApiError(501, 'Not implemented');
 };
+
+export const appCreateSchema = z.object({
+  clusterId: z.number().int(),
+});
 
 // Create team deployment
 const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -110,8 +89,10 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamMember = await throwIfNoTeamAccess(req, res);
   throwIfNotAllowed(user, 'team', 'read');
 
+  const { clusterId } = validateWithSchema(appCreateSchema, req.body);
+
   if (!process.env.UNIFIE_API_KEY || !process.env.UNIFIE_API_URL) {
-    return { data: null };
+    throw new ApiError(403, `UNIFIE_API_KEY or UNIFIE_API_URL is not set`);
   }
 
   //  Send deployment for this team
@@ -121,11 +102,96 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
     apiHost: process.env.UNIFIE_API_URL,
   });
 
-  const applications: iUnifieApplication[] =
-    await unifieApi.Application_getApplicationsList();
-
+  const appUuid = getAppUuid(teamMember.team.id);
   const currentTeamApplication: iUnifieApplication | null =
-    applications.find((app) => app.name === `store-${teamMember.id}`) || null;
+    await unifieApi.Application_getApplicationByExtUuid(appUuid);
+  if (currentTeamApplication) {
+    res.status(200).json({
+      data: {
+        extUuid: currentTeamApplication?.extUuid,
+        id: currentTeamApplication?.id,
+      },
+    });
+    return;
+  }
 
-  res.status(200).json({ data: currentTeamApplication });
+  const newApplication = await unifieApi.Application_createFromTemplate({
+    name: `store-team-${teamMember.team.slug}`,
+    extUuid: appUuid,
+    extData: {
+      teamId: teamMember.team.id,
+    },
+    clusterId: clusterId,
+  });
+
+  await unifieApi.Application_updateByExtUuid(appUuid, {
+    isEnabled: true,
+    isReady: true,
+  });
+
+  res.status(200).json({
+    data: {
+      extUuid: newApplication?.extUuid,
+      id: newApplication?.id,
+    },
+  });
+  return;
+};
+
+const unifieServiceSchema = z.set(
+  z.object({
+    vars: z.set(z.string()).optional(),
+    'service.evershop.enabled': z.boolean().optional(),
+  })
+);
+
+export const appUpdateSchema = z.object({
+  // domain: domain,
+  isEnabled: z.boolean().optional(),
+  region: z.number().int().optional(),
+  version: z.number().int().optional(),
+  env: z.set(z.string()).optional(),
+  services: unifieServiceSchema.optional(),
+});
+
+// Update team deployment
+const handlePATCH = async (req: NextApiRequest, res: NextApiResponse) => {
+  const user = await getCurrentUserWithTeam(req, res);
+  const teamMember = await throwIfNoTeamAccess(req, res);
+  throwIfNotAllowed(user, 'team', 'read');
+
+  const app: iUnifieApplicationInput = validateWithSchema(
+    appUpdateSchema,
+    req.body
+  ) as any;
+
+  if (!process.env.UNIFIE_API_KEY || !process.env.UNIFIE_API_URL) {
+    throw new ApiError(403, `UNIFIE_API_KEY or UNIFIE_API_URL is not set`);
+  }
+
+  //  Send deployment for this team
+  const unifieApi = new UnifieApi();
+  await unifieApi.init({
+    apiKey: process.env.UNIFIE_API_KEY,
+    apiHost: process.env.UNIFIE_API_URL,
+  });
+
+  const appUuid = getAppUuid(teamMember.team.id);
+  const currentTeamApplication: iUnifieApplication | null =
+    await unifieApi.Application_getApplicationByExtUuid(appUuid);
+  if (!currentTeamApplication) {
+    throw new ApiError(
+      404,
+      `Application not found for team ${teamMember.team.slug} with uuid ${appUuid}`
+    );
+  }
+
+  const answer = await unifieApi.Application_updateByExtUuid(appUuid, app);
+
+  res.status(200).json({
+    data: {
+      error: answer?.error,
+    },
+  });
+  return;
 };

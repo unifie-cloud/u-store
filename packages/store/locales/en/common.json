@@ -246,5 +246,15 @@
   "internal-server-error": "Internal Server Error !",
   "unable-to-find": "We're unable to find out what's happening! We suggest you to",
   "try-again-later": "or visit here later.",
-  "multiple-sso-teams": "User belongs to multiple teams with SSO enabled. Please enter your team slug to get started."
+  "multiple-sso-teams": "User belongs to multiple teams with SSO enabled. Please enter your team slug to get started.",
+  "unifie-app-select-cluster-to-deploy": "Select a cluster to deploy this application",
+  "unifie-app-update": "Update",
+  "unifie-app-deploy": "Deploy",
+  "unifie-app-Application": "Application",
+  "unifie-app-cluster": "Cluster",
+  "unifie-app-domain": "Domain",
+  "unifie-app-version": "Version",
+  "unifie-app-choose-a-plan": "Choose a plan",
+  "unifie-app-no-subscription": "You don't have any subscription",
+  "unifie-app-enabled": "Enabled"
 }
