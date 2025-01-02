@@ -14,10 +14,12 @@ import env from '@/lib/env';
 import { Theme, applyTheme } from '@/lib/theme';
 import { Themer } from '@boxyhq/react-ui/shared';
 import { AccountLayout } from '@/components/layouts';
+import useApollo from 'hooks/useApollo';
+import { ApolloProvider } from '@apollo/client';
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const { session, ...props } = pageProps;
-
+  const client = useApollo(pageProps);
   // Add mixpanel
   useEffect(() => {
     if (env.mixpanel.token) {
@@ -37,7 +39,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     Component.getLayout || ((page) => <AccountLayout>{page}</AccountLayout>);
 
   return (
-    <>
+    <ApolloProvider client={client}>
       <Head>
         <title>{app.name}</title>
         <link rel="icon" href="https://boxyhq.com/img/favicon.ico" />
@@ -63,7 +65,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
           {getLayout(<Component {...props} />)}
         </Themer>
       </SessionProvider>
-    </>
+    </ApolloProvider>
   );
 }
 

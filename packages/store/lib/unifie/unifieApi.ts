@@ -84,8 +84,9 @@ class UnifieApi {
   }
 
   public async Clusters_getClustersList(): Promise<iUnifieCluster[]> {
-    const query = await this.client.rawRequest(
-      `query Clusters_getClustersList {
+    try {
+      const query = await this.client.rawRequest(
+        `query Clusters_getClustersList {
             Clusters_getClustersList {
                 id
                 name
@@ -95,10 +96,14 @@ class UnifieApi {
                 allowToAddDeployments 
             }
         }`,
-      {}
-    );
+        {}
+      );
 
-    return query?.data?.Clusters_getClustersList || [];
+      return query?.data?.Clusters_getClustersList || [];
+    } catch (e) {
+      console.log(e);
+      return [];
+    }
   }
   public async Clusters_getClustersForTemplate(
     templateId: number

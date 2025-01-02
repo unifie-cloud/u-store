@@ -14,10 +14,27 @@ import useTeamApplication from 'hooks/useTeamApplication';
 import { UnifieDeploymentOverview } from '@/components/unifie/UnifieDeploymentOverview';
 import { UnifieDeploymentCreate } from '@/components/unifie/UnifieDeploymentCreate';
 import { useRouter } from 'next/router';
+import { addApolloState, initializeApollo } from 'apollo';
+import { gql, useQuery } from '@apollo/client';
 
 const Products: NextPageWithLayout = (props) => {
   const router = useRouter();
   const { t } = useTranslation('common');
+  const gQuery = useQuery(
+    gql`
+      query Clusters_getClustersList {
+        Clusters_getClustersList {
+          id
+          name
+          regionName
+          title
+          cloudProvider
+          allowToAddDeployments
+        }
+      }
+    `,
+    {}
+  );
 
   const { isLoading, team } = useTeam();
   const app = useTeamApplication();
@@ -83,6 +100,8 @@ export async function getServerSideProps(req: GetServerSidePropsContext) {
     };
   }
 
+  const client = initializeApollo();
+
   const unifieApi = new UnifieApi();
   await unifieApi.init({
     apiKey: process.env.UNIFIE_API_KEY,
@@ -91,7 +110,7 @@ export async function getServerSideProps(req: GetServerSidePropsContext) {
   const clusterList: iUnifieCluster[] =
     await unifieApi.Clusters_getClustersList();
 
-  return {
+  return addApolloState(client, {
     props: {
       ...(req.locale
         ? await serverSideTranslations(req.locale, ['common'])
@@ -100,7 +119,7 @@ export async function getServerSideProps(req: GetServerSidePropsContext) {
         (cluster) => cluster.allowToAddDeployments
       ),
     },
-  };
+  });
 }
 
 export default Products;
