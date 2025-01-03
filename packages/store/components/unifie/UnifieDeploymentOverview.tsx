@@ -1,11 +1,10 @@
-import type { ApiResponse } from 'types';
 import { useTranslation } from 'next-i18next';
 import { iUnifieApplication } from '@/lib/unifie/unifieApi';
 import { Button, Form, Skeleton, Spin, Switch } from 'antd';
-import useTeamApplication from 'hooks/useTeamApplication';
 import { useState } from 'react';
-import { defaultHeaders } from '@/lib/common';
 import toast from 'react-hot-toast';
+import { getApollo } from 'hooks/useApollo';
+import { gql, useQuery } from '@apollo/client';
 
 export const UnifieDeploymentOverview = (props: {
   app: iUnifieApplication;
@@ -13,12 +12,8 @@ export const UnifieDeploymentOverview = (props: {
 }) => {
   const { t } = useTranslation('common');
   const [loading, setLoading] = useState(false);
-  const app = useTeamApplication();
-  const [form] = Form.useForm();
 
-  if (app.isLoading) {
-    return <Skeleton active={true} loading={true}></Skeleton>;
-  }
+  const [form] = Form.useForm();
 
   const currentTeamApplication: iUnifieApplication =
     props.app as iUnifieApplication;
@@ -28,20 +23,27 @@ export const UnifieDeploymentOverview = (props: {
 
     setLoading(true);
     try {
-      const response = await fetch(
-        `/api/teams/${props.teamSlug}/unifie-deployment`,
-        {
-          method: 'PATCH',
-          headers: defaultHeaders,
-          body: JSON.stringify(config),
-        }
-      );
+      const response = await getApollo().mutate({
+        mutation: gql`
+          mutation uStore_updateApplication(
+            $teamSlug: String!
+            $config: iUnifieApplicationInput!
+          ) {
+            uStore_updateApplication(teamSlug: $teamSlug, config: $config) {
+              error
+            }
+          }
+        `,
+        variables: {
+          teamSlug: props.teamSlug,
+          config,
+        },
+      });
 
       setLoading(false);
 
-      if (!response.ok) {
-        const json = (await response.json()) as ApiResponse;
-        toast.error(json.error.message);
+      if (response.data?.uStore_updateApplication?.error) {
+        toast.error(response.data?.uStore_updateApplication?.error);
         return;
       }
 

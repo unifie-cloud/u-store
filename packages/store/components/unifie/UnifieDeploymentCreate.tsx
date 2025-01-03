@@ -1,21 +1,36 @@
-import type { ApiResponse } from 'types';
 import { useTranslation } from 'next-i18next';
 import { iUnifieCluster } from '@/lib/unifie/unifieApi';
-import { Button, Select, Spin } from 'antd';
+import { Button, Select, Skeleton, Spin } from 'antd';
 import { useState } from 'react';
-import { defaultHeaders } from '@/lib/common';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import { gql, useQuery } from '@apollo/client';
+import { getApollo } from 'hooks/useApollo';
 
-export const UnifieDeploymentCreate = (props: {
-  teamSlug: string;
-  clusterList: iUnifieCluster[];
-}) => {
+export const UnifieDeploymentCreate = (props: { teamSlug: string }) => {
   const { t } = useTranslation('common');
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [cluster, setCluster] = useState(false);
-  const clusterList: iUnifieCluster[] = props.clusterList as any;
+
+  const gQuery = useQuery(
+    gql`
+      query uStore_getClusters {
+        uStore_getClusters {
+          id
+          name
+          regionName
+          title
+        }
+      }
+    `,
+    {}
+  );
+  if (gQuery.loading) {
+    return <Skeleton active={true} loading={true}></Skeleton>;
+  }
+
+  const clusterList: iUnifieCluster[] = gQuery?.data?.uStore_getClusters || [];
 
   const createApplication = async () => {
     if (!cluster) {
@@ -23,28 +38,39 @@ export const UnifieDeploymentCreate = (props: {
       return;
     }
     setLoading(true);
+
     try {
-      const response = await fetch(
-        `/api/teams/${props.teamSlug}/unifie-deployment`,
-        {
-          method: 'POST',
-          headers: defaultHeaders,
-          body: JSON.stringify({
-            clusterId: cluster,
-          }),
-        }
-      );
+      const response = await getApollo().mutate({
+        mutation: gql`
+          mutation uStore_createApplication(
+            $clusterId: Int!
+            $teamSlug: String!
+          ) {
+            uStore_createApplication(
+              clusterId: $clusterId
+              teamSlug: $teamSlug
+            ) {
+              error
+              extUuid
+            }
+          }
+        `,
+        variables: {
+          clusterId: cluster,
+          teamSlug: props.teamSlug,
+        },
+      });
 
       setLoading(false);
 
-      if (!response.ok) {
-        const json = (await response.json()) as ApiResponse;
-        toast.error(json.error.message);
+      if (!response.data?.uStore_createApplication?.extUuid) {
+        toast.success(t('team-removed-successfully'));
+        router.reload();
         return;
       }
-
-      toast.success(t('team-removed-successfully'));
-      router.reload();
+      if (response.data?.uStore_createApplication?.error) {
+        toast.error(response.data?.uStore_createApplication?.error);
+      }
     } catch (e: any) {
       toast.error(e?.message || e);
       setTimeout(() => {

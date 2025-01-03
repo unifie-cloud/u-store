@@ -7,6 +7,7 @@
  */
 
 import { GraphQLClient } from 'graphql-request';
+import env from '../env';
 
 export interface iUnifieCluster {
   id: number;
@@ -65,28 +66,34 @@ export interface UnifieApiOptions {
   defaultTemplateId?: number;
 }
 
-class UnifieApi {
+export class UnifieCloudApi {
   protected client;
   protected defaultTemplateId: number | null = Number(
     process.env.UNIFIE_DEFAULT_TEMPLATE_ID
   );
-  constructor() {
-    // ...
-  }
+  constructor(options?: UnifieApiOptions) {
+    const opt = options || env.unifie;
+    if (!opt.apiKey) {
+      console.error('UnifieCloudApi: apiKey is not set');
+      throw new Error('UnifieCloudApi: apiKey is not set');
+    }
 
-  public async init(options: UnifieApiOptions) {
-    // ...
-    this.client = new GraphQLClient(options.apiHost, {
+    if (!opt.apiHost) {
+      console.error('UnifieCloudApi: apiHost is not set');
+      throw new Error('UnifieCloudApi: apiHost is not set');
+    }
+
+    this.client = new GraphQLClient(opt.apiHost, {
       headers: {
-        'x-auth-token': options.apiKey,
+        'x-auth-token': opt.apiKey,
       },
     });
   }
 
   public async Clusters_getClustersList(): Promise<iUnifieCluster[]> {
-    try {
-      const query = await this.client.rawRequest(
-        `query Clusters_getClustersList {
+    // try {
+    const query = await this.client.rawRequest(
+      `query Clusters_getClustersList {
             Clusters_getClustersList {
                 id
                 name
@@ -96,17 +103,17 @@ class UnifieApi {
                 allowToAddDeployments 
             }
         }`,
-        {}
-      );
+      {}
+    );
 
-      return query?.data?.Clusters_getClustersList || [];
-    } catch (e) {
-      console.log(e);
-      return [];
-    }
+    return query?.data?.Clusters_getClustersList || [];
+    // } catch (e: any) {
+    //   console.error(`UnifieApi error:`, e?.response?.errors || e?.message);
+    //   return [];
+    // }
   }
   public async Clusters_getClustersForTemplate(
-    templateId: number
+    templateId?: number
   ): Promise<iUnifieCluster[]> {
     const query = await this.client.rawRequest(
       `query Clusters_getClustersForTemplate($projectId: Int!) {
@@ -232,4 +239,4 @@ class UnifieApi {
   }
 }
 
-export default UnifieApi;
+export const unifieApi = new UnifieCloudApi();

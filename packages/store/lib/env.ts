@@ -119,6 +119,11 @@ const env = {
     secretKey: process.env.STRIPE_SECRET_KEY,
     webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
   },
+  unifie: {
+    apiKey: process.env.UNIFIE_API_KEY,
+    apiHost: process.env.UNIFIE_API_URL,
+    defaultTemplateId: process.env.UNIFIE_DEFAULT_TEMPLATE_ID,
+  },
 };
 
 export default env;

@@ -102,10 +102,14 @@ const isAllowed = (role: Role, resource: Resource, action: Action) => {
 };
 
 export const throwIfNotAllowed = (
-  user: Pick<TeamMember, 'role'>,
+  user: Pick<TeamMember, 'role'> | null,
   resource: Resource,
   action: Action
 ) => {
+  if (!user) {
+    throw new ApiError(403, `User not found`);
+  }
+
   if (isAllowed(user.role, resource, action)) {
     return true;
   }

@@ -2,11 +2,16 @@ import { useMemo } from 'react';
 
 import { APOLLO_STATE_PROP_NAME, initializeApollo } from '../apollo';
 
+let apolloClient: any;
 function useApollo(pageProps: any) {
   const state = pageProps[APOLLO_STATE_PROP_NAME];
-  const client = useMemo(() => initializeApollo(state), [state]);
+  apolloClient = useMemo(() => initializeApollo(state), [state]);
 
-  return client;
+  return apolloClient;
+}
+
+export function getApollo() {
+  return apolloClient || initializeApollo();
 }
 
 export default useApollo;

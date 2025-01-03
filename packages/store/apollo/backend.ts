@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Session } from 'next-auth';
-import { NextRequest, NextResponse } from 'next/server';
 
 export interface iApolloResolver {
   Query: {

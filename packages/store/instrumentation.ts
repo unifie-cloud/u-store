@@ -2,7 +2,9 @@
 
 import * as Sentry from '@sentry/nextjs';
 
-export function register() {
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export async function register() {
   if (
     process.env.NEXT_RUNTIME === 'nodejs' ||
     process.env.NEXT_RUNTIME === 'edge'
@@ -14,5 +16,9 @@ export function register() {
       ),
       debug: false,
     });
+  }
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    const backend = await import('./instrumentation-backend');
+    await backend.init();
   }
 }
