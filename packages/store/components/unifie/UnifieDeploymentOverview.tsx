@@ -1,10 +1,11 @@
 import { useTranslation } from 'next-i18next';
-import { iUnifieApplication } from '@/lib/unifie/unifieApi';
-import { Button, Form, Skeleton, Spin, Switch } from 'antd';
+import { Button, Form, Spin } from 'antd';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { getApollo } from 'hooks/useApollo';
 import { gql, useQuery } from '@apollo/client';
+import { iUnifieApplication } from 'types/unifieApi';
+import { UnifieForm } from './UnifieForm';
 
 export const UnifieDeploymentOverview = (props: {
   app: iUnifieApplication;
@@ -13,6 +14,17 @@ export const UnifieDeploymentOverview = (props: {
   const { t } = useTranslation('common');
   const [loading, setLoading] = useState(false);
 
+  const formSchema = useQuery(
+    gql`
+      query uStore_getApplicationConfigSchema {
+        uStore_getApplicationConfigSchema {
+          schema
+        }
+      }
+    `,
+    {}
+  );
+  const schema = formSchema.data?.uStore_getApplicationConfigSchema?.schema;
   const [form] = Form.useForm();
 
   const currentTeamApplication: iUnifieApplication =
@@ -56,6 +68,10 @@ export const UnifieDeploymentOverview = (props: {
     }
   };
 
+  if (!schema) {
+    return <div>Loading...</div>;
+  }
+
   // We have an application - show status here
   return (
     <div className="p-3">
@@ -89,10 +105,12 @@ export const UnifieDeploymentOverview = (props: {
           //   services: currentTeamApplication.services,
         }}
       >
-        <Form.Item label={t('unifie-app-enabled')} name={`isEnabled`}>
+        {/* <Form.Item label={t('unifie-app-enabled')} name={`isEnabled`}>
           <Switch />
-        </Form.Item>
+        </Form.Item> */}
 
+        <UnifieForm schema={schema} />
+        <br />
         <Button
           type="primary"
           className="mt-3"

@@ -2,7 +2,6 @@ import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import type { NextPageWithLayout } from 'types';
 import { useTranslation } from 'next-i18next';
-import { iUnifieApplication } from '@/lib/unifie/unifieApi';
 import useTeam from 'hooks/useTeam';
 import useSWR from 'swr';
 import fetcher from '@/lib/fetcher';
@@ -11,8 +10,19 @@ import { UnifieDeploymentOverview } from '@/components/unifie/UnifieDeploymentOv
 import { UnifieDeploymentCreate } from '@/components/unifie/UnifieDeploymentCreate';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
+import { iUnifieApplication } from 'types/unifieApi';
 
-const Products: NextPageWithLayout = (props) => {
+export const dynamic = 'force-dynamic';
+
+function SafeHydrate({ children }) {
+  return (
+    <div suppressHydrationWarning>
+      {typeof window === 'undefined' ? null : children}
+    </div>
+  );
+}
+
+const Products: NextPageWithLayout = () => {
   const router = useRouter();
   const { t } = useTranslation('common');
 
@@ -80,15 +90,21 @@ const Products: NextPageWithLayout = (props) => {
 
   if (!currentTeamApplication) {
     // We need to create a new application
-    return <UnifieDeploymentCreate teamSlug={team.slug} />;
+    return (
+      <SafeHydrate>
+        <UnifieDeploymentCreate teamSlug={team.slug} />
+      </SafeHydrate>
+    );
   }
 
   // We have an application - show status here
   return (
-    <UnifieDeploymentOverview
-      app={currentTeamApplication}
-      teamSlug={team.slug}
-    />
+    <SafeHydrate>
+      <UnifieDeploymentOverview
+        app={currentTeamApplication}
+        teamSlug={team.slug}
+      />
+    </SafeHydrate>
   );
 };
 

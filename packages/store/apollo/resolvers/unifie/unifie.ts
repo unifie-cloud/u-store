@@ -1,12 +1,10 @@
-import {
-  iUnifieApplication,
-  iUnifieCluster,
-  unifieApi,
-} from '@/lib/unifie/unifieApi';
+import { unifieApi } from '@/lib/unifie/unifieApi';
 import { iApolloResolver, iQlContext, QL } from '../../backend';
 import { getTeamMember } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import { ApiError } from '@/lib/errors';
+import { iUnifieApplication, iUnifieCluster } from 'types/unifieApi';
+import { iUnifieFormSchema } from 'types/unifieForms';
 
 function getAppUuid(teamId: string) {
   return `store-team-${teamId}`;
@@ -48,6 +46,11 @@ export const unifieStoreFrontendApi: iApolloResolver = {
     type iCreateApplication {
       error: String
       extUuid: String
+    }
+
+    type iUnifieConfigSchema {
+      schema: JSON
+      uiSchema: JSON
     }
 
     type iUnifieApplication {
@@ -95,6 +98,7 @@ export const unifieStoreFrontendApi: iApolloResolver = {
       """
       uStore_getClusters: [ClusterModel]
       uStore_getApplication(teamSlug: String!): iUnifieApplication
+      uStore_getApplicationConfigSchema: iUnifieConfigSchema
     }
 
     extend type Mutation {
@@ -128,6 +132,30 @@ export const unifieStoreFrontendApi: iApolloResolver = {
           (await unifieApi.Clusters_getClustersForTemplate()) || []
         ).filter((cluster) => cluster.allowToAddDeployments);
         return res;
+      }
+    ),
+    uStore_getApplicationConfigSchema: QL(
+      async (
+        args: any,
+        context: iQlContext
+      ): Promise<{ schema: iUnifieFormSchema }> => {
+        return {
+          schema: {
+            properties: [
+              //  add properties
+              {
+                type: 'boolean',
+                label: 'unifie-app-enabled',
+                name: 'isEnabled',
+              },
+              {
+                type: 'string',
+                label: 'unifie-app-enabled',
+                name: 'textTest',
+              },
+            ],
+          },
+        };
       }
     ),
   },

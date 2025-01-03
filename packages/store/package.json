@@ -27,6 +27,9 @@
     "delete-team": "node --env-file .env delete-team.js"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.22.1",
+    "@ant-design/nextjs-registry": "^1.0.2",
+    "@ant-design/x": "^1.0.4",
     "@apollo/client": "^3.12.4",
     "@apollo/server": "^4.11.2",
     "@as-integrations/next": "^3.2.0",

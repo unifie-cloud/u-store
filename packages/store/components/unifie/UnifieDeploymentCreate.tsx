@@ -1,11 +1,11 @@
 import { useTranslation } from 'next-i18next';
-import { iUnifieCluster } from '@/lib/unifie/unifieApi';
 import { Button, Select, Skeleton, Spin } from 'antd';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import { getApollo } from 'hooks/useApollo';
+import { iUnifieCluster } from 'types/unifieApi';
 
 export const UnifieDeploymentCreate = (props: { teamSlug: string }) => {
   const { t } = useTranslation('common');
