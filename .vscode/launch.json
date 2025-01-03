@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Next.js: debug full stack 1!",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "cd packages/store && npm run dev",
+      "outFiles": ["${workspaceFolder}/**/*.js", "${workspaceFolder}/.next/**/*.js"]
+    }
+  ]
+}
