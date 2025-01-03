@@ -148,11 +148,11 @@ export const unifieStoreFrontendApi: iApolloResolver = {
                 label: 'unifie-app-enabled',
                 name: 'isEnabled',
               },
-              {
-                type: 'string',
-                label: 'unifie-app-enabled',
-                name: 'textTest',
-              },
+              // {
+              //   type: 'string',
+              //   label: 'unifie-app-enabled',
+              //   name: 'textTest',
+              // },
             ],
           },
         };
