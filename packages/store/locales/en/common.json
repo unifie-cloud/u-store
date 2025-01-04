@@ -1,4 +1,5 @@
 {
+  "project-name": "Unifie store",
   "device": "Device",
   "status": "Status",
   "created": "Created",
@@ -96,7 +97,7 @@
   "new-password": "New Password",
   "continue-with-github": "Continue with GitHub",
   "continue-with-google": "Continue with Google",
-  "email-placeholder": "example@boxyhq.com",
+  "email-placeholder": "example@example.com",
   "confirm-password": "Confirm Password",
   "enter-new-password": "Enter new password",
   "member-role-updated": "Member role updated successfully.",
@@ -246,15 +247,5 @@
   "internal-server-error": "Internal Server Error !",
   "unable-to-find": "We're unable to find out what's happening! We suggest you to",
   "try-again-later": "or visit here later.",
-  "multiple-sso-teams": "User belongs to multiple teams with SSO enabled. Please enter your team slug to get started.",
-  "unifie-app-select-cluster-to-deploy": "Select a cluster to deploy this application",
-  "unifie-app-update": "Update",
-  "unifie-app-deploy": "Deploy",
-  "unifie-app-Application": "Application",
-  "unifie-app-cluster": "Cluster",
-  "unifie-app-domain": "Domain",
-  "unifie-app-version": "Version",
-  "unifie-app-choose-a-plan": "Choose a plan",
-  "unifie-app-no-subscription": "You don't have any subscription",
-  "unifie-app-enabled": "Enabled"
+  "multiple-sso-teams": "User belongs to multiple teams with SSO enabled. Please enter your team slug to get started."
 }

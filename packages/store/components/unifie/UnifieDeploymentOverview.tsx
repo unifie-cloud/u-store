@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import { Button, Form, Spin } from 'antd';
+import { Button, Form, Skeleton, Spin } from 'antd';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { getApollo } from 'hooks/useApollo';
@@ -11,7 +11,7 @@ export const UnifieDeploymentOverview = (props: {
   app: iUnifieApplication;
   teamSlug: string;
 }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('unifie');
   const [loading, setLoading] = useState(false);
 
   const formSchema = useQuery(
@@ -59,7 +59,7 @@ export const UnifieDeploymentOverview = (props: {
         return;
       }
 
-      toast.success(t('team-removed-successfully'));
+      toast.success(t('unifie-app-update-successfully'));
     } catch (e: any) {
       toast.error(e?.message || e);
       setTimeout(() => {
@@ -69,7 +69,7 @@ export const UnifieDeploymentOverview = (props: {
   };
 
   if (!schema) {
-    return <div>Loading...</div>;
+    return <Skeleton active={true} loading={true}></Skeleton>;
   }
 
   // We have an application - show status here
@@ -105,10 +105,6 @@ export const UnifieDeploymentOverview = (props: {
           //   services: currentTeamApplication.services,
         }}
       >
-        {/* <Form.Item label={t('unifie-app-enabled')} name={`isEnabled`}>
-          <Switch />
-        </Form.Item> */}
-
         <UnifieForm schema={schema} />
         <br />
         <Button

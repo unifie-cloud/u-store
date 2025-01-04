@@ -4,7 +4,7 @@ const { withSentryConfig } = require('@sentry/nextjs');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // experimental: { esmExternals: false, webpackBuildWorker: true },
+  experimental: { esmExternals: true, webpackBuildWorker: true },
   reactStrictMode: true,
   transpilePackages: [
     'antd',

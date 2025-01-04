@@ -24,7 +24,7 @@ function SafeHydrate({ children }) {
 
 const Products: NextPageWithLayout = () => {
   const router = useRouter();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('unifie');
 
   const { isLoading, team } = useTeam();
 
@@ -118,7 +118,7 @@ export async function getServerSideProps(req: GetServerSidePropsContext) {
   return {
     props: {
       ...(req.locale
-        ? await serverSideTranslations(req.locale, ['common'])
+        ? await serverSideTranslations(req.locale, ['common', 'unifie'])
         : {}),
     },
   };

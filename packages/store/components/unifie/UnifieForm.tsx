@@ -10,7 +10,7 @@ interface iUnifieFormProps {
 }
 
 export const UnifieForm = (props: iUnifieFormProps) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('unifie');
 
   const schema = props.schema;
 

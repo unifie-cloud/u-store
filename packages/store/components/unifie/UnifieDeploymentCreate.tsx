@@ -8,7 +8,7 @@ import { getApollo } from 'hooks/useApollo';
 import { iUnifieCluster } from 'types/unifieApi';
 
 export const UnifieDeploymentCreate = (props: { teamSlug: string }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('unifie');
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [cluster, setCluster] = useState(false);
@@ -64,7 +64,7 @@ export const UnifieDeploymentCreate = (props: { teamSlug: string }) => {
       setLoading(false);
 
       if (!response.data?.uStore_createApplication?.extUuid) {
-        toast.success(t('team-removed-successfully'));
+        toast.success(t('unifie-app-create-successfully'));
         router.reload();
         return;
       }

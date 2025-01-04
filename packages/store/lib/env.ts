@@ -124,6 +124,13 @@ const env = {
     apiHost: process.env.UNIFIE_API_URL,
     defaultTemplateId: process.env.UNIFIE_DEFAULT_TEMPLATE_ID,
   },
+
+  branding: {
+    PROJECT_NAME: process.env.BRANDING_PROJECT_NAME || 'Unifie store',
+    PROJECT_LOGO:
+      process.env.BRANDING_PROJECT_LOGO ||
+      'https://api.unifie.cloud/branding/headerLogo.svg',
+  },
 };
 
 export default env;

@@ -3,8 +3,8 @@ import env from './env';
 
 const app = {
   version: packageInfo.version,
-  name: 'BoxyHQ',
-  logoUrl: 'https://boxyhq.com/img/logo.png',
+  name: env.branding.PROJECT_NAME,
+  logoUrl: env.branding.PROJECT_LOGO,
   url: env.appUrl,
 };
 
