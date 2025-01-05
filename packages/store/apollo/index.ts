@@ -1,3 +1,4 @@
+import env from '@/lib/env';
 import {
   ApolloClient,
   InMemoryCache,
@@ -6,8 +7,6 @@ import {
 import merge from 'deepmerge';
 import isEqual from 'lodash-es/isEqual';
 
-const COUNTRIES_API = 'http://localhost:4002/api/graphql';
-
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null;
@@ -15,7 +14,7 @@ let apolloClient: ApolloClient<NormalizedCacheObject> | null;
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    uri: COUNTRIES_API,
+    uri: env.appUrl + '/api/graphql',
     cache: new InMemoryCache(),
   });
 }
