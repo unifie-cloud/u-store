@@ -87,7 +87,66 @@ export const unifieStoreFrontendApi: iApolloResolver = {
       services: JSON
       tags: [Int]
     }
-      
+    
+    """
+    Return JWT token with access to Application monitoring data
+    - token - jwt token
+    - url - analytics server endpoint
+    """
+    type MonitoringToken {
+      error: String
+      token: String
+      url: String
+    }
+    
+    """
+    Kubernetes pod status
+    - labels - pod labels
+    - name - pod name
+    - nodeName - node name
+    - status_phase - pod phase
+    - status_startTime - pod start time
+    - creationTimestamp - pod creation time
+    - containers - pod containers
+    - status_conditions - pod conditions
+    - status_containerStatuses - pod container statuses
+    """
+    type k8sPodsStatus {
+      labels: JSON
+      name: String
+      nodeName: String
+      status_phase: String
+      status_startTime: String
+      creationTimestamp: String
+      containers: JSON
+      status_conditions: JSON
+      status_containerStatuses: JSON
+    }
+
+    """
+    Kubernetes pod Metrics - available if in Kubernetes cluster installed metrics-server
+    - labels - pod labels
+    - cpu - CPU usage in millicores
+    - memory - Memory usage in bytes
+    - name - pod name
+    - nodeName - node name
+    """
+    type k8sPodsMetrics {
+      labels: JSON
+      cpu: Float
+      memory: Float
+      name: String
+      nodeName: String
+    }
+
+    type ApplicationPodsMetrics {
+      error: String
+      metrics: [k8sPodsMetrics]
+    }
+    type ApplicationPodsStatus {
+      error: String
+      status: [k8sPodsStatus]
+    }
 
     # The "Query" type is special: it lists all of the available queries that
     # clients can execute, along with the return type for each. In this
@@ -99,6 +158,11 @@ export const unifieStoreFrontendApi: iApolloResolver = {
       uStore_getClusters: [ClusterModel]
       uStore_getApplication(teamSlug: String!): iUnifieApplication
       uStore_getApplicationConfigSchema: iUnifieConfigSchema
+
+
+      uStore_getPodsMetrics(teamSlug: String!): ApplicationPodsMetrics
+      uStore_getPodsStatus(teamSlug: String!): ApplicationPodsStatus
+      uStore_getMonitoringToken(teamSlug: String!): MonitoringToken 
     }
 
     extend type Mutation {
@@ -107,6 +171,45 @@ export const unifieStoreFrontendApi: iApolloResolver = {
     }
   `,
   Query: {
+    uStore_getPodsMetrics: QL(
+      async (args: { teamSlug: string }, context: iQlContext): Promise<any> => {
+        //  Send deployment for this team
+        const teamMember = await getTeamMember(
+          context.session.user.id,
+          args.teamSlug
+        );
+        throwIfNotAllowed(teamMember, 'team', 'read');
+        const appUuid = getAppUuid(teamMember.team.id);
+        return await unifieApi.Application_getPodsMetricsByExtUuid(appUuid);
+      }
+    ),
+    uStore_getPodsStatus: QL(
+      async (args: { teamSlug: string }, context: iQlContext): Promise<any> => {
+        //  Send deployment for this team
+        const teamMember = await getTeamMember(
+          context.session.user.id,
+          args.teamSlug
+        );
+        throwIfNotAllowed(teamMember, 'team', 'read');
+        const appUuid = getAppUuid(teamMember.team.id);
+        return await unifieApi.Application_getPodsStatusByExtUuid(appUuid);
+      }
+    ),
+    uStore_getMonitoringToken: QL(
+      async (
+        args: { teamSlug: string },
+        context: iQlContext
+      ): Promise<{ token: string; url: string; error: string }> => {
+        //  Send deployment for this team
+        const teamMember = await getTeamMember(
+          context.session.user.id,
+          args.teamSlug
+        );
+        throwIfNotAllowed(teamMember, 'team', 'read');
+        const appUuid = getAppUuid(teamMember.team.id);
+        return await unifieApi.Application_getMonitoringTokenByExtUuid(appUuid);
+      }
+    ),
     uStore_getApplication: QL(
       async (
         args: { teamSlug: string },

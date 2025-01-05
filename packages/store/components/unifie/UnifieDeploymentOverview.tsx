@@ -6,6 +6,7 @@ import { getApollo } from 'hooks/useApollo';
 import { gql, useQuery } from '@apollo/client';
 import { iUnifieApplication } from 'types/unifieApi';
 import { UnifieForm } from './UnifieForm';
+import { PodsMetrics } from './ResourcesStates/PodsMetrics';
 
 export const UnifieDeploymentOverview = (props: {
   app: iUnifieApplication;
@@ -116,6 +117,8 @@ export const UnifieDeploymentOverview = (props: {
           {t('unifie-app-update')} {loading && <Spin />}
         </Button>
       </Form>
+
+      <PodsMetrics teamSlug={props.teamSlug} />
     </div>
   );
 };

@@ -14,6 +14,7 @@ import {
   iUnifieApplication,
   iUnifieApplicationInput,
 } from 'types/unifieApi';
+import { cache } from 'react';
 
 export class UnifieCloudApi {
   protected client;
@@ -40,7 +41,6 @@ export class UnifieCloudApi {
   }
 
   public async Clusters_getClustersList(): Promise<iUnifieCluster[]> {
-    // try {
     const query = await this.client.rawRequest(
       `query Clusters_getClustersList {
             Clusters_getClustersList {
@@ -54,12 +54,89 @@ export class UnifieCloudApi {
         }`,
       {}
     );
-
     return query?.data?.Clusters_getClustersList || [];
-    // } catch (e: any) {
-    //   console.error(`UnifieApi error:`, e?.response?.errors || e?.message);
-    //   return [];
-    // }
+  }
+
+  public async Application_getMonitoringTokenByExtUuid(
+    extUuid: string
+  ): Promise<{ token: string; url: string; error: string }> {
+    const query = await this.client.rawRequest(
+      `query Application_getMonitoringTokenByExtUuid($extUuid: String!) {
+          Application_getMonitoringTokenByExtUuid(extUuid: $extUuid) { 
+            error
+            token
+            url
+          }
+        }`,
+      { extUuid: extUuid }
+    );
+
+    return query?.data?.Application_getMonitoringTokenByExtUuid || null;
+  }
+  public async Application_getPodsStatusByExtUuid(
+    extUuid: string
+  ): Promise<{ error: string; status: any[] }> {
+    const query = await this.client.rawRequest(
+      `query Application_getPodsStatusByExtUuid($extUuid: String!) {
+          Application_getPodsStatusByExtUuid(extUuid: $extUuid) { 
+            error
+            status {
+             labels
+              name
+              nodeName
+              status_phase
+              status_startTime
+              creationTimestamp
+              containers
+              status_conditions
+              status_containerStatuses
+            }
+          }
+        }`,
+      { extUuid: extUuid }
+    );
+
+    return (
+      query?.data?.Application_getPodsStatusByExtUuid || {
+        error: 'No data',
+        status: [],
+      }
+    );
+  }
+
+  public async Application_getPodsMetricsByExtUuid(
+    extUuid: string
+  ): Promise<{ error: string; metrics: any[] }> {
+    try {
+      const query = await this.client.rawRequest(
+        `query Application_getPodsMetricsByExtUuid($extUuid: String!) {
+          Application_getPodsMetricsByExtUuid(extUuid: $extUuid) { 
+            error
+            metrics {
+              labels
+              cpu
+              memory
+              name
+              nodeName
+            }
+          }
+        }`,
+        { extUuid: extUuid }
+      );
+
+      return (
+        query?.data?.Application_getPodsMetricsByExtUuid || {
+          error: 'No data',
+          metrics: [],
+        }
+      );
+    } catch (e: any) {
+      console.error(e?.message);
+      return {
+        error: 'No data',
+        metrics: [],
+      };
+    }
   }
   public async Clusters_getClustersForTemplate(
     templateId?: number
