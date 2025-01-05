@@ -7,6 +7,7 @@ import { gql, useQuery } from '@apollo/client';
 import { iUnifieApplication } from 'types/unifieApi';
 import { UnifieForm } from './UnifieForm';
 import { PodsMetrics } from './ResourcesStates/PodsMetrics';
+import { DeploymentMonitoring } from './DeploymentMonitoring';
 
 export const UnifieDeploymentOverview = (props: {
   app: iUnifieApplication;
@@ -119,6 +120,7 @@ export const UnifieDeploymentOverview = (props: {
       </Form>
 
       <PodsMetrics teamSlug={props.teamSlug} />
+      <DeploymentMonitoring teamSlug={props.teamSlug} />
     </div>
   );
 };
