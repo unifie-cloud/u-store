@@ -312,15 +312,16 @@ export const ResourcesStates = (props: iResourcesStatesProps) => {
               </Tag>
               {usage && (
                 <Text>
-                  {t('unifie-resources-CPU-usage', Math.floor(usage?.cpu))}
+                  {t('unifie-resources-CPU-usage', {
+                    value: Math.floor(usage?.cpu),
+                  })}
                 </Text>
               )}
               {usage && (
                 <Text>
-                  {t(
-                    'unifie-resources-Memory-usage',
-                    Math.floor(usage?.memory * 100) / 100
-                  )}
+                  {t('unifie-resources-Memory-usage', {
+                    value: Math.floor(usage?.memory * 100) / 100,
+                  })}
                 </Text>
               )}
             </Space>

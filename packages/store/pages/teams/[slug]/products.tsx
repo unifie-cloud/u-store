@@ -5,12 +5,14 @@ import { useTranslation } from 'next-i18next';
 import useTeam from 'hooks/useTeam';
 import useSWR from 'swr';
 import fetcher from '@/lib/fetcher';
-import { Button, Result, Skeleton } from 'antd';
+import { Button, Col, Result, Row, Skeleton, Tabs } from 'antd';
 import { UnifieDeploymentOverview } from '@/components/unifie/UnifieDeploymentOverview';
 import { UnifieDeploymentCreate } from '@/components/unifie/UnifieDeploymentCreate';
 import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 import { iUnifieApplication } from 'types/unifieApi';
+import { PodsMetrics } from '@/components/unifie/ResourcesStates/PodsMetrics';
+import { DeploymentMonitoring } from '@/components/unifie/DeploymentMonitoring';
 
 export const dynamic = 'force-dynamic';
 
@@ -100,10 +102,24 @@ const Products: NextPageWithLayout = () => {
   // We have an application - show status here
   return (
     <SafeHydrate>
-      <UnifieDeploymentOverview
-        app={currentTeamApplication}
-        teamSlug={team.slug}
-      />
+      <Tabs>
+        <Tabs.TabPane tab={t('unifie-app-Overview')} key="overview">
+          <Row>
+            <Col span={12}>
+              <UnifieDeploymentOverview
+                app={currentTeamApplication}
+                teamSlug={team.slug}
+              />
+            </Col>
+            <Col span={12}>
+              <PodsMetrics teamSlug={team.slug} />
+            </Col>
+          </Row>
+        </Tabs.TabPane>
+        <Tabs.TabPane tab={t('unifie-app-Monitoring')} key="monitoring">
+          <DeploymentMonitoring teamSlug={team.slug} />
+        </Tabs.TabPane>
+      </Tabs>
     </SafeHydrate>
   );
 };

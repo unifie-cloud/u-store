@@ -3,6 +3,7 @@ import type { SessionStrategy } from 'next-auth';
 const env = {
   databaseUrl: `${process.env.DATABASE_URL}`,
   appUrl: `${process.env.APP_URL}`,
+  appApiUrl: `${process.env.APP_API_URL}`,
   redirectIfAuthenticated: '/dashboard',
 
   // SMTP configuration for NextAuth
@@ -84,7 +85,7 @@ const env = {
   authProviders: process.env.AUTH_PROVIDERS || 'github,credentials',
 
   otel: {
-    prefix: process.env.OTEL_PREFIX || 'boxyhq.saas',
+    prefix: process.env.OTEL_PREFIX || 'unifie.store',
   },
 
   hideLandingPage: process.env.HIDE_LANDING_PAGE === 'true',

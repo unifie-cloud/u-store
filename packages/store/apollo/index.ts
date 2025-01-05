@@ -12,9 +12,16 @@ export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 let apolloClient: ApolloClient<NormalizedCacheObject> | null;
 
 function createApolloClient() {
+  let url = '';
+  if (typeof window === 'undefined') {
+    url = env.appApiUrl + `/graphql`;
+  } else {
+    url = `${window.location.origin}/api/graphql`;
+  }
+
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    uri: env.appUrl + '/api/graphql',
+    uri: url,
     cache: new InMemoryCache(),
   });
 }
