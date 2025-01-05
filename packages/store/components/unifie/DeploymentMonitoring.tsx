@@ -121,7 +121,7 @@ export const DeploymentMonitoring = (props: { teamSlug: string }) => {
     },
   ];
 
-  let OverView_charts = [
+  const OverView_charts = [
     ...OverView_usage,
     ...OverView_usage,
     ...OverView_stats,

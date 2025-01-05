@@ -1,4 +1,4 @@
-import { Button, Radio, Space } from 'antd';
+import { Radio, Space } from 'antd';
 import { useState } from 'react';
 
 export interface iFilter {
@@ -35,7 +35,7 @@ const DateRangeFilter = (props: iChartFilterElement) => {
     <Radio.Group
       key={`DateRangeFilter`}
       data-qa={`DateRangeFilter`}
-      onChange={e => {
+      onChange={(e) => {
         const newFilters = { ...props.filter, value: e.target.value };
         props.onChange(newFilters);
         setValue(e.target.value);
@@ -66,7 +66,7 @@ const GranularityFilter = (props: iChartFilterElement) => {
       key={`GranularityFilter`}
       data-qa={`GranularityFilter`}
       options={options}
-      onChange={e => {
+      onChange={(e) => {
         setValue(e.target.value);
         const newFilters = { ...props.filter, value: e.target.value };
         props.onChange(newFilters);
@@ -89,7 +89,7 @@ export const ChartFilters = (props: iChartFilters) => {
               data-qa={filter.type}
               filter={filter}
               allFilters={props.filters}
-              onChange={newFilter => {
+              onChange={(newFilter) => {
                 const newFilters = [...props.filters];
                 newFilters[index] = newFilter;
                 props.setFilters(newFilters);
@@ -104,7 +104,7 @@ export const ChartFilters = (props: iChartFilters) => {
               data-qa={filter.type}
               filter={filter}
               allFilters={props.filters}
-              onChange={newFilter => {
+              onChange={(newFilter) => {
                 const newFilters = [...props.filters];
                 newFilters[index] = newFilter;
                 props.setFilters(newFilters);

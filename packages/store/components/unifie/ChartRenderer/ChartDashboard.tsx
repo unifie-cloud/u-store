@@ -47,7 +47,7 @@ export const ChartDashboardMap = (props: iChartDashboardMap) => {
   const dateRangeValue = filters.find((f) => f.type === 'dateRange')?.value;
   const granularityValue = filters.find((f) => f.type === 'granularity')?.value;
 
-  const stats = props.stats.map((stat: iDashboardOneChart, index) => {
+  const stats = props.stats.map((stat: iDashboardOneChart) => {
     if (stat?.vizState?.query?.timeDimensions) {
       stat.vizState.query.timeDimensions =
         stat.vizState.query.timeDimensions.map((td) => {

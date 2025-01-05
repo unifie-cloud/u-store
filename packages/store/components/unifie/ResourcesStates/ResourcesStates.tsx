@@ -16,6 +16,7 @@ import {
   CloseCircleOutlined,
 } from '@ant-design/icons';
 import { useQuery } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 
 const blueColor: any = { color: 'blue' };
 const buttonColor: any = { color: '#00A58E' };
@@ -50,6 +51,7 @@ interface iRequestLimit {
 }
 
 export const ResourcesStates = (props: iResourcesStatesProps) => {
+  const { t } = useTranslation('unifie');
   const podsQuery = useQuery(
     gql`
       query uStore_getPodsMetrics($teamSlug: String!) {
@@ -85,10 +87,8 @@ export const ResourcesStates = (props: iResourcesStatesProps) => {
     }
   );
 
-  const { loading, error, data } = podsQuery || {};
-
-  const newStatus = data?.uStore_getPodsStatus?.status;
-  const newMetrics = data?.uStore_getPodsMetrics?.metrics;
+  const newStatus = podsQuery?.data?.uStore_getPodsStatus?.status;
+  const newMetrics = podsQuery?.data?.uStore_getPodsMetrics?.metrics;
 
   const [oldStatus, setOldStatus] = useState(null);
   const [oldMetrics, setOldMetrics] = useState(null);
@@ -100,8 +100,11 @@ export const ResourcesStates = (props: iResourcesStatesProps) => {
     if (newMetrics && !newMetrics?.error) {
       setOldMetrics(newMetrics);
     }
-    return podsQuery.stopPolling;
   }, [newStatus, newMetrics]);
+
+  useEffect(() => {
+    return podsQuery.stopPolling;
+  }, [podsQuery?.stopPolling]);
 
   podsQuery.startPolling(5000);
 
@@ -110,11 +113,16 @@ export const ResourcesStates = (props: iResourcesStatesProps) => {
   }
 
   if (!podsQuery.error && !newStatus) {
-    return <> No pods found </>;
+    return <>{t('unifie-resources-no-pods-found')}</>;
   }
 
   if (podsQuery.error || !newStatus || newStatus.error === 401) {
-    return <> Error: {JSON.stringify(podsQuery.error || newStatus?.error)} </>;
+    return (
+      <>
+        {t('unifie-resources-Error')}:{' '}
+        {JSON.stringify(podsQuery.error || newStatus?.error)}{' '}
+      </>
+    );
   }
 
   let metricsObj = newMetrics;
@@ -203,8 +211,8 @@ export const ResourcesStates = (props: iResourcesStatesProps) => {
   return (
     <Space direction="vertical">
       {status &&
-        status.map((service) => {
-          let checkError = getCheckError(service);
+        status.map((service, index) => {
+          const checkError = getCheckError(service);
           // console.log(service.name, checkError);
           const podName = service.name;
           const nodeName = service?.nodeName || ``;
@@ -212,18 +220,10 @@ export const ResourcesStates = (props: iResourcesStatesProps) => {
           const usage: iOneMetric | undefined = metricsByPodName(podName);
           const last = service.last_condition;
 
-          // const { lastTransitionTime, message, reason, status, type } = last;
-          const {
-            cpuRequest,
-            ephemeralRequest,
-            memoryRequest,
-            cpuLimit,
-            ephemeralLimit,
-            memoryLimit,
-          }: iRequestLimit = getCpuData(containerList);
+          const request: iRequestLimit = getCpuData(containerList);
 
           return (
-            <Space>
+            <Space key={index}>
               <Tag key={service.name} icon={serviceToIcon(service)}>
                 <span style={{ minWidth: '90px' }}>
                   <Popover
@@ -231,69 +231,75 @@ export const ResourcesStates = (props: iResourcesStatesProps) => {
                     content={
                       <Space direction="vertical">
                         <Text strong> {getTitleHelp(checkError)} </Text>
-                        <Text italic> Node {nodeName} </Text>
+                        <Text italic>
+                          {t('unifie-resources-Node')} {nodeName}
+                        </Text>
                         <p style={{ maxWidth: '300px' }}>
-                          {last?.lastTransitionTime ? (
-                            <ul>
-                              {last?.lastTransitionTime ? (
-                                <li>
-                                  {' '}
-                                  Last transition time:{' '}
-                                  {last?.lastTransitionTime}{' '}
-                                </li>
-                              ) : (
-                                ''
-                              )}
-                              {last?.message ? (
-                                <li> Message: {last?.message} </li>
-                              ) : (
-                                ''
-                              )}
-                              {last?.reason ? (
-                                <li> Reason: {last?.reason} </li>
-                              ) : (
-                                ''
-                              )}
-                              {last?.status ? (
-                                <li> Status: {last?.status} </li>
-                              ) : (
-                                ''
-                              )}
-                              {last?.type ? <li> Type: {last?.type} </li> : ''}
-                              {cpuRequest ? (
-                                <li>CPU Request : {cpuRequest}</li>
-                              ) : (
-                                ''
-                              )}
-                              {ephemeralRequest ? (
-                                <li> Ephemeral Request: {ephemeralRequest} </li>
-                              ) : (
-                                ''
-                              )}
-                              {memoryRequest ? (
-                                <li> Memory Request: {memoryRequest} </li>
-                              ) : (
-                                ''
-                              )}
-                              {cpuLimit ? (
-                                <li> CPU Limit : {cpuLimit} </li>
-                              ) : (
-                                ''
-                              )}
-                              {ephemeralLimit ? (
-                                <li> Memory Limit: {ephemeralLimit} </li>
-                              ) : (
-                                ''
-                              )}
-                              {memoryLimit ? (
-                                <li> Ephemeral Limit: {memoryLimit} </li>
-                              ) : (
-                                ''
-                              )}
-                            </ul>
-                          ) : (
-                            ''
-                          )}
+                          <ul>
+                            {last?.lastTransitionTime && (
+                              <li>
+                                {t('unifie-resources-last-transition-time')}:{' '}
+                                {last?.lastTransitionTime}
+                              </li>
+                            )}
+                            {last?.message && (
+                              <li>
+                                {t('unifie-resources-message')}: {last?.message}
+                              </li>
+                            )}
+                            {last?.reason && (
+                              <li>
+                                {t('unifie-resources-Reason')}: {last?.reason}
+                              </li>
+                            )}
+                            {last?.status && (
+                              <li>
+                                {t('unifie-resources-Status')}: {last?.status}
+                              </li>
+                            )}
+                            {last?.type && (
+                              <li>
+                                {t('unifie-resources-Type')}: {last?.type}
+                              </li>
+                            )}
+
+                            {request?.cpuRequest && (
+                              <li>
+                                {t('unifie-resources-CPU-Request')}:{' '}
+                                {request?.cpuRequest}
+                              </li>
+                            )}
+                            {request?.ephemeralRequest && (
+                              <li>
+                                {t('unifie-resources-Ephemeral-Request')}:{' '}
+                                {request?.ephemeralRequest}
+                              </li>
+                            )}
+                            {request?.memoryRequest && (
+                              <li>
+                                {t('unifie-resources-Memory-Request')}:{' '}
+                                {request?.memoryRequest}
+                              </li>
+                            )}
+                            {request?.cpuLimit && (
+                              <li>
+                                {t('unifie-resources-CPU-Limit')}:{' '}
+                                {request?.cpuLimit}
+                              </li>
+                            )}
+                            {request?.ephemeralLimit && (
+                              <li>
+                                {t('unifie-resources-Memory-Limit')}:{' '}
+                                {request?.ephemeralLimit}
+                              </li>
+                            )}
+                            {request?.memoryLimit && (
+                              <li>
+                                {t('unifie-resources-Ephemeral-Limit')}:{' '}
+                                {request?.memoryLimit}
+                              </li>
+                            )}
+                          </ul>
                         </p>
                       </Space>
                     }
@@ -304,11 +310,17 @@ export const ResourcesStates = (props: iResourcesStatesProps) => {
                   </Popover>
                 </span>
               </Tag>
-              {usage && <Text> CPU usage {Math.floor(usage?.cpu)}m </Text>}
               {usage && (
                 <Text>
-                  {' '}
-                  Memory usage {Math.floor(usage?.memory * 100) / 100}Mi{' '}
+                  {t('unifie-resources-CPU-usage', Math.floor(usage?.cpu))}
+                </Text>
+              )}
+              {usage && (
+                <Text>
+                  {t(
+                    'unifie-resources-Memory-usage',
+                    Math.floor(usage?.memory * 100) / 100
+                  )}
                 </Text>
               )}
             </Space>
@@ -335,7 +347,7 @@ const getCheckError = (service: any): string => {
     (new Date().getTime() - new Date(service.status_startTime).getTime()) /
     1000;
 
-  let status =
+  const status =
     service?.last_condition?.reason ||
     service?.status_phase ||
     service?.last_condition?.message;

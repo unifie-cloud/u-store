@@ -10,5 +10,19 @@
   "unifie-app-no-subscription": "You don't have any subscription",
   "unifie-app-update-successfully": "Done",
   "unifie-app-create-successfully": "Done",
-  "unifie-app-enabled": "Enabled"
+  "unifie-resources-last-transition-time": "Last transition time",
+  "unifie-resources-message": "Message",
+  "unifie-resources-CPU-usage": "CPU usage %s m",
+  "unifie-resources-Memory-usage": "Memory usage %s Mi",
+  "unifie-resources-Ephemeral-Limit": "Ephemeral limit",
+  "unifie-resources-Ephemeral-Request": "Ephemeral request",
+  "unifie-resources-Memory-Request": "Memory request",
+  "unifie-resources-CPU-Limit": "CPU limit",
+  "unifie-resources-Memory-Limit": "Memory limit",
+  "unifie-resources-CPU-Request": "CPU request",
+  "unifie-resources-Reason": "Reason",
+  "unifie-resources-Type": "Type",
+  "unifie-resources-Error": "Error",
+  "unifie-resources-Node": "Node",
+  "unifie-resources-no-pods-found": "No pods found"
 }

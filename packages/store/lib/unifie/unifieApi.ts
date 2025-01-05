@@ -14,7 +14,6 @@ import {
   iUnifieApplication,
   iUnifieApplicationInput,
 } from 'types/unifieApi';
-import { cache } from 'react';
 
 export class UnifieCloudApi {
   protected client;

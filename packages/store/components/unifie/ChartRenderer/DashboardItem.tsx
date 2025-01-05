@@ -4,9 +4,12 @@ import React, { useState } from 'react';
 // import { buttonColor, flexDisplay, floatingRight, spaceHeight, spaceWidth } from 'utils/styles';
 import { createContext } from 'react';
 
-export const FullScreenContext = createContext({
+export const FullScreenContext = createContext<{
+  showModal: boolean;
+  setShowModal: (showModal: boolean) => void;
+}>({
   showModal: false,
-  setShowModal: (showModal: boolean) => {},
+  setShowModal: () => {},
 });
 
 const DashboardItem = ({ children, title, needFullScreenView = true }) => {
