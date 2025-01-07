@@ -243,8 +243,8 @@ export const unifieStoreApplicationApi: iApolloResolver = {
         args: any,
         context: iQlContext
       ): Promise<{ schema: iUnifieFormSchema }> => {
-        // read json
-        const data = await readJsonConfigFile('schema.json'); // packages/store/lib/unifie/schema.json
+        // Read schema.json file from /unifie-configs
+        const data = await readJsonConfigFile('schema.json');
         return data;
       }
     ),
@@ -261,9 +261,21 @@ export const unifieStoreApplicationApi: iApolloResolver = {
         );
         throwIfNotAllowed(teamMember, 'team', 'update');
 
+        // Read schema.json file from /unifie-configs
+        const data = await readJsonConfigFile('schema.json');
+
+        const cleanObj = {};
+
+        // Cut off all properties that are not in schema.json file
+        data.schema.properties.forEach((item) => {
+          if (args.config[item.name]) {
+            cleanObj[item.name] = args.config[item.name];
+          }
+        });
+
         const answer = await uStore_updateApplication(
           teamMember.team.id,
-          args.config
+          cleanObj
         );
 
         return {
