@@ -3,14 +3,20 @@ import { iApolloResolver, iQlContext, QL } from '../../backend';
 import { getTeamMember } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
 import { ApiError } from '@/lib/errors';
-import { iUnifieApplication, iUnifieCluster } from 'types/unifieApi';
+import {
+  iApplicationExtData,
+  iUnifieApplication,
+  iUnifieCluster,
+} from 'types/unifieApi';
 import { iUnifieFormSchema } from 'types/unifieForms';
+import { getSubscriptionForTeam } from 'pages/api/teams/[slug]/payments/products';
+import env from '@/lib/env';
 
 function getAppUuid(teamId: string) {
   return `store-team-${teamId}`;
 }
 
-export const unifieStoreFrontendApi: iApolloResolver = {
+export const unifieStoreApplicationApi: iApolloResolver = {
   schema: `#graphql
     # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
@@ -75,9 +81,7 @@ export const unifieStoreFrontendApi: iApolloResolver = {
 
     input iUnifieApplicationInput {
       name: String
-      domain: String
-      extUuid: String
-      extData: JSON
+      domain: String 
       projectId: Int
       isReady: Boolean
       isEnabled: Boolean
@@ -147,10 +151,7 @@ export const unifieStoreFrontendApi: iApolloResolver = {
       error: String
       status: [k8sPodsStatus]
     }
-
-    # The "Query" type is special: it lists all of the available queries that
-    # clients can execute, along with the return type for each. In this
-    # case, the "books" query returns an array of zero or more Books (defined above).
+ 
     extend type Query { 
       """
       Returns clusters list. get request
@@ -273,19 +274,9 @@ export const unifieStoreFrontendApi: iApolloResolver = {
           args.teamSlug
         );
         throwIfNotAllowed(teamMember, 'team', 'update');
-        const appUuid = getAppUuid(teamMember.team.id);
 
-        const currentTeamApplication: iUnifieApplication | null =
-          await unifieApi.Application_getApplicationByExtUuid(appUuid);
-        if (!currentTeamApplication) {
-          throw new ApiError(
-            404,
-            `Application not found for team ${teamMember.team.slug} with uuid ${appUuid}`
-          );
-        }
-
-        const answer = await unifieApi.Application_updateByExtUuid(
-          appUuid,
+        const answer = await uStore_updateApplication(
+          teamMember.team.id,
           args.config
         );
 
@@ -314,12 +305,27 @@ export const unifieStoreFrontendApi: iApolloResolver = {
           };
         }
 
+        let subscriptions: any = [];
+        if (env.unifie.subscriptionRequired) {
+          const data = await getSubscriptionForTeam(
+            context.session,
+            args.teamSlug
+          );
+          subscriptions = data?.subscriptions || []; // .find((s) => s.active);
+          if (!subscriptions) {
+            throw new ApiError(400, 'No subscription found');
+          }
+        }
+
+        const extData: iApplicationExtData = {
+          teamId: teamMember.team.id,
+          subscriptions: subscriptions,
+        };
+
         const newApplication = await unifieApi.Application_createFromTemplate({
           name: `store-team-${teamMember.team.slug}`,
           extUuid: appUuid,
-          extData: {
-            teamId: teamMember.team.id,
-          },
+          extData: extData,
           clusterId: args.clusterId,
         });
 
@@ -335,3 +341,20 @@ export const unifieStoreFrontendApi: iApolloResolver = {
     ),
   },
 };
+
+export async function uStore_updateApplication(teamId: string, config: any) {
+  const appUuid = getAppUuid(teamId);
+  const currentTeamApplication: iUnifieApplication | null =
+    await unifieApi.Application_getApplicationByExtUuid(appUuid);
+  if (!currentTeamApplication) {
+    return {
+      error: `Application not found for team ${teamId} with uuid ${appUuid}`,
+    };
+    // throw new ApiError(
+    //   404,
+    //   `Application not found for team ${teamMember.team.slug} with uuid ${appUuid}`
+    // );
+  }
+
+  return await unifieApi.Application_updateByExtUuid(appUuid, config);
+}

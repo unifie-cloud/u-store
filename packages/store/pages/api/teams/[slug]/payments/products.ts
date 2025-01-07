@@ -2,10 +2,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { getStripeCustomerId } from '@/lib/stripe';
 import { getSession } from '@/lib/session';
-import { throwIfNoTeamAccess } from 'models/team';
+import { getTeamMember } from 'models/team';
 import { getAllServices } from 'models/service';
 import { getAllPrices } from 'models/price';
 import { getByCustomerId } from 'models/subscription';
+import { teamSlugSchema, validateWithSchema } from '@/lib/zod';
 
 export default async function handler(
   req: NextApiRequest,
@@ -30,9 +31,23 @@ export default async function handler(
   }
 }
 
-const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getSession(req, res);
-  const teamMember = await throwIfNoTeamAccess(req, res);
+export const getSubscriptionForTeam = async (session, teamSlug: string) => {
+  if (!session) {
+    throw new Error('Unauthorized');
+  }
+  const teamMember = {
+    ...(await getTeamMember(session.user.id, teamSlug)),
+    user: {
+      ...session.user,
+    },
+  };
+
+  if (!teamMember) {
+    throw new Error('You do not have access to this team');
+  }
+
+  // const session = await getSession(req, res);
+  // const teamMember = await throwIfNoTeamAccess(req, res);
   if (!session?.user?.id) {
     throw Error('Could not get user');
   }
@@ -65,10 +80,16 @@ const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
     };
   });
 
+  return {
+    products: productsWithPrices,
+    subscriptions: (_subscriptions || []).filter((s) => !!s),
+  };
+};
+
+const handleGET = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getSession(req, res);
+  const { slug } = validateWithSchema(teamSlugSchema, req.query);
   res.json({
-    data: {
-      products: productsWithPrices,
-      subscriptions: (_subscriptions || []).filter((s) => !!s),
-    },
+    data: await getSubscriptionForTeam(session, slug),
   });
 };

@@ -7,9 +7,12 @@ import {
   createStripeSubscription,
   deleteStripeSubscription,
   getBySubscriptionId,
+  subscriptionModel_getByCustomerId,
   updateStripeSubscription,
 } from 'models/subscription';
 import { getByCustomerId } from 'models/team';
+import { uStore_updateApplication } from 'apollo/resolvers/unifie/unifie';
+import { iApplicationExtData } from 'types/unifieApi';
 
 export const config = {
   api: {
@@ -48,6 +51,13 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
     return res.status(400).json({ error: { message: err.message } });
   }
 
+  const customer = (event.data.object as Stripe.Subscription).customer;
+  const teamExists = await getByCustomerId(customer as string);
+  if (!teamExists) {
+    // Not accept events for non-existing teams
+    throw new Error('Team does not exist');
+  }
+
   if (relevantEvents.includes(event.type)) {
     try {
       switch (event.type) {
@@ -65,6 +75,11 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
         default:
           throw new Error('Unhandled relevant event!');
       }
+
+      // Update subscriptions in unifie application extData
+      // It will allow to have subscription data in the HELM chart and use it to generate the YAML
+      await uStore_updateSubscriptions(teamExists.id, customer as string);
+
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       return res.status(400).json({
@@ -77,6 +92,12 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
   return res.status(200).json({ received: true });
 }
 
+/**
+ * Update subscriptions in unifie application extData
+ * It will allow to have subscription data in the HELM chart and use it to generate the YAML
+ * @param event
+ * @returns
+ */
 async function handleSubscriptionUpdated(event: Stripe.Event) {
   const {
     cancel_at,
@@ -88,29 +109,30 @@ async function handleSubscriptionUpdated(event: Stripe.Event) {
     items,
   } = event.data.object as Stripe.Subscription;
 
+  const teamExists = await getByCustomerId(customer as string);
+  if (!teamExists) {
+    // Not accept events for non-existing teams
+    throw new Error('Team does not exist');
+  }
+
   const subscription = await getBySubscriptionId(id);
   if (!subscription) {
-    const teamExists = await getByCustomerId(customer as string);
-    if (!teamExists) {
-      return;
-    } else {
-      await handleSubscriptionCreated(event);
-    }
-  } else {
-    const priceId = items.data.length > 0 ? items.data[0].plan?.id : '';
-    //type Stripe.Subscription.Status = "active" | "canceled" | "incomplete" | "incomplete_expired" | "past_due" | "paused" | "trialing" | "unpaid"
-    await updateStripeSubscription(id, {
-      active: status === 'active',
-      endDate: current_period_end
-        ? new Date(current_period_end * 1000)
-        : undefined,
-      startDate: current_period_start
-        ? new Date(current_period_start * 1000)
-        : undefined,
-      cancelAt: cancel_at ? new Date(cancel_at * 1000) : undefined,
-      priceId,
-    });
+    return await handleSubscriptionCreated(event);
   }
+
+  const priceId = items.data.length > 0 ? items.data[0].plan?.id : '';
+  //type Stripe.Subscription.Status = "active" | "canceled" | "incomplete" | "incomplete_expired" | "past_due" | "paused" | "trialing" | "unpaid"
+  await updateStripeSubscription(id, {
+    active: status === 'active',
+    endDate: current_period_end
+      ? new Date(current_period_end * 1000)
+      : undefined,
+    startDate: current_period_start
+      ? new Date(current_period_start * 1000)
+      : undefined,
+    cancelAt: cancel_at ? new Date(cancel_at * 1000) : undefined,
+    priceId,
+  });
 }
 
 async function handleSubscriptionCreated(event: Stripe.Event) {
@@ -126,4 +148,33 @@ async function handleSubscriptionCreated(event: Stripe.Event) {
     endDate: new Date(current_period_end * 1000),
     priceId: items.data.length > 0 ? items.data[0].plan?.id : '',
   });
+}
+
+/**
+ * Update subscription in unifie application
+ * @param teamId
+ * @param subscription
+ * @returns
+ */
+async function uStore_updateSubscriptions(
+  teamId: string,
+  customerId: string
+): Promise<boolean> {
+  const subscriptions = await subscriptionModel_getByCustomerId(customerId);
+  const extData: iApplicationExtData = {
+    teamId: teamId,
+    subscriptions: subscriptions,
+  };
+
+  const res = await uStore_updateApplication(teamId, {
+    extData: extData,
+  });
+
+  if (!res) {
+    throw new Error(`Error in uStore_updateApplication: empty response`);
+  }
+  if (res?.error) {
+    throw new Error(`Error in uStore_updateApplication:${res?.error}`);
+  }
+  return true;
 }

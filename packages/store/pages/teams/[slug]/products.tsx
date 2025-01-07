@@ -3,8 +3,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import type { NextPageWithLayout } from 'types';
 import { useTranslation } from 'next-i18next';
 import useTeam from 'hooks/useTeam';
-import useSWR from 'swr';
-import fetcher from '@/lib/fetcher';
 import { Button, Col, Result, Row, Skeleton, Tabs } from 'antd';
 import { UnifieDeploymentOverview } from '@/components/unifie/UnifieDeploymentOverview';
 import { UnifieDeploymentCreate } from '@/components/unifie/UnifieDeploymentCreate';
@@ -13,6 +11,7 @@ import { gql, useQuery } from '@apollo/client';
 import { iUnifieApplication } from 'types/unifieApi';
 import { PodsMetrics } from '@/components/unifie/ResourcesStates/PodsMetrics';
 import { DeploymentMonitoring } from '@/components/unifie/DeploymentMonitoring';
+import env from '@/lib/env';
 
 export const dynamic = 'force-dynamic';
 
@@ -45,6 +44,7 @@ const Products: NextPageWithLayout = () => {
             name
           }
         }
+        uMony_hasActiveSubscription(teamSlug: $teamSlug)
       }
     `,
     {
@@ -55,23 +55,16 @@ const Products: NextPageWithLayout = () => {
     }
   );
 
-  const { data } = useSWR(
-    team?.slug ? `/api/teams/${team?.slug}/payments/products` : null,
-    fetcher
-  );
-
-  if (isLoading || !team || !data || app.loading) {
+  if (isLoading || !team || app.loading) {
     return <Skeleton active={true} loading={true}></Skeleton>;
   }
 
-  const hasSubscription = (data?.data?.subscriptions || []).find(
-    (s) => s.active
-  );
+  const hasSubscription = app?.data?.uMony_hasActiveSubscription;
 
   const currentTeamApplication: iUnifieApplication | null =
     app?.data?.uStore_getApplication || null;
 
-  if (!hasSubscription) {
+  if (!hasSubscription && env.unifie.subscriptionRequired) {
     return (
       <Result
         title={t('unifie-app-no-subscription')}
@@ -111,14 +104,18 @@ const Products: NextPageWithLayout = () => {
                 teamSlug={team.slug}
               />
             </Col>
-            <Col span={12}>
-              <PodsMetrics teamSlug={team.slug} />
-            </Col>
+            {env.unifie.showPods && (
+              <Col span={12}>
+                <PodsMetrics teamSlug={team.slug} />
+              </Col>
+            )}
           </Row>
         </Tabs.TabPane>
-        <Tabs.TabPane tab={t('unifie-app-Monitoring')} key="monitoring">
-          <DeploymentMonitoring teamSlug={team.slug} />
-        </Tabs.TabPane>
+        {(env.unifie.showArability || env.unifie.showMetrics) && (
+          <Tabs.TabPane tab={t('unifie-app-Monitoring')} key="monitoring">
+            <DeploymentMonitoring teamSlug={team.slug} />
+          </Tabs.TabPane>
+        )}
       </Tabs>
     </SafeHydrate>
   );

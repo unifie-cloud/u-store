@@ -45,6 +45,14 @@ export const updateStripeSubscription = async (id: string, data: any) => {
   });
 };
 
+export const subscriptionModel_getByCustomerId = async (customerId: string) => {
+  return await prisma.subscription.findMany({
+    where: {
+      customerId,
+    },
+  });
+};
+
 export const getByCustomerId = async (customerId: string) => {
   return await prisma.subscription.findMany({
     where: {

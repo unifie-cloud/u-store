@@ -13,6 +13,7 @@ import {
   iUnifieCluster,
   iUnifieApplication,
   iUnifieApplicationInput,
+  iApplicationExtData,
 } from 'types/unifieApi';
 
 export class UnifieCloudApi {
@@ -223,7 +224,7 @@ export class UnifieCloudApi {
     name: string;
     clusterId: number;
     extUuid?: string;
-    extData?: any;
+    extData?: iApplicationExtData;
   }): Promise<iUnifieApplication> {
     const query = await this.client.rawRequest(
       `mutation Application_createFromTemplate($templateId: Int!, $name: String!, $clusterId: Int!, $extUuid: String, $extData: JSON) {

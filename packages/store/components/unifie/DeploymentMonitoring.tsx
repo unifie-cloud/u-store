@@ -6,6 +6,7 @@ import {
   iDashboardOneChart,
 } from './ChartRenderer/ChartDashboard';
 import { Skeleton } from 'antd';
+import env from '@/lib/env';
 
 export const DeploymentMonitoring = (props: { teamSlug: string }) => {
   const qToken = useQuery(
@@ -121,11 +122,15 @@ export const DeploymentMonitoring = (props: { teamSlug: string }) => {
     },
   ];
 
-  const OverView_charts = [
-    ...OverView_usage,
-    ...OverView_usage,
-    ...OverView_stats,
-  ];
+  const OverView_charts: iDashboardOneChart[] = [];
+
+  if (env.unifie.showMetrics) {
+    OverView_charts.push(...OverView_usage);
+  }
+
+  if (env.unifie.showArability) {
+    OverView_charts.push(...OverView_stats);
+  }
 
   return (
     <CubeProvider cubeApi={cubeApi}>

@@ -54,3 +54,15 @@ export interface UnifieApiOptions {
   apiHost: string;
   defaultTemplateId?: number;
 }
+
+/**
+ * Interface for application extended data (extData)
+ * You can add any fields you need. extData is a JSON field in the database
+ *
+ * @Note:
+ * This interface is used to validate the data, it just a typescript interface for type validation during development
+ */
+export interface iApplicationExtData {
+  teamId: string;
+  subscriptions: any[];
+}
