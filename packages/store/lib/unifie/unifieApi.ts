@@ -15,6 +15,7 @@ import {
   iUnifieApplicationInput,
   iApplicationExtData,
 } from 'types/unifieApi';
+import { GraphQLError } from 'graphql';
 
 export class UnifieCloudApi {
   protected client;
@@ -40,8 +41,22 @@ export class UnifieCloudApi {
     });
   }
 
+  protected async apiQuery(query: string, params: any) {
+    try {
+      return await this.apiQuery(query, params);
+    } catch (e: any) {
+      console.error(`apiQuery error`, e?.message || e?.error || e);
+      throw new GraphQLError(e?.message || e?.error || e, {
+        extensions: {
+          code: 'BAD_REQUEST',
+          http: { status: 200 },
+        },
+      });
+    }
+  }
+
   public async Clusters_getClustersList(): Promise<iUnifieCluster[]> {
-    const query = await this.client.rawRequest(
+    const query = await this.apiQuery(
       `query Clusters_getClustersList {
             Clusters_getClustersList {
                 id
@@ -60,7 +75,7 @@ export class UnifieCloudApi {
   public async Application_getMonitoringTokenByExtUuid(
     extUuid: string
   ): Promise<{ token: string; url: string; error: string }> {
-    const query = await this.client.rawRequest(
+    const query = await this.apiQuery(
       `query Application_getMonitoringTokenByExtUuid($extUuid: String!) {
           Application_getMonitoringTokenByExtUuid(extUuid: $extUuid) { 
             error
@@ -76,7 +91,7 @@ export class UnifieCloudApi {
   public async Application_getPodsStatusByExtUuid(
     extUuid: string
   ): Promise<{ error: string; status: any[] }> {
-    const query = await this.client.rawRequest(
+    const query = await this.apiQuery(
       `query Application_getPodsStatusByExtUuid($extUuid: String!) {
           Application_getPodsStatusByExtUuid(extUuid: $extUuid) { 
             error
@@ -108,7 +123,7 @@ export class UnifieCloudApi {
     extUuid: string
   ): Promise<{ error: string; metrics: any[] }> {
     try {
-      const query = await this.client.rawRequest(
+      const query = await this.apiQuery(
         `query Application_getPodsMetricsByExtUuid($extUuid: String!) {
           Application_getPodsMetricsByExtUuid(extUuid: $extUuid) { 
             error
@@ -141,7 +156,7 @@ export class UnifieCloudApi {
   public async Clusters_getClustersForTemplate(
     templateId?: number
   ): Promise<iUnifieCluster[]> {
-    const query = await this.client.rawRequest(
+    const query = await this.apiQuery(
       `query Clusters_getClustersForTemplate($projectId: Int!) {
             Clusters_getClustersForTemplate(projectId: $projectId) {
                 id
@@ -160,8 +175,9 @@ export class UnifieCloudApi {
   public async Application_getApplicationByExtUuid(
     extUuid: string
   ): Promise<iUnifieApplication | null> {
-    const query = await this.client.rawRequest(
-      `query Application_getApplicationByExtUuid($extUuid: String!) {
+    try {
+      const query = await this.apiQuery(
+        `query Application_getApplicationByExtUuid($extUuid: String!) {
           Application_getApplicationByExtUuid(extUuid: $extUuid) { 
             id
             name
@@ -182,16 +198,27 @@ export class UnifieCloudApi {
             tags
           }
         }`,
-      { extUuid: extUuid }
-    );
-
-    return query?.data?.Application_getApplicationByExtUuid || null;
+        { extUuid: extUuid }
+      );
+      return query?.data?.Application_getApplicationByExtUuid || null;
+    } catch (e: any) {
+      console.error(
+        `Application_getApplicationByExtUuid - error`,
+        e?.message || e?.error || e
+      );
+      throw new GraphQLError(e?.message || e?.error || e, {
+        extensions: {
+          code: 'BAD_REQUEST',
+          http: { status: 200 },
+        },
+      });
+    }
   }
 
   public async Application_getApplicationsList(): Promise<
     iUnifieApplication[]
   > {
-    const query = await this.client.rawRequest(
+    const query = await this.apiQuery(
       `query Application_getApplicationsList {
           Application_getApplicationsList {
             id
@@ -226,7 +253,7 @@ export class UnifieCloudApi {
     extUuid?: string;
     extData?: iApplicationExtData;
   }): Promise<iUnifieApplication> {
-    const query = await this.client.rawRequest(
+    const query = await this.apiQuery(
       `mutation Application_createFromTemplate($templateId: Int!, $name: String!, $clusterId: Int!, $extUuid: String, $extData: JSON) {
           Application_createFromTemplate(templateId: $templateId, name: $name, clusterId: $clusterId, extUuid: $extUuid, extData: $extData) {
             id
@@ -249,7 +276,7 @@ export class UnifieCloudApi {
     extUuid: string,
     fields: Partial<iUnifieApplicationInput>
   ): Promise<{ error: string }> {
-    const query = await this.client.rawRequest(
+    const query = await this.apiQuery(
       `mutation Application_updateByExtUuid($extUuid: String!, $fields: JSON!) {
         Application_updateByExtUuid(extUuid: $extUuid, fields: $fields) {
           error  
