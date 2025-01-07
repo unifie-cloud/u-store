@@ -1,4 +1,4 @@
-import { unifieApi } from '@/lib/unifie/unifieApi';
+import { readJsonConfigFile, unifieApi } from '@/lib/unifie/unifieApi';
 import { iApolloResolver, iQlContext, QL } from '../../backend';
 import { getTeamMember } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
@@ -243,23 +243,9 @@ export const unifieStoreApplicationApi: iApolloResolver = {
         args: any,
         context: iQlContext
       ): Promise<{ schema: iUnifieFormSchema }> => {
-        return {
-          schema: {
-            properties: [
-              //  add properties
-              {
-                type: 'boolean',
-                label: 'unifie-app-enabled',
-                name: 'isEnabled',
-              },
-              // {
-              //   type: 'string',
-              //   label: 'unifie-app-enabled',
-              //   name: 'textTest',
-              // },
-            ],
-          },
-        };
+        // read json
+        const data = await readJsonConfigFile('schema.json'); // packages/store/lib/unifie/schema.json
+        return data;
       }
     ),
   },

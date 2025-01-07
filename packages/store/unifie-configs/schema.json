@@ -1,0 +1,11 @@
+{
+  "schema": {
+    "properties": [
+      {
+        "type": "boolean",
+        "label": "unifie-app-enabled",
+        "name": "isEnabled"
+      }
+    ]
+  }
+}

@@ -1,3 +1,4 @@
+import env from '@/lib/env';
 import { iApolloResolver, iQlContext, QL } from '../../backend';
 import { getTeamMember } from 'models/team';
 import { throwIfNotAllowed } from 'models/user';
@@ -17,6 +18,10 @@ export const unifieStoreMonyApi: iApolloResolver = {
         args: { teamSlug: string },
         context: iQlContext
       ): Promise<boolean> => {
+        if (!env.stripe.secretKey || !env.stripe.webhookSecret) {
+          return false;
+        }
+
         //  Send deployment for this team
         const teamMember = await getTeamMember(
           context.session.user.id,

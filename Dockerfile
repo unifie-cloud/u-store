@@ -16,6 +16,8 @@ ENV BUILD_ID=${BUILD_ID}
 RUN apt-get update -y && apt-get install -y openssl build-essential libpq-dev 
 
 COPY packages/store /unifie-store 
+# Copy configs
+COPY packages/store/unifie-configs /unifie-configs
 
 
 

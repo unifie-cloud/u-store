@@ -16,6 +16,8 @@ import {
   iApplicationExtData,
 } from 'types/unifieApi';
 import { GraphQLError } from 'graphql';
+import fs from 'fs';
+import path from 'path';
 
 export class UnifieCloudApi {
   protected client;
@@ -43,7 +45,7 @@ export class UnifieCloudApi {
 
   protected async apiQuery(query: string, params: any) {
     try {
-      return await this.apiQuery(query, params);
+      return await this.client.rawRequest(query, params);
     } catch (e: any) {
       console.error(`apiQuery error`, e?.message || e?.error || e);
       throw new GraphQLError(e?.message || e?.error || e, {
@@ -293,3 +295,31 @@ export class UnifieCloudApi {
 }
 
 export const unifieApi = new UnifieCloudApi();
+
+export async function readJsonConfigFile(name: string) {
+  const confDirs = [
+    '/unifie-config-maps',
+    '/unifie-configs',
+    path.join(__dirname, '../../../../unifie-configs'),
+  ];
+  console.log(`__dirname`, __dirname);
+  for (const dir of confDirs) {
+    const fullPath = path.join(dir, name);
+    console.log(`readJsonConfigFile`, fullPath);
+    if (!fs.existsSync(fullPath)) {
+      continue;
+    }
+
+    const raw = fs.readFileSync(fullPath);
+    return JSON.parse(String(raw));
+  }
+
+  const fullPath = path.join(__dirname, name);
+  console.log(`readJsonConfigFile`, fullPath);
+  if (!fs.existsSync(fullPath)) {
+    return null;
+  }
+
+  const raw = fs.readFileSync(fullPath);
+  return JSON.parse(String(raw));
+}
