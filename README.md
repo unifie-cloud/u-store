@@ -18,10 +18,12 @@ It is a fastest way to get cloud service with own UI and business logic.
 
 ![UI](docs/images/product-monitoring.webp)
 
-# How to use
+# ✨ Getting Started
 
 1. [Create template for your own software](https://www.unifie.cloud/doc/docs/User-Guide/templates/)
 1. Pass your template id to ENV var
+
+- [AWS ECR image registry](https://gallery.ecr.aws/g4a0y2u8/unifie-store)
 
 # One click deploy
 
@@ -60,7 +62,7 @@ It is a fastest way to get cloud service with own UI and business logic.
 - [NextAuth.js](https://next-auth.js.org) (Provides Authentication)
   This is a complete open-source authentication solution for Next.js applications. It's used to handle user authentication and authorization. The NextAuth.js configuration and providers can be found in the pages/api/auth/[...nextauth].ts file.
 
-## ✨ Getting Started
+## ✨ Customization & Development
 
 Please follow these simple steps to get a local copy up and running.
 
@@ -152,7 +154,7 @@ npm run test:e2e
 
 _Note: HTML test report is generated inside the `report` folder. Currently supported browsers for test execution `chromium` and `firefox`_
 
-## 🥇 Features
+### 🥇 Features
 
 - Create account
 - Sign in with Email and Password
@@ -185,12 +187,12 @@ _Note: HTML test report is generated inside the `report` folder. Currently suppo
 - Payments
 - Security Headers
 
-## 🤩 Community
+# 🤩 Community
 
 - [Discussions](https://github.com/unifie-cloud/u-store/discussions) (Discussions)
 - [GitHub Issues](https://github.com/unifie-cloud/u-store/issues) (Contributions, report issues, and product ideas)
 - [Contributing guide](https://github.com/unifie-cloud/u-store/blob/main/CONTRIBUTING.md)
 
-## 🛡️ License
+# 🛡️ License
 
 [Apache 2.0 License](https://github.com/unifie-cloud/u-store/blob/main/LICENSE)
