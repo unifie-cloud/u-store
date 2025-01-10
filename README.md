@@ -16,6 +16,10 @@ The Open Source Next.js SaaS boilerplate for Enterprise SaaS app development.
 
 Please star ⭐ the repo if you want us to continue developing and improving the SaaS Starter Kit! 😀
 
+## UI
+
+![UI](docs/images/product-monitoring.webp)
+
 ## 🛠️ Built With
 
 - [Next.js](https://nextjs.org)
