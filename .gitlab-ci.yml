@@ -9,7 +9,6 @@ variables:
   DOCKER_TLS_CERTDIR: "" # Used for docker:dind inside kubernetes cicd runner
   IMAGE_NAME_PROD: unifie-store
   PROJECT_IMAGE_NAME: unifie-store
-  AWS_ECR_URL: public.ecr.aws/g4a0y2u8
 
 .base-script:
   before_script:
