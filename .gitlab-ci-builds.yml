@@ -12,7 +12,9 @@ build-prod-image:
 
     - while true; do sleep 1 && echo "try docker info" && docker info && break; done
 
-    - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g4a0y2u8
+    - aws ecr get-login-password --region us-east-1 | docker login --username AWS  --password-stdin $AWS_ECR_URL
+    - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g4a0y2u8
+
     - docker build  --build-arg CI_COMMIT_BRANCH=$CI_COMMIT_BRANCH --build-arg CI_PIPELINE_ID=$CI_PIPELINE_ID --build-arg BUILD_ID=$CI_PIPELINE_ID  -f ./Dockerfile -t $IMAGE_NAME_PROD .  | cat
     - docker tag $IMAGE_NAME_PROD public.ecr.aws/g4a0y2u8/$IMAGE_NAME_PROD:$IMAGE_TAG_ID
     - docker push public.ecr.aws/g4a0y2u8/$IMAGE_NAME_PROD:$IMAGE_TAG_ID | cat
