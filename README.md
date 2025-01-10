@@ -4,7 +4,7 @@
   <img alt="BoxyHQ Banner" src="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
 </picture>
 
-# ⭐ Enterprise SaaS deployments management system
+# ⭐ Fastest way to get SaaS cloud service with own UI and business logic
 
 <p>
     <a href="https://github.com/unifie-cloud/u-store/stargazers"><img src="https://img.shields.io/github/stars/unifie-cloud/u-store" alt="Github stargazers"></a>
@@ -12,13 +12,20 @@
     <a href="https://github.com/unifie-cloud/u-store/blob/main/LICENSE"><img src="https://img.shields.io/github/license/unifie-cloud/u-store" alt="license"></a>
 </p>
 
-The Open Source Next.js SaaS boilerplate for Enterprise SaaS app development.
-
-Please star ⭐ the repo if you want us to continue developing and improving the SaaS Starter Kit! 😀
+It is a fastest way to get cloud service with own UI and business logic.
 
 ## UI
 
 ![UI](docs/images/product-monitoring.webp)
+
+# How to use
+
+1. [Create template for your own software](https://www.unifie.cloud/doc/docs/User-Guide/templates/)
+1. Pass your template id to ENV var
+
+# One click deploy
+
+[![deploy with unifie](https://api.unifie.cloud/deploy-btn/button_unifie-one-click-deploy.gif)](https://unifie.cloud/kubernetes/unifie-project-lf24rvjgzu9rwhd5)
 
 ## 🛠️ Built With
 
