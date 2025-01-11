@@ -4,7 +4,7 @@
   <img alt="BoxyHQ Banner" src="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
 </picture>
 
-# ⭐ Fastest way to get SaaS cloud service with own UI and business logic
+# ⭐ Simplest way to get SaaS cloud with own UI and business logic for your software.
 
 <p>
     <a href="https://github.com/unifie-cloud/u-store/stargazers"><img src="https://img.shields.io/github/stars/unifie-cloud/u-store" alt="Github stargazers"></a>
@@ -12,9 +12,15 @@
     <a href="https://github.com/unifie-cloud/u-store/blob/main/LICENSE"><img src="https://img.shields.io/github/license/unifie-cloud/u-store" alt="license"></a>
 </p>
 
-It is a fastest way to get cloud service with own UI and business logic.
+This project allow to build cloud SaaS platform from any software to drive more usage, unlock more revenue and grow faster.
+
+Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 ## UI
+
+- [Demo store](https://store.nanoheal.work)
+- Login: `unifie-store@ww.tt`
+- Password: `unifie-store@ww.tt`
 
 ![UI](docs/images/product-monitoring.webp)
 
@@ -30,6 +36,11 @@ It is a fastest way to get cloud service with own UI and business logic.
 [![deploy with unifie](https://api.unifie.cloud/deploy-btn/button_unifie-one-click-deploy.gif)](https://unifie.cloud/kubernetes/unifie-project-lf24rvjgzu9rwhd5)
 
 ## 🛠️ Built With
+
+- [Unifie.cloud](https://www.unifie.cloud/doc/docs/Overview/)
+  streamlines application deployment to your own cloud account, empowering you with the flexibility and scalability you need to thrive.
+
+  This project use unifie.cloud API to mange deployments in kubernetes clusters.
 
 - [Next.js](https://nextjs.org)
   This is a React framework that provides features such as server-side rendering and static site generation. It's used for building the user interface of your application. The main configuration for Next.js can be found in next.config.js.
