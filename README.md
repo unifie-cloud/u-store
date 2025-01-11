@@ -167,6 +167,8 @@ _Note: HTML test report is generated inside the `report` folder. Currently suppo
 
 ### 🥇 Features
 
+- **Manage your software in you Kubernetes clusters**
+- Billing
 - Create account
 - Sign in with Email and Password
 - Sign in with Magic Link

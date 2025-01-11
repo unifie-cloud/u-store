@@ -4,7 +4,7 @@
   <img alt="BoxyHQ Banner" src="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
 </picture>
 
-# ⭐ Enterprise SaaS deployments management system
+# ⭐ Simplest way to get SaaS cloud with own UI and business logic for your software.
 
 <p>
     <a href="https://github.com/unifie-cloud/u-store/stargazers"><img src="https://img.shields.io/github/stars/unifie-cloud/u-store" alt="Github stargazers"></a>
@@ -12,11 +12,35 @@
     <a href="https://github.com/unifie-cloud/u-store/blob/main/LICENSE"><img src="https://img.shields.io/github/license/unifie-cloud/u-store" alt="license"></a>
 </p>
 
-The Open Source Next.js SaaS boilerplate for Enterprise SaaS app development.
+This project allow to build cloud SaaS platform from any software to drive more usage, unlock more revenue and grow faster.
 
-Please star ⭐ the repo if you want us to continue developing and improving the SaaS Starter Kit! 😀
+Please star ⭐ the repo if you want us to continue with unifie-store! 😀
+
+## UI
+
+- [Demo store](https://store.nanoheal.work)
+- Login: `unifie-store@ww.tt`
+- Password: `unifie-store@ww.tt`
+
+![UI](../../docs/images/product-monitoring.webp)
+
+# ✨ Getting Started
+
+1. [Create template for your own software](https://www.unifie.cloud/doc/docs/User-Guide/templates/)
+1. Pass your template id to ENV var
+
+- [AWS ECR image registry](https://gallery.ecr.aws/g4a0y2u8/unifie-store)
+
+# One click deploy
+
+[![deploy with unifie](https://api.unifie.cloud/deploy-btn/button_unifie-one-click-deploy.gif)](https://unifie.cloud/kubernetes/unifie-project-lf24rvjgzu9rwhd5)
 
 ## 🛠️ Built With
+
+- [Unifie.cloud](https://www.unifie.cloud/doc/docs/Overview/)
+  streamlines application deployment to your own cloud account, empowering you with the flexibility and scalability you need to thrive.
+
+  This project use unifie.cloud API to mange deployments in kubernetes clusters.
 
 - [Next.js](https://nextjs.org)
   This is a React framework that provides features such as server-side rendering and static site generation. It's used for building the user interface of your application. The main configuration for Next.js can be found in next.config.js.
@@ -49,7 +73,7 @@ Please star ⭐ the repo if you want us to continue developing and improving the
 - [NextAuth.js](https://next-auth.js.org) (Provides Authentication)
   This is a complete open-source authentication solution for Next.js applications. It's used to handle user authentication and authorization. The NextAuth.js configuration and providers can be found in the pages/api/auth/[...nextauth].ts file.
 
-## ✨ Getting Started
+## ✨ Customization & Development
 
 Please follow these simple steps to get a local copy up and running.
 
@@ -71,13 +95,19 @@ Please follow these simple steps to get a local copy up and running.
 git clone https://github.com/<your_github_username>/u-store.git
 ```
 
-#### 2. Install dependencies
+#### 2. Go to the project folder
+
+```bash
+cd u-store/packages/store
+```
+
+#### 3. Install dependencies
 
 ```bash
 npm install
 ```
 
-#### 3. Set up your .env file
+#### 4. Set up your .env file
 
 Duplicate `.env.example` to `.env`.
 
@@ -85,7 +115,7 @@ Duplicate `.env.example` to `.env`.
 cp .env.example .env
 ```
 
-#### 4. Create a database (Optional)
+#### 5. Create a database (Optional)
 
 To make the process of installing dependencies easier, we offer a `docker-compose.yml` with a Postgres container.
 
@@ -93,13 +123,13 @@ To make the process of installing dependencies easier, we offer a `docker-compos
 docker-compose up -d
 ```
 
-#### 5. Set up database schema
+#### 6. Set up database schema
 
 ```bash
 npx prisma db push
 ```
 
-#### 6. Start the server
+#### 7. Start the server
 
 In a development environment:
 
@@ -107,7 +137,7 @@ In a development environment:
 npm run dev
 ```
 
-#### 7. Start the Prisma Studio
+#### 8. Start the Prisma Studio
 
 Prisma Studio is a visual editor for the data in your database.
 
@@ -115,7 +145,7 @@ Prisma Studio is a visual editor for the data in your database.
 npx prisma studio
 ```
 
-#### 8. Testing
+#### 9. Testing
 
 We are using [Playwright](https://playwright.dev/) to execute E2E tests. Add all tests inside the `/tests` folder.
 
@@ -135,8 +165,10 @@ npm run test:e2e
 
 _Note: HTML test report is generated inside the `report` folder. Currently supported browsers for test execution `chromium` and `firefox`_
 
-## 🥇 Features
+### 🥇 Features
 
+- **Manage your software in you Kubernetes clusters**
+- Billing
 - Create account
 - Sign in with Email and Password
 - Sign in with Magic Link
@@ -168,14 +200,12 @@ _Note: HTML test report is generated inside the `report` folder. Currently suppo
 - Payments
 - Security Headers
 
-## 🤩 Community
+# 🤩 Community
 
 - [Discussions](https://github.com/unifie-cloud/u-store/discussions) (Discussions)
 - [GitHub Issues](https://github.com/unifie-cloud/u-store/issues) (Contributions, report issues, and product ideas)
 - [Contributing guide](https://github.com/unifie-cloud/u-store/blob/main/CONTRIBUTING.md)
 
-## 🛡️ License
+# 🛡️ License
 
 [Apache 2.0 License](https://github.com/unifie-cloud/u-store/blob/main/LICENSE)
-
-Code in this folder are based on [saas-starter-kit](https://github.com/boxyhq/saas-starter-kit)
