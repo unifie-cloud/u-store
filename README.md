@@ -204,6 +204,7 @@ _Note: HTML test report is generated inside the `report` folder. Currently suppo
 
 - [Discussions](https://github.com/unifie-cloud/u-store/discussions) (Discussions)
 - [GitHub Issues](https://github.com/unifie-cloud/u-store/issues) (Contributions, report issues, and product ideas)
+- [Project page](https://github.com/orgs/unifie-cloud/projects/2/views/1)
 - [Contributing guide](https://github.com/unifie-cloud/u-store/blob/main/CONTRIBUTING.md)
 
 # 🛡️ License
