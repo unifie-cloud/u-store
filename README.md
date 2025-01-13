@@ -45,6 +45,8 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 [![deploy with unifie](https://api.unifie.cloud/deploy-btn/button_unifie-one-click-deploy.gif)](https://unifie.cloud/kubernetes/unifie-project-lf24rvjgzu9rwhd5)
 
+- [AWS ECR image registry](https://gallery.ecr.aws/g4a0y2u8/unifie-store)
+
 ## ✨ Customization & Development
 
 Please follow these simple steps to get a local copy up and running.
