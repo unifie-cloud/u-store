@@ -18,10 +18,11 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 # 👋 Overview
 
-- [Environment Variables](./docs/EnvironmentVariables.md)
+- [Environment Variables](https://github.com/unifie-cloud/u-store/blob/staging/docs/EnvironmentVariables.md)
 - [Built With](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#%EF%B8%8F-built-with)
-- [Local development](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-local--development)
+- [Local development](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-local-development)
 - [Community](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-community)
+- [License information](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#%EF%B8%8F-license-information)
 
 ## 🛠️ Built With
 
