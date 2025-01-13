@@ -4,7 +4,7 @@
   <img alt="BoxyHQ Banner" src="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
 </picture>
 
-# ⭐ Simplest way to get SaaS cloud with own UI and business logic for your software.
+# ⭐ U-store: Customization & Development
 
 <p>
     <a href="https://github.com/unifie-cloud/u-store/stargazers"><img src="https://img.shields.io/github/stars/unifie-cloud/u-store" alt="Github stargazers"></a>
@@ -15,6 +15,13 @@
 This project allow to build cloud SaaS platform from any software to drive more usage, unlock more revenue and grow faster.
 
 Please star ⭐ the repo if you want us to continue with unifie-store! 😀
+
+# 👋 Overview
+
+- [Environment Variables](./docs/EnvironmentVariables.md)
+- [Built With](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#%EF%B8%8F-built-with)
+- [Local development](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-local--development)
+- [Community](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-community)
 
 ## 🛠️ Built With
 
@@ -54,13 +61,9 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 - [NextAuth.js](https://next-auth.js.org) (Provides Authentication)
   This is a complete open-source authentication solution for Next.js applications. It's used to handle user authentication and authorization. The NextAuth.js configuration and providers can be found in the pages/api/auth/[...nextauth].ts file.
 
-## ✨ Customization & Development
+## ✨ Local development
 
 Please follow these simple steps to get a local copy up and running.
-
-### Environment variables
-
-- [Environment Variables](./docs/EnvironmentVariables.md)
 
 ### Prerequisites
 

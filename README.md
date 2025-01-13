@@ -18,9 +18,9 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 # 👋 Overview
 
-- [UI](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#ui)
+- [UI](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-ui)
 - [Getting Started](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-getting-started)
-- [Kubernetes deploy](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#one-click-deploy)
+- [Kubernetes deploy](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-kubernetes-deploy)
 - [Customization & Development](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-customization--development)
 - [Features](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-features)
 - [Community](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-community)
