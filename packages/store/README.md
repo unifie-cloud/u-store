@@ -16,37 +16,6 @@ This project allow to build cloud SaaS platform from any software to drive more 
 
 Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
-# Overview
-
-- [UI](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#ui)
-- [Getting Started](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-getting-started)
-- [Kubernetes deploy](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#one-click-deploy)
-- [Built With](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-built-with)
-- [Environment Variables](./docs/EnvironmentVariables.md)
-- [Customization & Development](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-customization--development)
-- [Features](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-features)
-- [Community](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-community)
-- [License](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-license)
-
-## UI
-
-- [Demo store](https://store.nanoheal.work)
-- Login: `unifie-store@ww.tt`
-- Password: `unifie-store@ww.tt`
-
-![UI](../../docs/images/product-monitoring.webp)
-
-# ✨ Getting Started
-
-1. [Create template for your own software](https://www.unifie.cloud/doc/docs/User-Guide/templates/)
-1. Pass your template id to ENV var
-
-- [AWS ECR image registry](https://gallery.ecr.aws/g4a0y2u8/unifie-store)
-
-# Kubernetes deploy
-
-[![deploy with unifie](https://api.unifie.cloud/deploy-btn/button_unifie-one-click-deploy.gif)](https://unifie.cloud/kubernetes/unifie-project-lf24rvjgzu9rwhd5)
-
 ## 🛠️ Built With
 
 - [Unifie.cloud](https://www.unifie.cloud/doc/docs/Overview/)
@@ -181,41 +150,6 @@ npm run test:e2e
 
 _Note: HTML test report is generated inside the `report` folder. Currently supported browsers for test execution `chromium` and `firefox`_
 
-### 🥇 Features
-
-- **Manage your software in you Kubernetes clusters**
-- Billing
-- Create account
-- Sign in with Email and Password
-- Sign in with Magic Link
-- Sign in with SAML SSO
-- Sign in with Google [[Setting up Google OAuth](https://support.google.com/cloud/answer/6158849?hl=en)]
-- Sign in with GitHub [[Creating a Github OAuth App](https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app)]
-- Directory Sync (SCIM)
-- Update account
-- Create team
-- Delete team
-- Invite users to the team
-- Manage team members
-- Update team settings
-- Webhooks & Events
-- Internationalization
-- Audit logs
-- Roles and Permissions
-- Dark mode
-- Email notifications
-- E2E tests
-- Docker compose
-- Prisma Studio
-- Update member role
-- Directory Sync Events
-- Avatar Upload
-- SAML SSO
-- Audit Log
-- Webhook
-- Payments
-- Security Headers
-
 # 🤩 Community
 
 - [Discussions](https://github.com/unifie-cloud/u-store/discussions) (Discussions)
@@ -223,6 +157,8 @@ _Note: HTML test report is generated inside the `report` folder. Currently suppo
 - [Project page](https://github.com/orgs/unifie-cloud/projects/2/views/1)
 - [Contributing guide](https://github.com/unifie-cloud/u-store/blob/main/CONTRIBUTING.md)
 
-# 🛡️ License
+# 🛡️ License information
 
 [Apache 2.0 License](https://github.com/unifie-cloud/u-store/blob/main/LICENSE)
+
+Code based on [saas-starter-kit](https://github.com/boxyhq/saas-starter-kit)
