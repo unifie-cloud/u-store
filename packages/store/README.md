@@ -16,6 +16,18 @@ This project allow to build cloud SaaS platform from any software to drive more 
 
 Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
+# Overview
+
+- [UI](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#ui)
+- [Getting Started](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-getting-started)
+- [Kubernetes deploy](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#one-click-deploy)
+- [Built With](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-built-with)
+- [Environment Variables](./docs/EnvironmentVariables.md)
+- [Customization & Development](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-customization--development)
+- [Features](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-features)
+- [Community](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-community)
+- [License](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-license)
+
 ## UI
 
 - [Demo store](https://store.nanoheal.work)
@@ -31,7 +43,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 - [AWS ECR image registry](https://gallery.ecr.aws/g4a0y2u8/unifie-store)
 
-# One click deploy
+# Kubernetes deploy
 
 [![deploy with unifie](https://api.unifie.cloud/deploy-btn/button_unifie-one-click-deploy.gif)](https://unifie.cloud/kubernetes/unifie-project-lf24rvjgzu9rwhd5)
 
@@ -76,6 +88,10 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 ## ✨ Customization & Development
 
 Please follow these simple steps to get a local copy up and running.
+
+### Environment variables
+
+- [Environment Variables](./docs/EnvironmentVariables.md)
 
 ### Prerequisites
 

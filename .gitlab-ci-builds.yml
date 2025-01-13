@@ -16,7 +16,7 @@ build-prod-image:
     - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g4a0y2u8
 
     - docker build  --build-arg CI_COMMIT_BRANCH=$CI_COMMIT_BRANCH --build-arg CI_PIPELINE_ID=$CI_PIPELINE_ID --build-arg BUILD_ID=$CI_PIPELINE_ID  -f ./Dockerfile -t $IMAGE_NAME_PROD .  | cat
-    - docker tag $IMAGE_NAME_PROD public.ecr.aws/g4a0y2u8/$IMAGE_NAME_PROD:$IMAGE_TAG_ID
+    - docker tag $IMAGE_NAME_PROD public.ecr.aws/g4a0y2u8/$IMAGE_NAME_PROD:$IMAGE_TAG_ID lastest
     - docker push public.ecr.aws/g4a0y2u8/$IMAGE_NAME_PROD:$IMAGE_TAG_ID | cat
     - curl --insecure --user project307:$CI_CD_KEY --data-urlencode "projectId=307"  --data-urlencode "title=$CI_COMMIT_TITLE" --data-urlencode "message=$CI_COMMIT_MESSAGE" "https://$CI_CD_API_HOST_1/versions/update?channel=$channel&name=$CI_COMMIT_BRANCH&build=$CI_PIPELINE_ID&image=$PROJECT_IMAGE_NAME&url=public.ecr.aws/g4a0y2u8/$IMAGE_NAME_PROD:$IMAGE_TAG_ID"  2>&1
     - curl --insecure --user project571:$CI_CD_KEY_2 --data-urlencode "projectId=571"  --data-urlencode "title=$CI_COMMIT_TITLE" --data-urlencode "message=$CI_COMMIT_MESSAGE" "https://$CI_CD_API_HOST_2/versions/update?channel=$channel&name=$CI_COMMIT_BRANCH&build=$CI_PIPELINE_ID&image=$PROJECT_IMAGE_NAME&url=public.ecr.aws/g4a0y2u8/$IMAGE_NAME_PROD:$IMAGE_TAG_ID"  2>&1

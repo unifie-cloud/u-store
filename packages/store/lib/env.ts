@@ -3,7 +3,7 @@ import type { SessionStrategy } from 'next-auth';
 const env = {
   databaseUrl: `${process.env.DATABASE_URL}`,
   appUrl: `${process.env.APP_URL}`,
-  appApiUrl: `${process.env.APP_API_URL}`,
+  appApiUrl: `${process.env.APP_URL}/api`,
   redirectIfAuthenticated: '/dashboard',
 
   // SMTP configuration for NextAuth
@@ -125,7 +125,7 @@ const env = {
     apiHost: process.env.UNIFIE_API_URL,
     defaultTemplateId: process.env.UNIFIE_DEFAULT_TEMPLATE_ID,
     showPods: process.env.NEXT_PUBLIC_UNIFIE_SHOW_PODS !== 'false',
-    showArability: process.env.NEXT_PUBLIC_UNIFIE_SHOW_ARABILITY !== 'false',
+    showArability: process.env.NEXT_PUBLIC_UNIFIE_SHOW_AVAILABILITY !== 'false',
     showMetrics: process.env.NEXT_PUBLIC_UNIFIE_SHOW_METRICS !== 'false',
     subscriptionRequired:
       process.env.NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED !== 'false',
