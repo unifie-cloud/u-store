@@ -29,7 +29,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 ## 💡 UI
 
-- [Demo store](https://store.nanoheal.work)
+- [Demo store](https://demo-store.unifie.io)
 - Login: `unifie-store@ww.tt`
 - Password: `unifie-store@ww.tt`
 
