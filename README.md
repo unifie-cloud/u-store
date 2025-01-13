@@ -13,7 +13,7 @@
 </p>
  
 - Simplest way to get SaaS cloud with own UI and business logic for your software.
-- Allow tp build cloud SaaS platform from any software to drive more usage, unlock more revenue and grow faster.
+- Allow to build cloud SaaS platform from any software to drive more usage, unlock more revenue and grow faster.
 
 Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
