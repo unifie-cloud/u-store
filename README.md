@@ -16,7 +16,7 @@ This project allow to build cloud SaaS platform from any software to drive more 
 
 Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
-# Overview
+# 👋 Overview
 
 - [UI](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#ui)
 - [Getting Started](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-getting-started)
@@ -26,7 +26,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 - [Community](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-community)
 - [License](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-license)
 
-## UI
+## 💡 UI
 
 - [Demo store](https://store.nanoheal.work)
 - Login: `unifie-store@ww.tt`
@@ -34,14 +34,14 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 ![UI](docs/images/product-monitoring.webp)
 
-# ✨ Getting Started
+# 🌟 Getting Started
 
 1. [Create template for your own software](https://www.unifie.cloud/doc/docs/User-Guide/templates/)
 1. Pass your template id to ENV var
 
 - [AWS ECR image registry](https://gallery.ecr.aws/g4a0y2u8/unifie-store)
 
-# Kubernetes deploy
+# 🌥️ Kubernetes deploy
 
 [![deploy with unifie](https://api.unifie.cloud/deploy-btn/button_unifie-one-click-deploy.gif)](https://unifie.cloud/kubernetes/unifie-project-lf24rvjgzu9rwhd5)
 
@@ -53,7 +53,7 @@ Please follow these simple steps to get a local copy up and running.
 - [Built With](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#%EF%B8%8F-built-with)
 - [Local development](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-customization--development)
 
-### 🥇 Features
+## 🥇 Features
 
 - **Manage your software in you Kubernetes clusters**
 - Billing
