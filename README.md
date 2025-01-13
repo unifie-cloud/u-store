@@ -4,15 +4,16 @@
   <img alt="BoxyHQ Banner" src="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
 </picture>
 
-# ⭐ Simplest way to get SaaS cloud with own UI and business logic for your software.
+# ⭐ U-store - is template for your own SaaS cloud store
 
 <p>
     <a href="https://github.com/unifie-cloud/u-store/stargazers"><img src="https://img.shields.io/github/stars/unifie-cloud/u-store" alt="Github stargazers"></a>
     <a href="https://github.com/unifie-cloud/u-store/issues"><img src="https://img.shields.io/github/issues/unifie-cloud/u-store" alt="Github issues"></a>
     <a href="https://github.com/unifie-cloud/u-store/blob/main/LICENSE"><img src="https://img.shields.io/github/license/unifie-cloud/u-store" alt="license"></a>
 </p>
-
-This project allow to build cloud SaaS platform from any software to drive more usage, unlock more revenue and grow faster.
+ 
+- Simplest way to get SaaS cloud with own UI and business logic for your software.
+- Allow tp build cloud SaaS platform from any software to drive more usage, unlock more revenue and grow faster.
 
 Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
@@ -49,7 +50,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 ## ✨ Customization & Development
 
-Please follow these simple steps to get a local copy up and running.
+Development documentation:
 
 - [Environment Variables](./docs/EnvironmentVariables.md)
 - [Built With](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#%EF%B8%8F-built-with)
