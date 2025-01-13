@@ -44,9 +44,11 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 # 🌥️ Kubernetes deploy
 
-[![deploy with unifie](https://api.unifie.cloud/deploy-btn/button_unifie-one-click-deploy.gif)](https://unifie.cloud/kubernetes/unifie-project-lf24rvjgzu9rwhd5)
-
 - [AWS ECR image registry](https://gallery.ecr.aws/g4a0y2u8/unifie-store)
+- [HELM chart](https://artifacthub.io/packages/helm/unifie/u-store)
+- [Unifie.cloud one-click-deploy](https://unifie.cloud/kubernetes/unifie-project-lf24rvjgzu9rwhd5)
+
+[![deploy with unifie](https://api.unifie.cloud/deploy-btn/button_unifie-one-click-deploy.gif)](https://unifie.cloud/kubernetes/unifie-project-lf24rvjgzu9rwhd5)
 
 ## ✨ Customization & Development
 
