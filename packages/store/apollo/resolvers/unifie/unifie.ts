@@ -348,6 +348,7 @@ export async function uStore_updateApplication(teamId: string, config: any) {
   if (!currentTeamApplication) {
     return {
       error: `Application not found for team ${teamId} with uuid ${appUuid}`,
+      code: `NotFound`,
     };
     // throw new ApiError(
     //   404,
@@ -355,5 +356,8 @@ export async function uStore_updateApplication(teamId: string, config: any) {
     // );
   }
 
-  return await unifieApi.Application_updateByExtUuid(appUuid, config);
+  return {
+    ...(await unifieApi.Application_updateByExtUuid(appUuid, config)),
+    code: null,
+  };
 }

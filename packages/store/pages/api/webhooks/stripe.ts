@@ -184,7 +184,7 @@ async function uStore_updateSubscriptions(
     );
     throw new Error(`Error in uStore_updateApplication: empty response`);
   }
-  if (res?.error) {
+  if (res?.error && res?.code !== `NotFound`) {
     console.error(
       'Error: Webhook stripe:',
       `Error in uStore_updateApplication:${res?.error}`
