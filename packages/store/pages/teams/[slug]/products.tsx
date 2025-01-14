@@ -12,16 +12,10 @@ import { iUnifieApplication } from 'types/unifieApi';
 import { PodsMetrics } from '@/components/unifie/ResourcesStates/PodsMetrics';
 import { DeploymentMonitoring } from '@/components/unifie/DeploymentMonitoring';
 import env from '@/lib/env';
+import { useEffect } from 'react';
+import { UnifieDeploying } from '@/components/unifie/UnifieDeploying';
 
 export const dynamic = 'force-dynamic';
-
-function SafeHydrate({ children }) {
-  return (
-    <div suppressHydrationWarning>
-      {typeof window === 'undefined' ? null : children}
-    </div>
-  );
-}
 
 const Products: NextPageWithLayout = () => {
   const router = useRouter();
@@ -36,6 +30,7 @@ const Products: NextPageWithLayout = () => {
           id
           name
           domain
+          isLive
           isEnabled
           ClusterModel {
             title
@@ -54,6 +49,24 @@ const Products: NextPageWithLayout = () => {
       },
     }
   );
+
+  useEffect(() => {
+    return app.stopPolling;
+  }, []);
+  useEffect(() => {
+    if (app?.data?.uStore_getApplication) {
+      const isLive = app.data?.uStore_getApplication?.isLive;
+      if (!isLive && app.data?.uStore_getApplication?.isEnabled === true) {
+        app.startPolling(15000);
+      } else {
+        app.stopPolling();
+      }
+    }
+  }, [app?.data?.uStore_getApplication]);
+
+  const isLive = app.data?.uStore_getApplication?.isLive;
+  const isEnabled = app.data?.uStore_getApplication?.isEnabled;
+  const showStartingUI = !isLive && isEnabled;
 
   if (isLoading || !team || app.loading) {
     return <Skeleton active={true} loading={true}></Skeleton>;
@@ -85,39 +98,38 @@ const Products: NextPageWithLayout = () => {
 
   if (!currentTeamApplication) {
     // We need to create a new application
-    return (
-      <SafeHydrate>
-        <UnifieDeploymentCreate teamSlug={team.slug} />
-      </SafeHydrate>
-    );
+    return <UnifieDeploymentCreate teamSlug={team.slug} />;
+  }
+
+  if (showStartingUI) {
+    // UI for the deploying state of an application
+    return <UnifieDeploying />;
   }
 
   // We have an application - show status here
   return (
-    <SafeHydrate>
-      <Tabs>
-        <Tabs.TabPane tab={t('unifie-app-Overview')} key="overview">
-          <Row>
+    <Tabs>
+      <Tabs.TabPane tab={t('unifie-app-Overview')} key="overview">
+        <Row>
+          <Col span={12}>
+            <UnifieDeploymentOverview
+              app={currentTeamApplication}
+              teamSlug={team.slug}
+            />
+          </Col>
+          {env.unifie.showPods && (
             <Col span={12}>
-              <UnifieDeploymentOverview
-                app={currentTeamApplication}
-                teamSlug={team.slug}
-              />
+              <PodsMetrics teamSlug={team.slug} />
             </Col>
-            {env.unifie.showPods && (
-              <Col span={12}>
-                <PodsMetrics teamSlug={team.slug} />
-              </Col>
-            )}
-          </Row>
+          )}
+        </Row>
+      </Tabs.TabPane>
+      {(env.unifie.showArability || env.unifie.showMetrics) && (
+        <Tabs.TabPane tab={t('unifie-app-Monitoring')} key="monitoring">
+          <DeploymentMonitoring teamSlug={team.slug} />
         </Tabs.TabPane>
-        {(env.unifie.showArability || env.unifie.showMetrics) && (
-          <Tabs.TabPane tab={t('unifie-app-Monitoring')} key="monitoring">
-            <DeploymentMonitoring teamSlug={team.slug} />
-          </Tabs.TabPane>
-        )}
-      </Tabs>
-    </SafeHydrate>
+      )}
+    </Tabs>
   );
 };
 

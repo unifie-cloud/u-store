@@ -66,6 +66,7 @@ export const unifieStoreApplicationApi: iApolloResolver = {
       extUuid: String
       extData: JSON
       projectId: Int
+      isLive: Boolean
       specsErrors: String
       specsWarns: String
       isReady: Boolean

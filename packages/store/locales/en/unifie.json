@@ -27,5 +27,9 @@
   "unifie-resources-Error": "Error",
   "unifie-resources-Node": "Node",
   "unifie-resources-no-pods-found": "No pods found",
+
+  "unifie-deploying-title": "Your application is deploying",
+  "unifie-deploying-message": "Cloud server configuration takes 2-6 minutes, please wait.",
+
   "unifie-app-enabled": "Enabled"
 }
