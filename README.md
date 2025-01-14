@@ -30,8 +30,8 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 ## 💡 UI
 
 - [Demo store](https://demo-store.unifie.io)
-- Login: `unifie-store@ww.tt`
-- Password: `unifie-store@ww.tt`
+- Login: `demo@demo-store.unifie.io`
+- Password: `demo@demo-store.unifie.io`
 
 ![UI](docs/images/product-monitoring.webp)
 
@@ -54,7 +54,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 Development documentation:
 
-- [Environment Variables](./docs/EnvironmentVariables.md)
+- [Environment Variables](https://github.com/unifie-cloud/u-store/blob/staging/docs/EnvironmentVariables.md)
 - [Built With](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#%EF%B8%8F-built-with)
 - [Local development](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-customization--development)
 

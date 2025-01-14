@@ -197,6 +197,7 @@ export class UnifieCloudApi {
             domain 
             projectId 
             isReady
+            isLive
             isEnabled 
             ClusterModel {
               id
@@ -239,6 +240,7 @@ export class UnifieCloudApi {
             domain 
             projectId 
             isReady
+            isLive
             isEnabled 
             ClusterModel {
               id

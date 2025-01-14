@@ -104,6 +104,14 @@ Duplicate `.env.example` to `.env`.
 cp .env.example .env
 ```
 
+Check [docs for supported environment variables](https://github.com/unifie-cloud/u-store/blob/staging/docs/EnvironmentVariables.md)
+
+Pay attention for this environment variables
+
+- UNIFIE_API_URL
+- UNIFIE_API_KEY
+- UNIFIE_DEFAULT_TEMPLATE_ID
+
 #### 5. Create a database (Optional)
 
 To make the process of installing dependencies easier, we offer a `docker-compose.yml` with a Postgres container.
