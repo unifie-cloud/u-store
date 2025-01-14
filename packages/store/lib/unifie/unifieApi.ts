@@ -164,18 +164,26 @@ export class UnifieCloudApi {
     const query = await this.apiQuery(
       `query Clusters_getClustersForTemplate($projectId: Int!) {
             Clusters_getClustersForTemplate(projectId: $projectId) {
+              regions{
                 id
-                name
-                regionName
-                title 
+                name       
+                regionName    
+                title
                 cloudProvider 
                 allowToAddDeployments 
+              }
+              disabledRegions
             }
         }`,
       { projectId: templateId || this.defaultTemplateId }
     );
-
-    return query?.data?.Clusters_getClustersList || [];
+    const regions = query?.data?.Clusters_getClustersForTemplate?.regions || [];
+    return regions.filter(
+      (r) =>
+        !query?.data?.Clusters_getClustersForTemplate?.disabledRegions?.includes(
+          r.id
+        )
+    );
   }
   public async Application_getApplicationByExtUuid(
     extUuid: string
