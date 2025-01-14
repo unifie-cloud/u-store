@@ -88,6 +88,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
       return res.status(400).json({
         error: {
           message: 'Webhook handler failed. View your nextjs function logs.',
+          debug: error,
         },
       });
     }
@@ -116,7 +117,7 @@ async function handleSubscriptionUpdated(event: Stripe.Event) {
   if (!teamExists) {
     // Not accept events for non-existing teams
     console.error('Error: Webhook stripe:', `Team ${customer} does not exist`);
-    throw new Error('Team does not exist');
+    throw new Error(`Team ${customer} does not exist`);
   }
 
   const subscription = await getBySubscriptionId(id);
