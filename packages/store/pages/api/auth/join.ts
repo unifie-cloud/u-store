@@ -123,26 +123,36 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
 
   // Send account verification email
   if (env.confirmEmail && !user.emailVerified) {
-    const verificationToken = await createVerificationToken({
-      identifier: user.email,
-      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-    });
+    try {
+      const verificationToken = await createVerificationToken({
+        identifier: user.email,
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+      });
 
-    await sendVerificationEmail({ user, verificationToken });
+      await sendVerificationEmail({ user, verificationToken });
+    } catch (e: any) {
+      console.error(
+        `Error sendVerificationEmail or createVerificationToken:`,
+        e?.message || e
+      );
+    }
   }
 
   recordMetric('user.signup');
-
-  slackNotify()?.alert({
-    text: invitation
-      ? 'New user signed up via invitation'
-      : 'New user signed up',
-    fields: {
-      Name: user.name,
-      Email: user.email,
-      Team: userTeam?.name,
-    },
-  });
+  try {
+    slackNotify()?.alert({
+      text: invitation
+        ? 'New user signed up via invitation'
+        : 'New user signed up',
+      fields: {
+        Name: user.name,
+        Email: user.email,
+        Team: userTeam?.name,
+      },
+    });
+  } catch (e: any) {
+    console.error(`Error sending slack notification:`, e?.message || e);
+  }
 
   res.status(201).json({
     data: {

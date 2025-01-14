@@ -90,21 +90,21 @@ const env = {
 
   hideLandingPage: process.env.HIDE_LANDING_PAGE === 'true',
 
-  darkModeEnabled: process.env.NEXT_PUBLIC_DARK_MODE !== 'false',
+  darkModeEnabled: process.env.NEXT_PUBLIC_DARK_MODE === 'true',
 
   teamFeatures: {
-    sso: process.env.FEATURE_TEAM_SSO !== 'false',
-    dsync: process.env.FEATURE_TEAM_DSYNC !== 'false',
-    webhook: process.env.FEATURE_TEAM_WEBHOOK !== 'false',
-    apiKey: process.env.FEATURE_TEAM_API_KEY !== 'false',
-    auditLog: process.env.FEATURE_TEAM_AUDIT_LOG !== 'false',
+    sso: process.env.FEATURE_TEAM_SSO === 'true',
+    dsync: process.env.FEATURE_TEAM_DSYNC === 'true',
+    webhook: process.env.FEATURE_TEAM_WEBHOOK === 'true',
+    apiKey: process.env.FEATURE_TEAM_API_KEY === 'true',
+    auditLog: process.env.FEATURE_TEAM_AUDIT_LOG === 'true',
     payments:
       process.env.FEATURE_TEAM_PAYMENTS === 'false'
         ? false
         : Boolean(
             process.env.STRIPE_SECRET_KEY && process.env.STRIPE_WEBHOOK_SECRET
           ),
-    deleteTeam: process.env.FEATURE_TEAM_DELETION !== 'false',
+    deleteTeam: process.env.FEATURE_TEAM_DELETION === 'true',
   },
 
   recaptcha: {

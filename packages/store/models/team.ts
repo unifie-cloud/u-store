@@ -23,8 +23,12 @@ export const createTeam = async (param: {
 
   await addTeamMember(team.id, userId, Role.OWNER);
 
-  await findOrCreateApp(team.name, team.id);
-
+  try {
+    await findOrCreateApp(team.name, team.id);
+  } catch (e: any) {
+    console.error(`Error svix.findOrCreateApp:`, e?.message || e);
+    throw new Error('Failed to create svix app');
+  }
   return team;
 };
 
