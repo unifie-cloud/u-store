@@ -28,6 +28,7 @@ export default async function handler(
         });
     }
   } catch (error: any) {
+    console.error(`Error in /api/password:`, error);
     const message = error.message || 'Something went wrong';
     const status = error.status || 500;
 

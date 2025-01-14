@@ -22,6 +22,10 @@ export default async function handler(
         });
     }
   } catch (error: any) {
+    console.error(
+      `Error in packages/store/pages/api/invitations/[token].ts:`,
+      error
+    );
     res.status(400).json({
       error: { message: error.message },
     });

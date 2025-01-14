@@ -39,6 +39,10 @@ export const oidcMetadataParse = (
       return { ...body, oidcMetadata };
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
+      console.error(
+        `Error: Could not parse OIDC Provider metadata, expected a valid JSON string`,
+        err
+      );
       throw new ApiError(
         400,
         'Could not parse OIDC Provider metadata, expected a valid JSON string'

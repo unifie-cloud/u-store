@@ -25,6 +25,7 @@ export default async function handler(
         });
     }
   } catch (err: any) {
+    console.error(`Error in packages/store/pages/api/oauth/authorize.ts:`, err);
     const message = err.message || 'Something went wrong';
     const status = err.status || 500;
     res.status(status).json({ error: { message } });

@@ -44,7 +44,10 @@ export default async function handler(
         });
     }
   } catch (err: any) {
-    console.error(err);
+    console.error(
+      `Error in packages/store/pages/api/teams/[slug]/sso.ts:`,
+      err
+    );
 
     const message = err.message || 'Something went wrong';
     const status = err.status || 500;

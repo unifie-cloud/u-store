@@ -48,6 +48,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
     }
     event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
   } catch (err: any) {
+    console.error(`Error in /api/webhooks/stripe:`, err?.message || err);
     return res.status(400).json({ error: { message: err.message } });
   }
 
@@ -55,6 +56,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
   const teamExists = await getByCustomerId(customer as string);
   if (!teamExists) {
     // Not accept events for non-existing teams
+    console.error('Error: Webhook stripe:', `Team ${customer} does not exist`);
     throw new Error('Team does not exist');
   }
 
@@ -82,6 +84,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
+      console.error('Webhook handler failed:', error);
       return res.status(400).json({
         error: {
           message: 'Webhook handler failed. View your nextjs function logs.',
@@ -112,6 +115,7 @@ async function handleSubscriptionUpdated(event: Stripe.Event) {
   const teamExists = await getByCustomerId(customer as string);
   if (!teamExists) {
     // Not accept events for non-existing teams
+    console.error('Error: Webhook stripe:', `Team ${customer} does not exist`);
     throw new Error('Team does not exist');
   }
 
@@ -171,9 +175,17 @@ async function uStore_updateSubscriptions(
   });
 
   if (!res) {
+    console.error(
+      'Error: Webhook stripe:',
+      'Error in uStore_updateApplication: empty response'
+    );
     throw new Error(`Error in uStore_updateApplication: empty response`);
   }
   if (res?.error) {
+    console.error(
+      'Error: Webhook stripe:',
+      `Error in uStore_updateApplication:${res?.error}`
+    );
     throw new Error(`Error in uStore_updateApplication:${res?.error}`);
   }
   return true;

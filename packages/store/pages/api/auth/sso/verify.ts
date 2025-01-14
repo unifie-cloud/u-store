@@ -26,6 +26,7 @@ export default async function handler(
         });
     }
   } catch (err: any) {
+    console.error(`Error in api/auth/sso/verify:`, err);
     res.status(400).json({
       error: { message: err.message },
     });

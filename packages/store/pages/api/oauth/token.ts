@@ -19,6 +19,7 @@ export default async function handler(
         });
     }
   } catch (err: any) {
+    console.error(`Error in packages/store/pages/api/oauth/token.ts:`, err);
     const message = err.message || 'Something went wrong';
     const status = err.status || 500;
 

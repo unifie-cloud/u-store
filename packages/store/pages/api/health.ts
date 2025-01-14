@@ -18,6 +18,7 @@ export default async function handler(
       version: packageInfo.version,
     });
   } catch (err: any) {
+    console.error(`Error in health:`, err);
     const { statusCode = 503 } = err;
     res.status(statusCode).json({});
   }

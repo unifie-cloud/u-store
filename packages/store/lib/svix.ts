@@ -56,6 +56,7 @@ export const createEventType = async (eventType: string) => {
       description: `Event type for ${eventType}`,
     });
   } catch (e: any) {
+    console.error(`Error: svix createEventType`, e?.message || e);
     if (e.code !== 409) {
       throw e;
     }

@@ -37,7 +37,10 @@ export default async function handler(
         });
     }
   } catch (error: any) {
-    console.error(error);
+    console.error(
+      `Error in packages/store/pages/api/teams/[slug]/dsync/[directoryId].ts:`,
+      error
+    );
 
     const message = error.message || 'Something went wrong';
     const status = error.status || 500;

@@ -22,6 +22,7 @@ export default async function handler(
         });
     }
   } catch (error: any) {
+    console.error(`Error in api/auth/unlock-account:`, error);
     const message = error.message || 'Something went wrong';
     const status = error.status || 500;
 

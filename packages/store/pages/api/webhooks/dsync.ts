@@ -24,7 +24,10 @@ export default async function handler(
 
     res.end();
   } catch (error: any) {
-    console.error(error);
+    console.error(
+      `Error in packages/store/pages/api/webhooks/dsync.ts:`,
+      error
+    );
     res.end();
   }
 }

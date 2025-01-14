@@ -20,6 +20,10 @@ export default async function handler(
         });
     }
   } catch (error: any) {
+    console.error(
+      `Error in packages/store/pages/api/sessions/index.ts:`,
+      error
+    );
     const message = error.message || 'Something went wrong';
     const status = error.status || 500;
 

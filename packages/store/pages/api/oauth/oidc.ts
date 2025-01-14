@@ -20,6 +20,7 @@ export default async function handler(
       res.redirect(302, redirect_url);
     }
   } catch (err: any) {
+    console.error(`Error in packages/store/pages/api/oauth/oidc.ts:`, err);
     const message = err.message || 'Something went wrong';
     const status = err.status || 500;
 

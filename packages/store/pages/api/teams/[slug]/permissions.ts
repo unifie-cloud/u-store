@@ -18,6 +18,10 @@ export default async function handler(
         });
     }
   } catch (error: any) {
+    console.error(
+      `Error in packages/store/pages/api/teams/[slug]/permissions.ts:`,
+      error
+    );
     const message = error.message || 'Something went wrong';
     const status = error.status || 500;
 

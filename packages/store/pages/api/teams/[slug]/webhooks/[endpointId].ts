@@ -38,6 +38,10 @@ export default async function handler(
         });
     }
   } catch (err: any) {
+    console.error(
+      `Error in packages/store/pages/api/teams/[slug]/webhooks/[endpointId].ts:`,
+      err
+    );
     const message = err?.body?.detail || err.message || 'Something went wrong';
     const status = err.status || err.code || 500;
 

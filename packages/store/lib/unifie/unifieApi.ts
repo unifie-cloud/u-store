@@ -148,7 +148,10 @@ export class UnifieCloudApi {
         }
       );
     } catch (e: any) {
-      console.error(e?.message);
+      console.error(
+        `Error in Application_getPodsMetricsByExtUuid:`,
+        e?.message
+      );
       return {
         error: 'No data',
         metrics: [],
