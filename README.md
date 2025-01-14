@@ -33,6 +33,8 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 - Login: `demo@demo-store.unifie.io`
 - Password: `demo@demo-store.unifie.io`
 
+[Ustore-demo.webm](https://github.com/user-attachments/assets/809685e2-17a7-4d02-800b-e3f36290cb2f)
+
 ![UI](docs/images/product-monitoring.webp)
 
 # 🌟 Getting Started
