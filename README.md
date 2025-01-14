@@ -12,15 +12,18 @@
     <a href="https://github.com/unifie-cloud/u-store/blob/main/LICENSE"><img src="https://img.shields.io/github/license/unifie-cloud/u-store" alt="license"></a>
 </p>
  
-- Simplest way to get SaaS cloud with own UI and business logic for your software.
-- Allow to build cloud SaaS platform from any software to drive more usage, unlock more revenue and grow faster.
+- Simplest way to get SaaS cloud for your software in 1 - 2 days.
+- Allow to build cloud SaaS platform for any software to drive more usage, unlock more revenue and grow faster.
+- Fully customizable UI and logic
+- Hosted in your servers
+- Stripe integration
+- [See full features list ...](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-features)
 
 Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 # 👋 Overview
 
 - [UI](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-ui)
-- [Getting Started](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-getting-started)
 - [Kubernetes deploy](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-kubernetes-deploy)
 - [Customization & Development](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-customization--development)
 - [Features](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-features)
@@ -36,13 +39,6 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 [Ustore-demo.webm](https://github.com/user-attachments/assets/809685e2-17a7-4d02-800b-e3f36290cb2f)
 
 ![UI](docs/images/product-monitoring.webp)
-
-# 🌟 Getting Started
-
-1. [Create template for your own software](https://www.unifie.cloud/doc/docs/User-Guide/templates/)
-1. Pass your template id to ENV var
-
-- [AWS ECR image registry](https://gallery.ecr.aws/g4a0y2u8/unifie-store)
 
 # 🌥️ Kubernetes deploy
 
@@ -63,6 +59,10 @@ Development documentation:
 ## 🥇 Features
 
 - **Manage your software in you Kubernetes clusters**
+- Simplest way to get SaaS cloud for your software in 1 - 2 days.
+- Allow to build cloud SaaS platform for any software to drive more usage, unlock more revenue and grow faster.
+- Fully customizable UI and logic
+- Hosted in your servers
 - Billing
 - Create account
 - Sign in with Email and Password
