@@ -83,11 +83,13 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
       await uStore_updateSubscriptions(teamExists.id, customer as string);
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
+    } catch (error: any) {
       console.error('Webhook handler failed:', error);
       return res.status(400).json({
         error: {
-          message: 'Webhook handler failed. View your nextjs function logs.',
+          message:
+            error?.message ||
+            'Webhook handler failed. View your nextjs function logs.',
           debug: error,
         },
       });
