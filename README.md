@@ -40,6 +40,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 - [Demo store](https://demo-store.unifie.io)
 - Login: `demo@demo-store.unifie.io`
 - Password: `demo@demo-store.unifie.io`
+- Stripe works in testing mode, use [testing card](https://docs.stripe.com/testing) number `4242424242424242` with CVC `111`
 
 [Ustore-demo.webm](https://github.com/user-attachments/assets/809685e2-17a7-4d02-800b-e3f36290cb2f)
 
