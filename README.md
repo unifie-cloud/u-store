@@ -30,7 +30,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 - [Community](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-community)
 - [License](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-license)
 
-## 💡 UI
+# 💡 UI
 
 - [Demo store](https://demo-store.unifie.io)
 - Login: `demo@demo-store.unifie.io`
@@ -40,6 +40,16 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 ![UI](docs/images/product-monitoring.webp)
 
+# 💡 How it works
+
+![U-store usage flow](docs/images/U-store-usage.svg)
+
+- U-store is cloud SaaS platform that allows to your customers to run your software in your kubernetes clusters over the world.
+- [Unifie.cloud](https://www.unifie.cloud/doc/docs/Overview/) is multi cluster kubernetes management dashboard
+- U-store use [Unifie.cloud API](https://www.unifie.cloud/doc/docs/api-v1/) to manage deployments in your kubernetes clusters.
+- Your customers will see only U-store.
+- Your DevOps team can use unifie.cloud as management dashboard for monitoring and debugging.
+
 # 🌥️ Kubernetes deploy
 
 - [AWS ECR image registry](https://gallery.ecr.aws/g4a0y2u8/unifie-store)
@@ -48,7 +58,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 [![deploy with unifie](https://api.unifie.cloud/deploy-btn/button_unifie-one-click-deploy.gif)](https://unifie.cloud/kubernetes/unifie-project-lf24rvjgzu9rwhd5)
 
-## ✨ Customization & Development
+# ✨ Customization & Development
 
 Development documentation:
 
@@ -56,7 +66,7 @@ Development documentation:
 - [Built With](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#%EF%B8%8F-built-with)
 - [Local development](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-customization--development)
 
-## 🥇 Features
+# 🥇 Features
 
 - **Manage your software in you Kubernetes clusters**
 - Simplest way to get SaaS cloud for your software in 1 - 2 days.
