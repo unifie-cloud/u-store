@@ -47,7 +47,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 # 💡 How it works
 
-![U-store usage flow](docs/images/U-store-usage.png)
+![U-store usage flow](docs/images/U-store-usage.svg)
 
 - U-store is cloud SaaS platform that allows to your customers to run your software in your kubernetes clusters over the world.
 - [Unifie.cloud](https://www.unifie.cloud/doc/docs/Overview/) is multi cluster kubernetes management dashboard
