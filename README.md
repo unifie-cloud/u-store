@@ -4,14 +4,18 @@
   <img alt="BoxyHQ Banner" src="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
 </picture>
 
-# ⭐ U-store - is template for your own SaaS cloud store
+# ⭐ U-store - cloud SaaS store template
 
 <p>
     <a href="https://github.com/unifie-cloud/u-store/stargazers"><img src="https://img.shields.io/github/stars/unifie-cloud/u-store" alt="Github stargazers"></a>
     <a href="https://github.com/unifie-cloud/u-store/issues"><img src="https://img.shields.io/github/issues/unifie-cloud/u-store" alt="Github issues"></a>
     <a href="https://github.com/unifie-cloud/u-store/blob/main/LICENSE"><img src="https://img.shields.io/github/license/unifie-cloud/u-store" alt="license"></a>
 </p>
- 
+
+U-Store — a powerful cloud SaaS store template designed to help startups quickly launch scalable platforms.
+
+It features:
+
 - Simplest way to get SaaS cloud for your software in 1 - 2 days.
 - Allow to build cloud SaaS platform for any software to drive more usage, unlock more revenue and grow faster.
 - Fully customizable UI and logic
