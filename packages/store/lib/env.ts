@@ -128,7 +128,7 @@ const env = {
     showArability: process.env.NEXT_PUBLIC_UNIFIE_SHOW_AVAILABILITY !== 'false',
     showMetrics: process.env.NEXT_PUBLIC_UNIFIE_SHOW_METRICS !== 'false',
     subscriptionRequired:
-      process.env.NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED !== 'false',
+      process.env.NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED === 'true',
   },
 
   branding: {
