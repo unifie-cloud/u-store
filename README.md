@@ -28,6 +28,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 # 👋 Overview
 
 - [UI](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-ui)
+- [How it works](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-how-it-works)
 - [Kubernetes deploy](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-kubernetes-deploy)
 - [Customization & Development](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-customization--development)
 - [Features](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-features)
