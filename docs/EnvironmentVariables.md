@@ -1,5 +1,11 @@
 ## Environment Variables
 
+### Unifie integration
+
+- **`UNIFIE_API_KEY`**: Secret api key ([How to get API key and api host](https://www.unifie.cloud/doc/docs/api-v1/#how-to-get-api-key))
+- **`UNIFIE_API_URL`**: Base URL for unifie api. ([How to get API key and api host](https://www.unifie.cloud/doc/docs/api-v1/#how-to-get-api-key))
+- **`UNIFIE_DEFAULT_TEMPLATE_ID`**: Unifie template id ([How to get template id](https://www.unifie.cloud/doc/docs/User-Guide/templates/#how-to-get-template-id))
+
 ### Authentication and Security
 
 - **`NEXTAUTH_URL`**: Base URL for authentication. Example: `http://localhost:4002`.
