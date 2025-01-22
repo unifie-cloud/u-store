@@ -17,6 +17,7 @@ U-Store — a powerful cloud SaaS store template designed to help startups quick
 It features:
 
 - Simplest way to get SaaS cloud for your software in 1 - 2 days.
+- NoCode - does not require programming skills
 - Allow to build cloud SaaS platform for any software to drive more usage, unlock more revenue and grow faster.
 - Fully customizable UI and logic
 - Hosted in your servers
