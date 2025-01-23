@@ -10,6 +10,7 @@
     <a href="https://github.com/unifie-cloud/u-store/stargazers"><img src="https://img.shields.io/github/stars/unifie-cloud/u-store" alt="Github stargazers"></a>
     <a href="https://github.com/unifie-cloud/u-store/issues"><img src="https://img.shields.io/github/issues/unifie-cloud/u-store" alt="Github issues"></a>
     <a href="https://github.com/unifie-cloud/u-store/blob/main/LICENSE"><img src="https://img.shields.io/github/license/unifie-cloud/u-store" alt="license"></a>
+     <a href="https://discord.gg/pqwhY5MQZ9"><img src="https://discord.com/api/guilds/1330768472212508742/widget.png?style=shield" alt="discord"></a>
 </p>
 
 U-Store — a powerful cloud SaaS store template designed to help startups quickly launch scalable platforms.
@@ -113,6 +114,7 @@ Development documentation:
 
 # 🤩 Community
 
+- [Discord](https://discord.gg/pqwhY5MQZ9) (Discord)
 - [Discussions](https://github.com/unifie-cloud/u-store/discussions) (Discussions)
 - [GitHub Issues](https://github.com/unifie-cloud/u-store/issues) (Contributions, report issues, and product ideas)
 - [Project page](https://github.com/orgs/unifie-cloud/projects/2/views/1)
