@@ -5,6 +5,7 @@
 - **`UNIFIE_API_KEY`**: Secret api key ([How to get API key and api host](https://www.unifie.cloud/doc/docs/api-v1/#how-to-get-api-key))
 - **`UNIFIE_API_URL`**: Base URL for unifie api. ([How to get API key and api host](https://www.unifie.cloud/doc/docs/api-v1/#how-to-get-api-key))
 - **`UNIFIE_DEFAULT_TEMPLATE_ID`**: Unifie template id ([How to get template id](https://www.unifie.cloud/doc/docs/User-Guide/templates/#how-to-get-template-id))
+- **`UNIFIE_CLUSTER_WHITELIST`**: Comma separated list of cluster IDs that are allowed to access the store. If empty, all clusters are allowed. Example: "1,2,3" Default: ""
 
 ### Authentication and Security
 

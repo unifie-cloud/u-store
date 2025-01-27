@@ -121,6 +121,16 @@ const env = {
     webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
   },
   unifie: {
+    /**
+     * Comma separated list of cluster IDs that are allowed to access the store.
+     * If empty, all clusters are allowed.
+     * If not empty, only the clusters in the list are allowed.
+     * Example: "1,2,3"
+     * Default: ""
+     */
+    clusterWhitelist: (process.env.UNIFIE_CLUSTER_WHITELIST || '')
+      .replace(/^[0-9,]/, '')
+      .split(','),
     apiKey: process.env.UNIFIE_API_KEY,
     apiHost: process.env.UNIFIE_API_URL,
     defaultTemplateId: process.env.UNIFIE_DEFAULT_TEMPLATE_ID,

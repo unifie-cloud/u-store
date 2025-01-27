@@ -236,6 +236,12 @@ export const unifieStoreApplicationApi: iApolloResolver = {
         const res = (
           (await unifieApi.Clusters_getClustersForTemplate()) || []
         ).filter((cluster) => cluster.allowToAddDeployments);
+
+        if (env.unifie.clusterWhitelist.length > 0) {
+          return res.filter((cluster) =>
+            env.unifie.clusterWhitelist.includes(String(cluster.id))
+          );
+        }
         return res;
       }
     ),
@@ -320,6 +326,15 @@ export const unifieStoreApplicationApi: iApolloResolver = {
           teamId: teamMember.team.id,
           subscriptions: subscriptions,
         };
+
+        if (env.unifie.clusterWhitelist.length > 0) {
+          if (!env.unifie.clusterWhitelist.includes(String(args.clusterId))) {
+            throw new ApiError(
+              400,
+              `Cluster with id ${args.clusterId} is not allowed for this team`
+            );
+          }
+        }
 
         const newApplication = await unifieApi.Application_createFromTemplate({
           name: `store-team-${teamMember.team.slug}`,
