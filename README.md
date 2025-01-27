@@ -72,7 +72,7 @@ Development documentation:
 
 - [Environment Variables](https://github.com/unifie-cloud/u-store/blob/staging/docs/EnvironmentVariables.md)
 - [Built With](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#%EF%B8%8F-built-with)
-- [Local development](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-customization--development)
+- [Local development](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-u-store-customization--development)
 
 # 🥇 Features
 
