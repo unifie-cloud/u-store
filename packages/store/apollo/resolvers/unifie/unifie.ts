@@ -233,16 +233,15 @@ export const unifieStoreApplicationApi: iApolloResolver = {
     ),
     uStore_getClusters: QL(
       async (args: any, context: iQlContext): Promise<iUnifieCluster[]> => {
-        const res = (
-          (await unifieApi.Clusters_getClustersForTemplate()) || []
-        ).filter((cluster) => cluster.allowToAddDeployments);
+        const res = (await unifieApi.Clusters_getClustersForTemplate()) || [];
 
         if (env.unifie.clusterWhitelist.length > 0) {
-          return res.filter((cluster) =>
-            env.unifie.clusterWhitelist.includes(String(cluster.id))
-          );
+          return res.filter((cluster) => {
+            return env.unifie.clusterWhitelist.includes(String(cluster.id));
+          });
         }
-        return res;
+
+        return res.filter((cluster) => cluster.allowToAddDeployments);
       }
     ),
     uStore_getApplicationConfigSchema: QL(

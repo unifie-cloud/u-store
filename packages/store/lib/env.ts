@@ -129,17 +129,15 @@ const env = {
      * Default: ""
      */
     clusterWhitelist: (process.env.UNIFIE_CLUSTER_WHITELIST || '')
-      .replace(/^[0-9,]/, '')
+      .replace(/[^0-9,]/, '')
       .split(','),
     apiKey: process.env.UNIFIE_API_KEY,
     apiHost: process.env.UNIFIE_API_URL,
     defaultTemplateId: process.env.UNIFIE_DEFAULT_TEMPLATE_ID,
-    showPods: process.env.NEXT_PUBLIC_UNIFIE_SHOW_PODS !== 'false',
-    showAvailability:
-      process.env.NEXT_PUBLIC_UNIFIE_SHOW_AVAILABILITY !== 'false',
-    showMetrics: process.env.NEXT_PUBLIC_UNIFIE_SHOW_METRICS !== 'false',
-    subscriptionRequired:
-      process.env.NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED === 'true',
+    showPods: process.env.UNIFIE_SHOW_PODS !== 'false',
+    showAvailability: process.env.UNIFIE_SHOW_AVAILABILITY !== 'false',
+    showMetrics: process.env.UNIFIE_SHOW_METRICS !== 'false',
+    subscriptionRequired: process.env.UNIFIE_SUBSCRIPTION_REQUIRED === 'true',
     test: process.env,
   },
 
