@@ -6,7 +6,7 @@ import {
   iDashboardOneChart,
 } from './ChartRenderer/ChartDashboard';
 import { Skeleton } from 'antd';
-import env from '@/lib/env';
+import { useGlobalConfig } from '../context/GlobalContext';
 
 export const DeploymentMonitoring = (props: { teamSlug: string }) => {
   const qToken = useQuery(
@@ -24,6 +24,7 @@ export const DeploymentMonitoring = (props: { teamSlug: string }) => {
       variables: { teamSlug: String(props.teamSlug) },
     }
   );
+  const { config } = useGlobalConfig();
 
   if (!qToken?.data?.uStore_getMonitoringToken) {
     return <Skeleton active />;
@@ -124,11 +125,11 @@ export const DeploymentMonitoring = (props: { teamSlug: string }) => {
 
   const OverView_charts: iDashboardOneChart[] = [];
 
-  if (env.unifie.showMetrics) {
+  if (config.unifie.showMetrics) {
     OverView_charts.push(...OverView_usage);
   }
 
-  if (env.unifie.showAvailability) {
+  if (config.unifie.showAvailability) {
     OverView_charts.push(...OverView_stats);
   }
 
