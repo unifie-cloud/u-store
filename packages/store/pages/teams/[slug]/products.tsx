@@ -71,7 +71,7 @@ const Products: NextPageWithLayout = () => {
   if (isLoading || !team || app.loading) {
     return <Skeleton active={true} loading={true}></Skeleton>;
   }
-
+  console.log(`env`, env);
   const hasSubscription = app?.data?.uMony_hasActiveSubscription;
 
   const currentTeamApplication: iUnifieApplication | null =
@@ -124,7 +124,7 @@ const Products: NextPageWithLayout = () => {
           )}
         </Row>
       </Tabs.TabPane>
-      {(env.unifie.showArability || env.unifie.showMetrics) && (
+      {(env.unifie.showAvailability || env.unifie.showMetrics) && (
         <Tabs.TabPane tab={t('unifie-app-Monitoring')} key="monitoring">
           <DeploymentMonitoring teamSlug={team.slug} />
         </Tabs.TabPane>

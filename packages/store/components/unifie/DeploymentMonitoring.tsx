@@ -128,7 +128,7 @@ export const DeploymentMonitoring = (props: { teamSlug: string }) => {
     OverView_charts.push(...OverView_usage);
   }
 
-  if (env.unifie.showArability) {
+  if (env.unifie.showAvailability) {
     OverView_charts.push(...OverView_stats);
   }
 

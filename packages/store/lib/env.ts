@@ -135,7 +135,8 @@ const env = {
     apiHost: process.env.UNIFIE_API_URL,
     defaultTemplateId: process.env.UNIFIE_DEFAULT_TEMPLATE_ID,
     showPods: process.env.NEXT_PUBLIC_UNIFIE_SHOW_PODS !== 'false',
-    showArability: process.env.NEXT_PUBLIC_UNIFIE_SHOW_AVAILABILITY !== 'false',
+    showAvailability:
+      process.env.NEXT_PUBLIC_UNIFIE_SHOW_AVAILABILITY !== 'false',
     showMetrics: process.env.NEXT_PUBLIC_UNIFIE_SHOW_METRICS !== 'false',
     subscriptionRequired:
       process.env.NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED === 'true',
