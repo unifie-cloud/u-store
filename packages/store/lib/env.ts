@@ -140,6 +140,7 @@ const env = {
     showMetrics: process.env.NEXT_PUBLIC_UNIFIE_SHOW_METRICS !== 'false',
     subscriptionRequired:
       process.env.NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED === 'true',
+    test: process.env,
   },
 
   branding: {
