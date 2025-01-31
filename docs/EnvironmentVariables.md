@@ -1,5 +1,16 @@
 ## Environment Variables
 
+### Unifie integration
+
+- **`UNIFIE_API_KEY`**: Secret api key ([How to get API key and api host](https://www.unifie.cloud/doc/docs/api-v1/#how-to-get-api-key))
+- **`UNIFIE_API_URL`**: Base URL for unifie api. ([How to get API key and api host](https://www.unifie.cloud/doc/docs/api-v1/#how-to-get-api-key))
+- **`UNIFIE_DEFAULT_TEMPLATE_ID`**: Unifie template id ([How to get template id](https://www.unifie.cloud/doc/docs/User-Guide/templates/#how-to-get-template-id))
+- **`UNIFIE_CLUSTER_WHITELIST`**: Comma separated list of cluster IDs that are allowed to access the store. If empty, all clusters are allowed. Example: "1,2,3" Default: ""
+- **`UNIFIE_SHOW_PODS`**: (boolean) Show pod details. Default: `true`.
+- **`UNIFIE_SHOW_AVAILABILITY`**: (boolean) Show availability details. Default: `true`.
+- **`UNIFIE_SHOW_METRICS`**: (boolean) Show metrics. Default: `true`.
+- **`UNIFIE_SUBSCRIPTION_REQUIRED`**: (boolean) Require a subscription for usage. Default: `true`.
+
 ### Authentication and Security
 
 - **`NEXTAUTH_URL`**: Base URL for authentication. Example: `http://localhost:4002`.
@@ -35,10 +46,6 @@
 ### Feature Toggles
 
 - **`HIDE_LANDING_PAGE`**: (boolean) Hide the landing page and redirect to the login page. Default: `true`.
-- **`NEXT_PUBLIC_UNIFIE_SHOW_PODS`**: (boolean) Show pod details. Default: `true`.
-- **`NEXT_PUBLIC_UNIFIE_SHOW_AVAILABILITY`**: (boolean) Show availability details. Default: `true`.
-- **`NEXT_PUBLIC_UNIFIE_SHOW_METRICS`**: (boolean) Show metrics. Default: `true`.
-- **`NEXT_PUBLIC_UNIFIE_SUBSCRIPTION_REQUIRED`**: (boolean) Require a subscription for usage. Default: `true`.
 - **`FEATURE_TEAM_*`**: Toggles for team-related features such as `SSO`, `DSYNC`, `AUDIT_LOG`, etc.
 
 ### Observability

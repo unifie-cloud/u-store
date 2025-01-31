@@ -55,3 +55,4 @@ yarn-error.log*
 .vscode
 # Sentry Config File
 .sentryclirc
+presentation

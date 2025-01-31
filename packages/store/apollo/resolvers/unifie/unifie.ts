@@ -233,10 +233,15 @@ export const unifieStoreApplicationApi: iApolloResolver = {
     ),
     uStore_getClusters: QL(
       async (args: any, context: iQlContext): Promise<iUnifieCluster[]> => {
-        const res = (
-          (await unifieApi.Clusters_getClustersForTemplate()) || []
-        ).filter((cluster) => cluster.allowToAddDeployments);
-        return res;
+        const res = (await unifieApi.Clusters_getClustersForTemplate()) || [];
+
+        if (env.unifie.clusterWhitelist.length > 0) {
+          return res.filter((cluster) => {
+            return env.unifie.clusterWhitelist.includes(String(cluster.id));
+          });
+        }
+
+        return res.filter((cluster) => cluster.allowToAddDeployments);
       }
     ),
     uStore_getApplicationConfigSchema: QL(
@@ -267,12 +272,25 @@ export const unifieStoreApplicationApi: iApolloResolver = {
 
         const cleanObj = {};
 
+        const keys = Object.keys(args.config || {});
+
         // Cut off all properties that are not in schema.json file
-        data.schema.properties.forEach((item) => {
-          if (args.config[item.name]) {
-            cleanObj[item.name] = args.config[item.name];
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
+          const prop = data.schema.properties.find((p) => p.name === key);
+          if (!prop) {
+            console.warn(`Property ${key} is not in schema.json file`);
+            return {
+              error: `Property ${key} is not in schema.json file`,
+            };
           }
-        });
+          cleanObj[key] = args.config[key];
+        }
+
+        console.log(
+          `uStore_updateApplication: ${teamMember.team.id}`,
+          cleanObj
+        );
 
         const answer = await uStore_updateApplication(
           teamMember.team.id,
@@ -320,6 +338,15 @@ export const unifieStoreApplicationApi: iApolloResolver = {
           teamId: teamMember.team.id,
           subscriptions: subscriptions,
         };
+
+        if (env.unifie.clusterWhitelist.length > 0) {
+          if (!env.unifie.clusterWhitelist.includes(String(args.clusterId))) {
+            throw new ApiError(
+              400,
+              `Cluster with id ${args.clusterId} is not allowed for this team`
+            );
+          }
+        }
 
         const newApplication = await unifieApi.Application_createFromTemplate({
           name: `store-team-${teamMember.team.slug}`,

@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { getSession } from '@/lib/session';
 import { throwIfNoTeamAccess } from 'models/team';
-import { stripe, getStripeCustomerId } from '@/lib/stripe';
+import { getStripeClient, getStripeCustomerId } from '@/lib/stripe';
 import env from '@/lib/env';
 import { checkoutSessionSchema, validateWithSchema } from '@/lib/zod';
 
@@ -43,7 +43,7 @@ const handlePOST = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession(req, res);
   const customer = await getStripeCustomerId(teamMember, session);
 
-  const checkoutSession = await stripe.checkout.sessions.create({
+  const checkoutSession = await getStripeClient().checkout.sessions.create({
     customer,
     mode: 'subscription',
     line_items: [

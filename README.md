@@ -4,15 +4,21 @@
   <img alt="BoxyHQ Banner" src="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
 </picture>
 
-# ⭐ U-store - is template for your own SaaS cloud store
+# ⭐ U-store - cloud SaaS store template
 
 <p>
     <a href="https://github.com/unifie-cloud/u-store/stargazers"><img src="https://img.shields.io/github/stars/unifie-cloud/u-store" alt="Github stargazers"></a>
     <a href="https://github.com/unifie-cloud/u-store/issues"><img src="https://img.shields.io/github/issues/unifie-cloud/u-store" alt="Github issues"></a>
     <a href="https://github.com/unifie-cloud/u-store/blob/main/LICENSE"><img src="https://img.shields.io/github/license/unifie-cloud/u-store" alt="license"></a>
+     <a href="https://discord.gg/pqwhY5MQZ9"><img src="https://discord.com/api/guilds/1330768472212508742/widget.png?style=shield" alt="discord"></a>
 </p>
- 
+
+U-Store — a powerful cloud SaaS store template designed to help startups quickly launch scalable platforms.
+
+It features:
+
 - Simplest way to get SaaS cloud for your software in 1 - 2 days.
+- NoCode - does not require programming skills
 - Allow to build cloud SaaS platform for any software to drive more usage, unlock more revenue and grow faster.
 - Fully customizable UI and logic
 - Hosted in your servers
@@ -24,21 +30,33 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 # 👋 Overview
 
 - [UI](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-ui)
+- [How it works](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-how-it-works)
 - [Kubernetes deploy](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-kubernetes-deploy)
 - [Customization & Development](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-customization--development)
 - [Features](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-features)
 - [Community](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-community)
 - [License](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-license)
 
-## 💡 UI
+# 💡 UI
 
 - [Demo store](https://demo-store.unifie.io)
 - Login: `demo@demo-store.unifie.io`
 - Password: `demo@demo-store.unifie.io`
+- Stripe works in testing mode, use [testing card](https://docs.stripe.com/testing) number `4242424242424242` with CVC `111`
 
 [Ustore-demo.webm](https://github.com/user-attachments/assets/809685e2-17a7-4d02-800b-e3f36290cb2f)
 
 ![UI](docs/images/product-monitoring.webp)
+
+# 💡 How it works
+
+![U-store usage flow](docs/images/U-store-usage.svg)
+
+- U-store is cloud SaaS platform that allows to your customers to run your software in your kubernetes clusters over the world.
+- [Unifie.cloud](https://www.unifie.cloud/doc/docs/Overview/) is multi cluster kubernetes management dashboard
+- U-store use [Unifie.cloud API](https://www.unifie.cloud/doc/docs/api-v1/) to manage deployments in your kubernetes clusters.
+- Your customers will see only U-store.
+- Your DevOps team can use unifie.cloud as management dashboard for monitoring and debugging.
 
 # 🌥️ Kubernetes deploy
 
@@ -48,15 +66,15 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 [![deploy with unifie](https://api.unifie.cloud/deploy-btn/button_unifie-one-click-deploy.gif)](https://unifie.cloud/kubernetes/unifie-project-lf24rvjgzu9rwhd5)
 
-## ✨ Customization & Development
+# ✨ Customization & Development
 
 Development documentation:
 
 - [Environment Variables](https://github.com/unifie-cloud/u-store/blob/staging/docs/EnvironmentVariables.md)
 - [Built With](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#%EF%B8%8F-built-with)
-- [Local development](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-customization--development)
+- [Local development](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-u-store-customization--development)
 
-## 🥇 Features
+# 🥇 Features
 
 - **Manage your software in you Kubernetes clusters**
 - Simplest way to get SaaS cloud for your software in 1 - 2 days.
@@ -97,6 +115,7 @@ Development documentation:
 
 # 🤩 Community
 
+- [Discord](https://discord.gg/pqwhY5MQZ9) (Discord)
 - [Discussions](https://github.com/unifie-cloud/u-store/discussions) (Discussions)
 - [GitHub Issues](https://github.com/unifie-cloud/u-store/issues) (Contributions, report issues, and product ideas)
 - [Project page](https://github.com/orgs/unifie-cloud/projects/2/views/1)

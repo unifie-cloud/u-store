@@ -8,7 +8,8 @@
   "scripts": {
     "release": "git checkout release && git merge origin/main && release-it && git checkout main && git merge origin/release && git push origin main",
     "dev": "next dev --port 4002",
-    "build": "prisma generate && prisma db push && next build",
+    "build": "prisma generate && next build",
+    "prisma": "prisma ",
     "start": "next start --port 4002",
     "check-types": "tsc --pretty --noEmit",
     "check-format": "prettier --check .",
@@ -60,7 +61,7 @@
     "lodash-es": "^4.17.21",
     "micromatch": "4.0.8",
     "mixpanel-browser": "2.55.1",
-    "next": "15.0.1",
+    "next": "15.1.6",
     "next-auth": "4.24.8",
     "next-i18next": "15.3.1",
     "nodemailer": "6.9.15",

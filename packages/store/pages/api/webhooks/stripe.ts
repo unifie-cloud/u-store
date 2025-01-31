@@ -1,5 +1,4 @@
 import Stripe from 'stripe';
-import { stripe } from '@/lib/stripe';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import env from '@/lib/env';
 import type { Readable } from 'node:stream';
@@ -13,6 +12,7 @@ import {
 import { getByCustomerId } from 'models/team';
 import { uStore_updateApplication } from 'apollo/resolvers/unifie/unifie';
 import { iApplicationExtData } from 'types/unifieApi';
+import { getStripeClient } from '@/lib/stripe';
 
 export const config = {
   api: {
@@ -46,7 +46,11 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
     if (!sig || !webhookSecret) {
       return;
     }
-    event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
+    event = getStripeClient().webhooks.constructEvent(
+      rawBody,
+      sig,
+      webhookSecret
+    );
   } catch (err: any) {
     console.error(`Error in /api/webhooks/stripe:`, err?.message || err);
     return res.status(400).json({ error: { message: err.message } });

@@ -14,6 +14,7 @@ import { DeploymentMonitoring } from '@/components/unifie/DeploymentMonitoring';
 import env from '@/lib/env';
 import { useEffect } from 'react';
 import { UnifieDeploying } from '@/components/unifie/UnifieDeploying';
+import { useGlobalConfig } from '@/components/context/GlobalContext';
 
 export const dynamic = 'force-dynamic';
 
@@ -50,6 +51,8 @@ const Products: NextPageWithLayout = () => {
     }
   );
 
+  const { config } = useGlobalConfig();
+
   useEffect(() => {
     return app.stopPolling;
   }, []);
@@ -71,13 +74,12 @@ const Products: NextPageWithLayout = () => {
   if (isLoading || !team || app.loading) {
     return <Skeleton active={true} loading={true}></Skeleton>;
   }
-
   const hasSubscription = app?.data?.uMony_hasActiveSubscription;
 
   const currentTeamApplication: iUnifieApplication | null =
     app?.data?.uStore_getApplication || null;
 
-  if (!hasSubscription && env.unifie.subscriptionRequired) {
+  if (!hasSubscription && config.unifie.subscriptionRequired) {
     return (
       <Result
         title={t('unifie-app-no-subscription')}
@@ -124,7 +126,7 @@ const Products: NextPageWithLayout = () => {
           )}
         </Row>
       </Tabs.TabPane>
-      {(env.unifie.showArability || env.unifie.showMetrics) && (
+      {(env.unifie.showAvailability || env.unifie.showMetrics) && (
         <Tabs.TabPane tab={t('unifie-app-Monitoring')} key="monitoring">
           <DeploymentMonitoring teamSlug={team.slug} />
         </Tabs.TabPane>

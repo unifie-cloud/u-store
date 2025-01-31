@@ -302,7 +302,7 @@ export class UnifieCloudApi {
         fields: fields,
       }
     );
-
+    console.log(`Application_updateByExtUuid:`, query?.data);
     return query?.data?.Application_updateByExtUuid;
   }
 }
