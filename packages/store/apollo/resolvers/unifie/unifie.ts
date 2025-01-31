@@ -272,12 +272,25 @@ export const unifieStoreApplicationApi: iApolloResolver = {
 
         const cleanObj = {};
 
+        const keys = Object.keys(args.config || {});
+
         // Cut off all properties that are not in schema.json file
-        data.schema.properties.forEach((item) => {
-          if (args.config[item.name]) {
-            cleanObj[item.name] = args.config[item.name];
+        for (let i = 0; i < keys.length; i++) {
+          const key = keys[i];
+          const prop = data.schema.properties.find((p) => p.name === key);
+          if (!prop) {
+            console.warn(`Property ${key} is not in schema.json file`);
+            return {
+              error: `Property ${key} is not in schema.json file`,
+            };
           }
-        });
+          cleanObj[key] = args.config[key];
+        }
+
+        console.log(
+          `uStore_updateApplication: ${teamMember.team.id}`,
+          cleanObj
+        );
 
         const answer = await uStore_updateApplication(
           teamMember.team.id,
