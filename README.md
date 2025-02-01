@@ -30,6 +30,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 # 👋 Overview
 
 - [UI](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-ui)
+- [Video presentation](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-video-presentation)
 - [How it works](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-how-it-works)
 - [Kubernetes deploy](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-kubernetes-deploy)
 - [Customization & Development](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-customization--development)
@@ -46,11 +47,11 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 - [Full youtube presentation](https://youtu.be/O2SMceQucJg)
 
 
-## 🎦 Video presentation 
+# 🎦 Video presentation 
 
 👉 [Full youtube presentation](https://youtu.be/O2SMceQucJg)
 
-Full youtube presentation
+Full youtube presentation 👇
 [![Youtube presentation](https://img.youtube.com/vi/O2SMceQucJg/0.jpg)](https://www.youtube.com/watch?v=O2SMceQucJg)
 
 Short demo
