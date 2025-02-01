@@ -45,12 +45,15 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 - Stripe works in testing mode, use [testing card](https://docs.stripe.com/testing) number `4242424242424242` with CVC `111`
 - [Full youtube presentation](https://youtu.be/O2SMceQucJg)
 
-[![Youtube presentation](https://img.youtube.com/vi/O2SMceQucJg/0.jpg)](https://www.youtube.com/watch?v=O2SMceQucJg)
 
 ## 🎦 Video presentation 
 
-- [Full youtube presentation 📽️](https://youtu.be/O2SMceQucJg)
- 
+👉 [Full youtube presentation](https://youtu.be/O2SMceQucJg)
+
+Full youtube presentation
+[![Youtube presentation](https://img.youtube.com/vi/O2SMceQucJg/0.jpg)](https://www.youtube.com/watch?v=O2SMceQucJg)
+
+Short demo
 [Ustore-demo.webm](https://github.com/user-attachments/assets/809685e2-17a7-4d02-800b-e3f36290cb2f)
 
 ![UI](docs/images/product-monitoring.webp)
