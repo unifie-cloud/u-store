@@ -47,6 +47,8 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 
 [![Full overview of features](https://img.youtube.com/vi/O2SMceQucJg/0.jpg)](https://www.youtube.com/watch?v=O2SMceQucJg)
 
+<iframe width="100%" height="420" src="https://www.youtube.com/embed/O2SMceQucJg?si=NRjaV8zzIbCOC3kN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 [Ustore-demo.webm](https://github.com/user-attachments/assets/809685e2-17a7-4d02-800b-e3f36290cb2f)
 
 ![UI](docs/images/product-monitoring.webp)
