@@ -50,11 +50,11 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 # 🎦 Video presentation 
 
 👉 [Full youtube presentation](https://youtu.be/O2SMceQucJg)
-
-Full youtube presentation 👇
 [![Youtube presentation](https://img.youtube.com/vi/O2SMceQucJg/0.jpg)](https://www.youtube.com/watch?v=O2SMceQucJg)
 
-Short demo
+
+### Short demo
+
 [Ustore-demo.webm](https://github.com/user-attachments/assets/809685e2-17a7-4d02-800b-e3f36290cb2f)
 
 ![UI](docs/images/product-monitoring.webp)
