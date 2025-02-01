@@ -43,12 +43,14 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 - Login: `demo@demo-store.unifie.io`
 - Password: `demo@demo-store.unifie.io`
 - Stripe works in testing mode, use [testing card](https://docs.stripe.com/testing) number `4242424242424242` with CVC `111`
-- [Full overview of features](https://youtu.be/O2SMceQucJg)
+- [Full youtube presentation](https://youtu.be/O2SMceQucJg)
 
-[![Full overview of features](https://img.youtube.com/vi/O2SMceQucJg/0.jpg)](https://www.youtube.com/watch?v=O2SMceQucJg)
+[![Youtube presentation](https://img.youtube.com/vi/O2SMceQucJg/0.jpg)](https://www.youtube.com/watch?v=O2SMceQucJg)
 
-<iframe width="100%" height="420" src="https://www.youtube.com/embed/O2SMceQucJg?si=NRjaV8zzIbCOC3kN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+## 🎦 Video presentation 
 
+- [Full youtube presentation 📽️](https://youtu.be/O2SMceQucJg)
+ 
 [Ustore-demo.webm](https://github.com/user-attachments/assets/809685e2-17a7-4d02-800b-e3f36290cb2f)
 
 ![UI](docs/images/product-monitoring.webp)
