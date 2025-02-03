@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import { Result, Space } from 'antd';
+import { Result } from 'antd';
 
 /**
  * UI for the deploying state of an application
