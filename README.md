@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
-  <source media="(prefers-color-scheme: light)" srcset="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
-  <img alt="BoxyHQ Banner" src="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/repository-open-graph-template.png">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/repository-open-graph-template.png">
+  <img alt="U-store Banner" src="docs/images/repository-open-graph-template.png">
 </picture>
 
 # ⭐ U-store - cloud SaaS store template
@@ -46,15 +46,11 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 - Stripe works in testing mode, use [testing card](https://docs.stripe.com/testing) number `4242424242424242` with CVC `111`
 - [Full youtube presentation](https://youtu.be/O2SMceQucJg)
 
-
-# 🎦 Video presentation 
+# 🎦 Video presentation
 
 👉 [Full youtube presentation](https://youtu.be/O2SMceQucJg)
 
-
-
 [![Youtube presentation](https://img.youtube.com/vi/O2SMceQucJg/0.jpg)](https://www.youtube.com/watch?v=O2SMceQucJg)
-
 
 ### Short demo
 
