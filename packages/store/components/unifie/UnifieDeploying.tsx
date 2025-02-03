@@ -22,10 +22,10 @@ export const UnifieDeploying = () => {
         height="420"
         src="https://www.youtube.com/embed/O2SMceQucJg?si=DNyuX7ln1my0Dxpq"
         title="YouTube video player"
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
       ></iframe>
     </>
   );
