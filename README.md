@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/images/repository-open-graph-template.png">
-  <source media="(prefers-color-scheme: light)" srcset="docs/images/repository-open-graph-template.png">
-  <img alt="U-store Banner" src="docs/images/repository-open-graph-template.png">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/repository-open-graph-template.webp">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/repository-open-graph-template.webp">
+  <img alt="U-store Banner" src="docs/images/repository-open-graph-template.webp">
 </picture>
 
 # ⭐ U-store - cloud SaaS store template
