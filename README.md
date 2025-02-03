@@ -30,6 +30,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 # 👋 Overview
 
 - [UI](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-ui)
+- [Video presentation](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-video-presentation)
 - [How it works](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-how-it-works)
 - [Kubernetes deploy](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-kubernetes-deploy)
 - [Customization & Development](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-customization--development)
@@ -43,6 +44,19 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 - Login: `demo@demo-store.unifie.io`
 - Password: `demo@demo-store.unifie.io`
 - Stripe works in testing mode, use [testing card](https://docs.stripe.com/testing) number `4242424242424242` with CVC `111`
+- [Full youtube presentation](https://youtu.be/O2SMceQucJg)
+
+
+# 🎦 Video presentation 
+
+👉 [Full youtube presentation](https://youtu.be/O2SMceQucJg)
+
+
+
+[![Youtube presentation](https://img.youtube.com/vi/O2SMceQucJg/0.jpg)](https://www.youtube.com/watch?v=O2SMceQucJg)
+
+
+### Short demo
 
 [Ustore-demo.webm](https://github.com/user-attachments/assets/809685e2-17a7-4d02-800b-e3f36290cb2f)
 
