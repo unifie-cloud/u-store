@@ -130,6 +130,12 @@ Development documentation:
 - [GitHub Issues](https://github.com/unifie-cloud/u-store/issues) (Contributions, report issues, and product ideas)
 - [Project page](https://github.com/orgs/unifie-cloud/projects/2/views/1)
 - [Contributing guide](https://github.com/unifie-cloud/u-store/blob/main/CONTRIBUTING.md)
+  
+As the author of U-Store and an engineer with expertise in DevOps, Kubernetes, and cloud architecture, I offer:
+- 🔧 Consultations on integrating U-Store into your infrastructure.
+- 🚀 Guidance for building multi-tenant SaaS solutions.
+- 💡 Best practices for cluster management and CI/CD pipelines.
+[Let’s Connect!](https://www.linkedin.com/in/victor-trapenok/)
 
 # 🛡️ License
 
