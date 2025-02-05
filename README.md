@@ -13,7 +13,7 @@
      <a href="https://discord.gg/pqwhY5MQZ9"><img src="https://discord.com/api/guilds/1330768472212508742/widget.png?style=shield" alt="discord"></a>
 </p>
 
-U-Store — a powerful cloud SaaS store template designed to help startups quickly launch scalable platforms.
+U-Store — a powerful multi-tenant cloud SaaS template designed to help startups quickly launch scalable platforms.
 
 It features:
 
