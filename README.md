@@ -109,19 +109,13 @@ Development documentation:
 - Internationalization
 - Audit logs
 - Roles and Permissions
-- Dark mode
 - Email notifications
-- E2E tests
-- Docker compose
 - Prisma Studio
 - Update member role
-- Directory Sync Events
-- Avatar Upload
 - SAML SSO
 - Audit Log
 - Webhook
 - Payments
-- Security Headers
 
 # 🤩 Community
 
