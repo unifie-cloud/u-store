@@ -11,9 +11,47 @@ import {
 import { iUnifieFormSchema } from 'types/unifieForms';
 import { getSubscriptionForTeam } from 'pages/api/teams/[slug]/payments/products';
 import env from '@/lib/env';
+import _ from 'lodash';
 
 function getAppUuid(teamId: string) {
   return `store-team-${teamId}`;
+}
+
+interface iVarsMap {
+  [varName: string]: any;
+}
+
+/**
+ * @returns schema.json file from /unifie-configs
+ */
+async function getAppUIschema(): Promise<{ schema: iUnifieFormSchema }> {
+  // Read schema.json file from /unifie-configs
+  return await readJsonConfigFile('schema.json');
+}
+
+async function getUiConfigValuesFromApp(
+  app: iUnifieApplication | null
+): Promise<iVarsMap> {
+  if (!app) {
+    return {};
+  }
+
+  const configSchema = await getAppUIschema();
+  const configs = {};
+  for (let key in configSchema.schema.properties) {
+    const val = configSchema.schema.properties[key];
+
+    const varsParsed = /^vars[\[.'"]+(.*?)['"\].]+(.*?)$/.exec(val.name);
+    if (varsParsed) {
+      // Case for vars['serviceName'].varName (related for helm chart values.yaml file)
+      const serviceName = varsParsed[1];
+      const varSubPath = varsParsed[2];
+      configs[val.name] = _.get(app.vars[serviceName], varSubPath);
+    } else {
+      configs[val.name] = _.get(app, val.name);
+    }
+  }
+  return configs;
 }
 
 export const unifieStoreApplicationApi: iApolloResolver = {
@@ -58,7 +96,7 @@ export const unifieStoreApplicationApi: iApolloResolver = {
       schema: JSON
       uiSchema: JSON
     }
-
+ 
     type iUnifieApplication {
       id: Int
       name: String
@@ -66,33 +104,24 @@ export const unifieStoreApplicationApi: iApolloResolver = {
       extUuid: String
       extData: JSON
       projectId: Int
-      isLive: Boolean
-      specsErrors: String
-      specsWarns: String
-      isReady: Boolean
-      isEnabled: Boolean
-      region: String
-      version: String
-      ClusterModel: ClusterModel
-      VersionModel: VersionModel
-      env: String
-      services: String
-      tags: String
-    }
-
-    input iUnifieApplicationInput {
-      name: String
-      domain: String 
-      projectId: Int
+      isLive: Boolean 
       isReady: Boolean
       isEnabled: Boolean
       region: Int
       version: Int
+      ClusterModel: ClusterModel
+      VersionModel: VersionModel
       env: JSON
       services: JSON
-      tags: [Int]
+      tags: JSON 
+      vars: JSON 
     }
-    
+
+    type iUnifieApplicationConfigs {
+      application: iUnifieApplication
+      configs: JSON
+    }
+  
     """
     Return JWT token with access to Application monitoring data
     - token - jwt token
@@ -158,7 +187,7 @@ export const unifieStoreApplicationApi: iApolloResolver = {
       Returns clusters list. get request
       """
       uStore_getClusters: [ClusterModel]
-      uStore_getApplication(teamSlug: String!): iUnifieApplication
+      uStore_getApplication(teamSlug: String!): iUnifieApplicationConfigs
       uStore_getApplicationConfigSchema: iUnifieConfigSchema
 
 
@@ -169,7 +198,7 @@ export const unifieStoreApplicationApi: iApolloResolver = {
 
     extend type Mutation {
         uStore_createApplication(clusterId: Int!, teamSlug: String!): iCreateApplication
-        uStore_updateApplication(teamSlug: String!, config: iUnifieApplicationInput!): iUpdateApplication
+        uStore_updateApplication(teamSlug: String!, config: JSON!): iUpdateApplication
     }
   `,
   Query: {
@@ -216,7 +245,10 @@ export const unifieStoreApplicationApi: iApolloResolver = {
       async (
         args: { teamSlug: string },
         context: iQlContext
-      ): Promise<iUnifieApplication | null> => {
+      ): Promise<{
+        application: iUnifieApplication | null;
+        configs: any | null;
+      }> => {
         //  Send deployment for this team
         const teamMember = await getTeamMember(
           context.session.user.id,
@@ -228,7 +260,10 @@ export const unifieStoreApplicationApi: iApolloResolver = {
         const currentTeamApplication: iUnifieApplication | null =
           await unifieApi.Application_getApplicationByExtUuid(appUuid);
 
-        return currentTeamApplication;
+        return {
+          application: currentTeamApplication,
+          configs: await getUiConfigValuesFromApp(currentTeamApplication),
+        };
       }
     ),
     uStore_getClusters: QL(
@@ -249,9 +284,9 @@ export const unifieStoreApplicationApi: iApolloResolver = {
         args: any,
         context: iQlContext
       ): Promise<{ schema: iUnifieFormSchema }> => {
+        // Store deployment schema
         // Read schema.json file from /unifie-configs
-        const data = await readJsonConfigFile('schema.json');
-        return data;
+        return await getAppUIschema();
       }
     ),
   },
@@ -268,7 +303,7 @@ export const unifieStoreApplicationApi: iApolloResolver = {
         throwIfNotAllowed(teamMember, 'team', 'update');
 
         // Read schema.json file from /unifie-configs
-        const data = await readJsonConfigFile('schema.json');
+        const data = await getAppUIschema();
 
         const cleanObj = {};
 

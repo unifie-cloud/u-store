@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
-  <source media="(prefers-color-scheme: light)" srcset="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
-  <img alt="BoxyHQ Banner" src="https://avatars.githubusercontent.com/u/164479931?s=256&v=4">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/repository-open-graph-template.webp">
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/repository-open-graph-template.webp">
+  <img alt="U-store Banner" src="docs/images/repository-open-graph-template.webp">
 </picture>
 
 # ⭐ U-store - cloud SaaS store template
@@ -10,10 +10,10 @@
     <a href="https://github.com/unifie-cloud/u-store/stargazers"><img src="https://img.shields.io/github/stars/unifie-cloud/u-store" alt="Github stargazers"></a>
     <a href="https://github.com/unifie-cloud/u-store/issues"><img src="https://img.shields.io/github/issues/unifie-cloud/u-store" alt="Github issues"></a>
     <a href="https://github.com/unifie-cloud/u-store/blob/main/LICENSE"><img src="https://img.shields.io/github/license/unifie-cloud/u-store" alt="license"></a>
-     <a href="https://discord.gg/pqwhY5MQZ9"><img src="https://discord.com/api/guilds/1330768472212508742/widget.png?style=shield" alt="discord"></a>
+     <a href="https://discord.gg/UeEr36eteV"><img src="https://discord.com/api/guilds/1330768472212508742/widget.png?style=shield" alt="discord"></a>
 </p>
 
-U-Store — a powerful cloud SaaS store template designed to help startups quickly launch scalable platforms.
+U-Store — a powerful multi-tenant cloud SaaS template designed to help startups quickly launch scalable platforms.
 
 It features:
 
@@ -30,6 +30,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 # 👋 Overview
 
 - [UI](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-ui)
+- [Video presentation](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-video-presentation)
 - [How it works](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-how-it-works)
 - [Kubernetes deploy](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#%EF%B8%8F-kubernetes-deploy)
 - [Customization & Development](https://github.com/unifie-cloud/u-store?tab=readme-ov-file#-customization--development)
@@ -43,6 +44,15 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 - Login: `demo@demo-store.unifie.io`
 - Password: `demo@demo-store.unifie.io`
 - Stripe works in testing mode, use [testing card](https://docs.stripe.com/testing) number `4242424242424242` with CVC `111`
+- [Full youtube presentation](https://youtu.be/O2SMceQucJg)
+
+# 🎦 Video presentation
+
+👉 [Full youtube presentation](https://youtu.be/O2SMceQucJg)
+
+[![Youtube presentation](https://img.youtube.com/vi/O2SMceQucJg/0.jpg)](https://www.youtube.com/watch?v=O2SMceQucJg)
+
+### Short demo
 
 [Ustore-demo.webm](https://github.com/user-attachments/assets/809685e2-17a7-4d02-800b-e3f36290cb2f)
 
@@ -99,27 +109,28 @@ Development documentation:
 - Internationalization
 - Audit logs
 - Roles and Permissions
-- Dark mode
 - Email notifications
-- E2E tests
-- Docker compose
 - Prisma Studio
 - Update member role
-- Directory Sync Events
-- Avatar Upload
 - SAML SSO
 - Audit Log
 - Webhook
 - Payments
-- Security Headers
 
 # 🤩 Community
 
-- [Discord](https://discord.gg/pqwhY5MQZ9) (Discord)
+- [Discord](https://discord.gg/UeEr36eteV) (Discord)
 - [Discussions](https://github.com/unifie-cloud/u-store/discussions) (Discussions)
 - [GitHub Issues](https://github.com/unifie-cloud/u-store/issues) (Contributions, report issues, and product ideas)
 - [Project page](https://github.com/orgs/unifie-cloud/projects/2/views/1)
 - [Contributing guide](https://github.com/unifie-cloud/u-store/blob/main/CONTRIBUTING.md)
+  
+As the [author of U-Store](https://www.linkedin.com/in/victor-trapenok/) and an engineer with expertise in DevOps, Kubernetes, and cloud architecture, I offer:
+- 🔧 Consultations on integrating U-Store into your infrastructure.
+- 🚀 Guidance for building multi-tenant SaaS solutions.
+- 💡 Best practices for cluster management and CI/CD pipelines.
+
+[Let’s Connect!](https://www.linkedin.com/in/victor-trapenok/)
 
 # 🛡️ License
 

@@ -199,6 +199,7 @@ export class UnifieCloudApi {
             isReady
             isLive
             isEnabled 
+            vars
             ClusterModel {
               id
               title
@@ -242,6 +243,7 @@ export class UnifieCloudApi {
             isReady
             isLive
             isEnabled 
+            vars
             ClusterModel {
               id
               title

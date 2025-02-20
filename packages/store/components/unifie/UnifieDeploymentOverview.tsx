@@ -9,6 +9,7 @@ import { UnifieForm } from './UnifieForm';
 
 export const UnifieDeploymentOverview = (props: {
   app: iUnifieApplication;
+  appConfigs: any;
   teamSlug: string;
 }) => {
   const { t } = useTranslation('unifie');
@@ -39,7 +40,7 @@ export const UnifieDeploymentOverview = (props: {
         mutation: gql`
           mutation uStore_updateApplication(
             $teamSlug: String!
-            $config: iUnifieApplicationInput!
+            $config: JSON!
           ) {
             uStore_updateApplication(teamSlug: $teamSlug, config: $config) {
               error
@@ -95,17 +96,8 @@ export const UnifieDeploymentOverview = (props: {
         </p>
       )}
 
-      <Form
-        form={form}
-        initialValues={{
-          isEnabled: currentTeamApplication.isEnabled,
-          //   region: currentTeamApplication.region,
-          //   version: currentTeamApplication.version,
-          //   env: currentTeamApplication.env,
-          //   services: currentTeamApplication.services,
-        }}
-      >
-        <UnifieForm schema={schema} />
+      <Form form={form} initialValues={props.appConfigs} layout={'vertical'}>
+        <UnifieForm schema={schema} initialValues={props.appConfigs} />
         <br />
         <Button
           type="primary"
