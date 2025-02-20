@@ -28,17 +28,21 @@ const Products: NextPageWithLayout = () => {
     gql`
       query uStore_getApplication($teamSlug: String!) {
         uStore_getApplication(teamSlug: $teamSlug) {
-          id
-          name
-          domain
-          isLive
-          isEnabled
-          ClusterModel {
-            title
-          }
-          VersionModel {
+          application {
+            id
             name
+            domain
+            isLive
+            isEnabled
+            vars
+            ClusterModel {
+              title
+            }
+            VersionModel {
+              name
+            }
           }
+          configs
         }
         uMony_hasActiveSubscription(teamSlug: $teamSlug)
       }
@@ -57,18 +61,21 @@ const Products: NextPageWithLayout = () => {
     return app.stopPolling;
   }, []);
   useEffect(() => {
-    if (app?.data?.uStore_getApplication) {
-      const isLive = app.data?.uStore_getApplication?.isLive;
-      if (!isLive && app.data?.uStore_getApplication?.isEnabled === true) {
+    if (app?.data?.uStore_getApplication?.application) {
+      const isLive = app.data?.uStore_getApplication?.application?.isLive;
+      if (
+        !isLive &&
+        app.data?.uStore_getApplication?.application?.isEnabled === true
+      ) {
         app.startPolling(15000);
       } else {
         app.stopPolling();
       }
     }
-  }, [app?.data?.uStore_getApplication]);
+  }, [app?.data?.uStore_getApplication?.application]);
 
-  const isLive = app.data?.uStore_getApplication?.isLive;
-  const isEnabled = app.data?.uStore_getApplication?.isEnabled;
+  const isLive = app.data?.uStore_getApplication?.application?.isLive;
+  const isEnabled = app.data?.uStore_getApplication?.application?.isEnabled;
   const showStartingUI = !isLive && isEnabled;
 
   if (isLoading || !team || app.loading) {
@@ -77,7 +84,9 @@ const Products: NextPageWithLayout = () => {
   const hasSubscription = app?.data?.uMony_hasActiveSubscription;
 
   const currentTeamApplication: iUnifieApplication | null =
-    app?.data?.uStore_getApplication || null;
+    app?.data?.uStore_getApplication?.application || null;
+  const currentTeamApplicationConfigs: any =
+    app?.data?.uStore_getApplication?.configs || {};
 
   if (!hasSubscription && config.unifie.subscriptionRequired) {
     return (
@@ -116,6 +125,7 @@ const Products: NextPageWithLayout = () => {
           <Col span={12}>
             <UnifieDeploymentOverview
               app={currentTeamApplication}
+              appConfigs={currentTeamApplicationConfigs}
               teamSlug={team.slug}
             />
           </Col>

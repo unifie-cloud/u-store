@@ -63,13 +63,13 @@ export const UnifieDeploymentCreate = (props: { teamSlug: string }) => {
 
       setLoading(false);
 
-      if (!response.data?.uStore_createApplication?.extUuid) {
+      if (response.data?.uStore_createApplication?.error) {
+        toast.error(response.data?.uStore_createApplication?.error);
+      }
+      if (response.data?.uStore_createApplication?.extUuid) {
         toast.success(t('unifie-app-create-successfully'));
         router.reload();
         return;
-      }
-      if (response.data?.uStore_createApplication?.error) {
-        toast.error(response.data?.uStore_createApplication?.error);
       }
     } catch (e: any) {
       toast.error(e?.message || e);

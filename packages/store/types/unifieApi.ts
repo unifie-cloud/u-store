@@ -7,6 +7,13 @@ export interface iUnifieCluster {
   allowToAddDeployments: boolean;
 }
 
+export interface iDeploymentServiceVarsMap {
+  [varName: string]: any;
+}
+
+export interface iDeploymentVarsMap {
+  [serviceName: string]: iDeploymentServiceVarsMap;
+}
 export interface iUnifieApplication {
   id: number;
   name: string;
@@ -20,6 +27,7 @@ export interface iUnifieApplication {
   isEnabled: boolean;
   region: string;
   version: string;
+  vars: iDeploymentVarsMap;
   ClusterModel: {
     id: number;
     title: string;
