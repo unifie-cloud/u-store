@@ -1,4 +1,4 @@
-import { Form, Input, Select, Space, Switch } from 'antd';
+import { Form, Input, Select, Switch } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { useTranslation } from 'react-i18next';
 import {
@@ -50,7 +50,7 @@ export const UnifieForm = (props: iUnifieFormProps) => {
               <Select>
                 {(params?.options || []).map((opt) => {
                   return (
-                    <Select.Option value={opt.value}>
+                    <Select.Option value={opt.value} key={opt.value}>
                       {opt.title || opt.value}
                     </Select.Option>
                   );
