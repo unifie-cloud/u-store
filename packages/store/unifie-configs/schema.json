@@ -5,16 +5,6 @@
         "type": "boolean",
         "label": "unifie-app-enabled",
         "name": "isEnabled"
-      },
-      {
-        "type": "textarea",
-        "label": "Config (yaml)",
-        "name": "vars['versus-incident'].app.config"
-      },
-      {
-        "type": "textarea",
-        "label": "email_message (tpl)",
-        "name": "vars['versus-incident'].app.email_message"
       }
     ]
   }
