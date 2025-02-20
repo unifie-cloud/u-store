@@ -56,3 +56,4 @@ yarn-error.log*
 # Sentry Config File
 .sentryclirc
 presentation
+packages/store/unifie-configs/schema.json
