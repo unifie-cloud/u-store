@@ -81,6 +81,7 @@ Please star ⭐ the repo if you want us to continue with unifie-store! 😀
 Development documentation:
 
 - [Environment Variables](https://github.com/unifie-cloud/u-store/blob/staging/docs/EnvironmentVariables.md)
+- [schema.json file](https://github.com/unifie-cloud/u-store/tree/staging/packages/store/unifie-configs)
 - [Built With](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#%EF%B8%8F-built-with)
 - [Local development](https://github.com/unifie-cloud/u-store/tree/staging/packages/store#-u-store-customization--development)
 
