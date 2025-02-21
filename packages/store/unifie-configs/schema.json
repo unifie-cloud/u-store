@@ -5,6 +5,51 @@
         "type": "boolean",
         "label": "unifie-app-enabled",
         "name": "isEnabled"
+      },
+      {
+        "type": "boolean",
+        "label": "Use email messages",
+        "name": "vars['versus-incident'].env.EMAIL_ENABLE"
+      },
+      {
+        "type": "string",
+        "label": "EMAIL_SUBJECT",
+        "name": "vars['versus-incident'].env.EMAIL_SUBJECT"
+      },
+      {
+        "type": "string",
+        "label": "EMAIL_TO",
+        "name": "vars['versus-incident'].env.EMAIL_TO"
+      },
+      {
+        "type": "string",
+        "label": "SMTP_HOST",
+        "name": "vars['versus-incident'].env.SMTP_HOST"
+      },
+      {
+        "type": "string",
+        "label": "SMTP_PORT",
+        "name": "vars['versus-incident'].env.SMTP_PORT"
+      },
+      {
+        "type": "string",
+        "label": "SMTP_USERNAME",
+        "name": "vars['versus-incident'].env.SMTP_USERNAME"
+      },
+      {
+        "type": "string",
+        "label": "SMTP_PASSWORD",
+        "name": "vars['versus-incident'].env.SMTP_PASSWORD"
+      },
+      {
+        "type": "textarea",
+        "label": "email_message (tpl)",
+        "name": "vars['versus-incident'].app.email_message"
+      },
+      {
+        "type": "textarea",
+        "label": "Config (yaml)",
+        "name": "vars['versus-incident'].app.config"
       }
     ]
   }

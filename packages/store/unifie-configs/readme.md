@@ -2,6 +2,8 @@
 
 Allow to define options that can be changed by user from `products` page with graphql mutation `uStore_updateApplication`
 
+![products ui](../../../docs/images/schema-ui.png)
+
 Example:
 
 ```json
